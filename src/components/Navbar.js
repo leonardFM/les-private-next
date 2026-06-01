@@ -38,7 +38,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className={styles.logo} onClick={closeMenu}>
           <div className={styles.logoIcon}>L</div>
-          <span>Lexicon<span style={{ color: 'var(--secondary-color)' }}>English</span></span>
+          <span>El`s <span style={{ color: 'var(--secondary-color)' }}>Corner</span></span>
         </Link>
 
         {/* Backdrop for mobile drawer */}

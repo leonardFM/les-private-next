@@ -1,0 +1,230 @@
+.hero {
+  padding: 100px 0;
+  background: radial-gradient(100% 100% at 0% 0%, hsl(var(--primary-hue), 90%, 95%) 0%, var(--background) 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+:global([data-theme='dark']) .hero {
+  background: radial-gradient(100% 100% at 0% 0%, hsl(var(--primary-hue), 60%, 15%) 0%, var(--background) 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (max-width: 968px) {
+  .content {
+    align-items: center;
+  }
+}
+
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-light);
+  margin-bottom: 24px;
+}
+
+:global([data-theme='dark']) .tagline {
+  background-color: var(--card-bg);
+}
+
+.taglineDot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+.title {
+  font-size: 54px;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.15;
+  margin-bottom: 24px;
+  letter-spacing: -1.5px;
+}
+
+.highlight {
+  background: linear-gradient(120deg, var(--primary-light), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-size: 18px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 580px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 968px) {
+  .actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Right Illustration Area */
+.illustrationArea {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualWrapper {
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, hsl(var(--primary-hue), 85%, 35%), hsl(200, 95%, 45%));
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphingBlob 12s ease-in-out infinite alternate;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+  position: relative;
+}
+
+@keyframes morphingBlob {
+  0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+  100% { border-radius: 50% 50% 50% 50% / 30% 70% 30% 70%; }
+}
+
+.visualContent {
+  text-align: center;
+}
+
+.visualTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.visualSub {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Floating Stats Cards */
+.floatingCard {
+  position: absolute;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 16px 20px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: floatEffect 6s ease-in-out infinite alternate;
+}
+
+.floatingCard1 {
+  top: 10%;
+  left: -5%;
+}
+
+.floatingCard2 {
+  bottom: 10%;
+  right: -5%;
+  animation-delay: -3s;
+}
+
+@media (max-width: 968px) {
+  .illustrationArea {
+    margin-top: 40px;
+    height: 420px;
+  }
+  .floatingCard1 {
+    left: 10%;
+  }
+  .floatingCard2 {
+    right: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .illustrationArea {
+    height: 340px;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes floatEffect {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-soft);
+  color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNum {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.statText {
+  font-size: 12px;
+  color: var(--foreground-muted);
+}

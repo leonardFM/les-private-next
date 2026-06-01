@@ -1,0 +1,224 @@
+.storyRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .storyRow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.storyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.visualPane {
+  background: linear-gradient(135deg, var(--primary-soft) 0%, hsl(var(--primary-hue), 80%, 88%) 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 60px 40px;
+  height: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.visualPaneTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.visualPaneDesc {
+  font-size: 15px;
+  color: var(--foreground-muted);
+  max-width: 320px;
+}
+
+/* Values Grid */
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.valueCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 32px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.valueCard:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.valueIcon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.valueTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--foreground);
+}
+
+.valueDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Instructors Grid */
+.teachersSection {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teachersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .teachersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .teachersGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.teacherCard {
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  text-align: center;
+  transition: all var(--transition-normal);
+}
+
+.teacherCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.teacherImagePlaceholder {
+  height: 200px;
+  background: linear-gradient(135deg, hsl(var(--primary-hue), 85%, 28%) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.teacherInfo {
+  padding: 20px;
+}
+
+.teacherName {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 4px;
+}
+
+.teacherRole {
+  font-size: 13px;
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.teacherBio {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  line-height: 1.5;
+}
+
+/* Offline Facilities Section */
+.campusSection {
+  background-color: var(--background);
+}
+
+.campusGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .campusGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.campusCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.campusImagePlaceholder {
+  height: 200px;
+  background-color: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-light);
+  font-size: 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.campusInfo {
+  padding: 24px;
+}
+
+.campusName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.campusDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.5;
+}

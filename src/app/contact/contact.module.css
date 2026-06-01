@@ -1,0 +1,236 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Sidebar details */
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.infoCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.infoIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--primary-soft);
+  color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.infoDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 4px;
+}
+
+.infoVal {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+/* Contact Form */
+.formCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 24px;
+  }
+}
+
+.formTitle {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--foreground);
+}
+
+.formSub {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  background-color: var(--card-bg);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.successBox {
+  background-color: hsl(140, 70%, 94%);
+  border: 1px solid hsl(140, 50%, 80%);
+  color: hsl(140, 60%, 20%);
+  padding: 24px;
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+}
+
+.successTitle {
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.successText {
+  font-size: 14px;
+}
+
+/* FAQ Accordion */
+.faqSection {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 80px 0;
+}
+
+.faqContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faqItem {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background-color: var(--background);
+  transition: all var(--transition-fast);
+}
+
+.faqItemOpen {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.faqHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--foreground);
+  cursor: pointer;
+  user-select: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.faqHeader:hover {
+  color: var(--primary-light);
+}
+
+.faqTrigger {
+  font-size: 20px;
+  font-weight: 400;
+  transition: transform var(--transition-fast);
+}
+
+.faqTriggerOpen {
+  transform: rotate(45deg);
+  color: var(--primary-light);
+}
+
+.faqContent {
+  padding: 0 24px 20px;
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  border-top: 1px solid transparent;
+}
+
+.faqContentOpen {
+  border-top: 1px solid var(--border-color);
+}

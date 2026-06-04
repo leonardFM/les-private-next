@@ -1,0 +1,125 @@
+.banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-color) 0%, hsl(200, 95%, 43%) 100%);
+  padding: 60px 0;
+}
+
+.bgDecoration {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.cta {
+  font-size: 15px;
+  padding: 14px 32px;
+}
+
+.visual {
+  flex-shrink: 0;
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.iconCircle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  animation: float 6s ease-in-out infinite;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.floatingIcons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floatIcon {
+  position: absolute;
+  font-size: 24px;
+  animation: floatIcon 4s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(10deg); }
+}
+
+@media (max-width: 768px) {
+  .banner { padding: 40px 0; }
+  .inner { flex-direction: column; text-align: center; }
+  .content { max-width: 100%; }
+  .title { justify-content: center; font-size: 28px; }
+  .subtitle { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .visual { width: 120px; height: 120px; }
+  .iconCircle { width: 110px; height: 110px; font-size: 44px; }
+}

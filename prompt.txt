@@ -1,22 +1,131 @@
-Review seluruh project Next.js saya.
+update halaman landing page "/kids-private" untuk layanan les privat anak usia 4–8 tahun.
 
-Tujuan website:
-Mengubah pengunjung menjadi calon siswa les private melalui WhatsApp.
+Halaman ini harus terasa sangat hangat, lembut, dan menyenangkan untuk orang tua. Bukan seperti aplikasi atau dashboard, tapi seperti tempat belajar anak yang penuh kasih, aman, dan playful.
 
-Tolong analisis:
+Fokus utama adalah membuat orang tua merasa percaya dan ingin langsung menghubungi via WhatsApp.
 
-- Kekurangan UI/UX
-- Kekurangan SEO
-- Kekurangan konversi
-- Posisi CTA yang kurang tepat
-- Informasi yang kurang
-- Komponen yang sebaiknya ditambahkan
-- Optimasi mobile
-- Optimasi performa
+---
 
-Kemudian berikan prioritas:
-High Impact
-Medium Impact
-Low Impact
+## 🌼 ARAH DESAIN
+Gunakan vibe seperti:
+- ruang belajar anak yang nyaman dan ceria
+- playroom edukatif modern
+- scrapbook / album aktivitas anak
 
-Dan implementasikan perubahan yang termasuk High Impact.
+Karakter UI:
+- lembut, tidak kaku
+- banyak rounded shape besar
+- warna pastel hangat (cream, soft blue, mint, light yellow, pink muda)
+- shadow halus seperti benda ringan
+- layout tidak terlalu simetris
+
+---
+
+## 🎬 ANIMASI (WAJIB, TAPI LEMBUT)
+
+Tambahkan animasi yang halus dan tidak berlebihan:
+
+- card program floating pelan seperti balon
+- hover card: naik sedikit + shadow muncul lembut
+- gambar sedikit zoom saat hover
+- fade-in saat scroll untuk setiap section
+- tombol WhatsApp punya efek “soft pulse” pelan
+- transisi antar elemen smooth dan natural
+
+Animasi harus:
+- pelan (3–6 detik)
+- tidak mengganggu
+- terasa hidup tapi tetap tenang
+
+---
+
+## 🧸 STRUKTUR HALAMAN
+
+### HERO
+Buat pembuka yang sangat hangat.
+
+Gunakan 1 gambar utama anak sedang belajar dengan suasana bahagia.
+
+Tampilkan:
+- headline sederhana, emosional, dan mudah dipahami orang tua
+- penjelasan singkat bahwa anak belajar dengan cara menyenangkan
+- tombol utama WhatsApp yang paling menonjol
+- tombol trial class sebagai opsi kedua
+
+Hero harus langsung memberi rasa aman dan percaya.
+
+---
+
+### PROGRAM BELAJAR
+Tampilkan sebagai “dunia belajar anak”.
+
+Gunakan kartu yang terasa seperti mainan / cerita, bukan list bisnis.
+
+Program:
+- membaca & menulis dasar
+- matematika dasar
+- kreativitas & seni
+- fokus & percaya diri
+
+Setiap kartu:
+- ada gambar
+- hover interaktif
+- animasi floating ringan
+
+---
+
+### CARA BELAJAR
+Tampilkan sebagai alur cerita sederhana:
+
+1. ngobrol dengan orang tua
+2. memilih tutor yang cocok
+3. mulai belajar dengan menyenangkan
+
+Buat seperti perjalanan lembut, bukan step formal.
+
+---
+
+### AKTIVITAS ANAK
+Tampilkan gambar aktivitas belajar anak seperti album cerita.
+
+Layout:
+- tidak simetris
+- seperti scrapbook atau Pinterest style
+- terasa hidup dan natural
+
+---
+
+### TESTIMONIAL
+Tampilkan pengalaman orang tua dengan gaya cerita singkat.
+
+Gunakan gaya:
+- hangat
+- personal
+- seperti review nyata
+
+---
+
+### FINAL CTA
+Buat penutup yang emosional dan tenang.
+
+Gunakan gambar anak tersenyum atau bahagia belajar.
+
+Tampilkan:
+- pesan ajakan yang lembut
+- tombol WhatsApp besar sebagai aksi utama
+- suasana yang menenangkan
+
+---
+
+## 📱 MOBILE EXPERIENCE
+- semua section harus vertical flow yang nyaman
+- tombol WhatsApp selalu mudah dijangkau
+- program bisa scroll horizontal
+
+---
+
+## ⚠️ PENTING
+- gunakan gambar dari folder public/image
+- jangan gunakan layout grid yang kaku atau terlalu simetris
+- prioritaskan rasa hangat dan storytelling visual
+- hasil harus siap production dan terlihat seperti website les privat anak premium

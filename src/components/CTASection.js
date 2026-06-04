@@ -7,7 +7,7 @@ import styles from './CTASection.module.css';
 
 export default function CTASection({
   title = 'Ready to Speak English Confidently?',
-  description = 'Join thousands of successful graduates who have achieved language proficiency with Lexicon English Academy. Sign up today and get a free placement assessment and demo session.',
+  description = 'Join thousands of successful graduates who have achieved language proficiency with El\'s Corner. Sign up today and get a free placement assessment and demo session.',
   primaryActionText = 'Book Placement Test',
   primaryMessage = '',
   secondaryActionText = 'Browse Programs',

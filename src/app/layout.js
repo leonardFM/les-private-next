@@ -16,13 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Lexicon English Academy | Les Bahasa Inggris Online & Offline",
+  title: "El's Corner | Les Bahasa Inggris Online & Offline",
   description: "Les bahasa Inggris private online & offline untuk anak, remaja, dewasa, TOEFL, IELTS. Konsultasi gratis via WhatsApp. 15.000+ alumni sukses.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body>
         <LanguageProvider>
           <Navbar />

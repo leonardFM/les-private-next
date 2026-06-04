@@ -135,7 +135,7 @@ export default function AboutClient() {
         <CTASection
           title={t('cta.about.title')}
           description={t('cta.about.description')}
-          primaryMessage={`Halo! Saya ingin konsultasi tentang program les di Lexicon English Academy. Mohon informasinya.`}
+          primaryMessage={`Halo! Saya ingin konsultasi tentang program les di El's Corner. Mohon informasinya.`}
         />
       </div>
   </div>

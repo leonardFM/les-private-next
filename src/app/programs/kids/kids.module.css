@@ -1,0 +1,533 @@
+/* Hero Section */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 80px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, hsl(200, 95%, 38%) 50%, hsl(170, 80%, 35%) 100%);
+  color: #fff;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  flex: 1;
+}
+
+.heroTag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.heroTitle {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.heroHighlight {
+  background: linear-gradient(135deg, var(--accent-color), hsl(38, 95%, 65%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.heroVisual {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.heroIconCircle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  animation: float 6s ease-in-out infinite;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.heroEmoji {
+  line-height: 1;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.heroStatItem {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(4px);
+  border-radius: var(--border-radius-md);
+  padding: 12px 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.heroStatVal {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.heroStatLabel {
+  display: block;
+  font-size: 11px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Advantages / Materials / Reasons Grid */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Advantage Cards */
+.advantageCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 32px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.advantageCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.advantageIcon {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.advantageTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.advantageDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Methods */
+.methodsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.methodCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.methodCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.methodStep {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-light);
+  background: var(--primary-soft);
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+
+.methodIcon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.methodTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.methodDesc {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Material Cards */
+.materialCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--transition-normal);
+}
+
+.materialCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.materialIcon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.materialTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.materialDesc {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Age Groups */
+.ageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.ageCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.ageCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.ageHeader {
+  padding: 28px;
+  text-align: center;
+}
+
+.ageBadge {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  padding: 8px 20px;
+  border-radius: var(--border-radius-md);
+  backdrop-filter: blur(4px);
+}
+
+.ageBody {
+  padding: 24px 28px 28px;
+}
+
+.ageTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 10px;
+}
+
+.ageDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Reason Cards */
+.reasonCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--transition-normal);
+}
+
+.reasonCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.reasonIcon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.reasonTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.reasonDesc {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+/* Testimonials */
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonialCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 28px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonialAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.testimonialName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.testimonialChild {
+  font-size: 12px;
+  color: var(--foreground-muted);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.starFilled {
+  color: var(--accent-color);
+  font-size: 16px;
+}
+
+.starEmpty {
+  color: var(--border-color);
+  font-size: 16px;
+}
+
+.testimonialQuote {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* FAQ Accordion */
+.faqContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordionItem {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background: var(--card-bg);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.accordionItem:hover {
+  border-color: var(--primary-light);
+}
+
+.accordionOpen {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary-light);
+}
+
+.accordionBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color var(--transition-fast);
+  gap: 16px;
+}
+
+.accordionOpen .accordionBtn {
+  color: var(--primary-light);
+}
+
+.accordionIcon {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground-muted);
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.accordionOpen .accordionIcon {
+  color: var(--primary-light);
+}
+
+.accordionContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 24px;
+}
+
+.accordionOpen .accordionContent {
+  max-height: 300px;
+  padding: 0 24px 20px;
+}
+
+.accordionAnswer {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid3, .testimonialGrid { grid-template-columns: repeat(2, 1fr); }
+  .methodsGrid { grid-template-columns: repeat(2, 1fr); }
+  .ageGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 60px 0 50px; }
+  .heroInner { flex-direction: column; text-align: center; gap: 40px; }
+  .heroContent { max-width: 100%; }
+  .heroTitle { font-size: 32px; }
+  .heroSubtitle { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .heroActions { justify-content: center; }
+  .grid3, .testimonialGrid, .ageGrid { grid-template-columns: 1fr; }
+  .methodsGrid { grid-template-columns: 1fr; }
+  .methodCard { padding: 24px 20px; }
+  .heroVisual { order: -1; }
+  .heroIconCircle { width: 120px; height: 120px; font-size: 44px; }
+}
+
+@media (max-width: 480px) {
+  .heroTitle { font-size: 28px; }
+  .heroActions { flex-direction: column; align-items: stretch; }
+  .heroStats { grid-template-columns: 1fr 1fr; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}

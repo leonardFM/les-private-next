@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
+import PromotionalBanner from '@/components/PromotionalBanner';
 import ProgramCard from '@/components/ProgramCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import CTASection from '@/components/CTASection';
@@ -20,6 +21,9 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <Hero />
+
+      {/* Promotional Banner - English for Kids */}
+      <PromotionalBanner />
 
       {/* Why Choose Us Features */}
       <section className={`${styles.features} section`}>

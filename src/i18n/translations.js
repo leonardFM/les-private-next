@@ -1,12 +1,12 @@
 const translations = {
   id: {
     nav: {
-      brand: "Lexicon English",
-      links: ["Beranda", "Tentang Kami", "Program", "Testimoni", "Kontak"],
-      paths: ["/", "/about", "/programs", "/testimonials", "/contact"],
+      brand: "El's Corner",
+      links: ["Beranda", "Tentang Kami", "Program", "English for Kids", "Testimoni", "Kontak"],
+      paths: ["/", "/about", "/programs", "/kids-private", "/testimonials", "/contact"],
       cta: "Konsultasi Gratis",
       langToggle: "EN",
-      whatsappMsg: "Halo! Saya ingin konsultasi tentang program les di Lexicon English Academy.",
+      whatsappMsg: "Halo! Saya ingin konsultasi tentang program les di El's Corner.",
     },
     hero: {
       tagline: "Konsultasi Gratis via WhatsApp",
@@ -16,7 +16,7 @@ const translations = {
         "Kelas online dan offline untuk anak, remaja, mahasiswa, dan profesional. Kuasai komunikasi bahasa Inggris, bangun kepercayaan diri akademis, dan tingkatkan prospek karier global Anda bersama pengajar bersertifikasi.",
       btnPrimary: "Konsultasi Gratis via WA",
       btnSecondary: "Info Program via WA",
-      whatsappMsg: "Halo! Saya tertarik dengan program les di Lexicon English Academy. Mohon informasinya.",
+      whatsappMsg: "Halo! Saya tertarik dengan program les di El's Corner. Mohon informasinya.",
       visualTitle: "Pembelajaran Interaktif",
       visualSub: "Meningkatkan rasa percaya diri berbahasa setiap hari",
       stat1Value: "4.9 / 5.0",
@@ -25,6 +25,14 @@ const translations = {
       stat2Label: "Siswa Aktif",
     },
     home: {
+      banner: {
+        tag: "Program Spesial",
+        title: "English for Kids",
+        subtitle: "Les bahasa Inggris khusus anak usia 4–12 tahun dengan metode fun learning. Bangun kepercayaan diri berbahasa Inggris sejak dini!",
+        cta: "Lihat Program English for Kids",
+        path: "/kids-private",
+        bgEmoji: "\u{1F476}",
+      },
       features: {
         tag: "Keunggulan Kami",
         title: "Metode Efektif untuk Fasih",
@@ -100,14 +108,14 @@ const translations = {
         tag: "Testimoni Siswa",
         title: "Cerita Sukses Alumni Kami",
         subtitle:
-          "Bergabunglah dengan ribuan siswa yang telah berhasil meraih cita-cita dan kemajuan karier bersama Lexicon English Academy.",
+          "Bergabunglah dengan ribuan siswa yang telah berhasil meraih cita-cita dan kemajuan karier bersama El's Corner.",
         cards: [
           {
             name: "Budi Santoso",
             course: "Persiapan IELTS",
             rating: 5,
             quote:
-              "Belajar di Lexicon benar-benar mengubah cara saya mempersiapkan tes. Saya berhasil mendapatkan skor band 8.0! Masukan dari para pengajar sangat mendalam.",
+              "Belajar di El's Corner benar-benar mengubah cara saya mempersiapkan tes. Saya berhasil mendapatkan skor band 8.0! Masukan dari para pengajar sangat mendalam.",
             initials: "BS",
           },
           {
@@ -145,16 +153,17 @@ const translations = {
       },
     },
     footer: {
-      brand: "Lexicon",
+      brand: "El's Corner",
       brandHighlight: "English",
       description:
-        "Lexicon English Academy menawarkan program kursus bahasa Inggris berkualitas premium secara online dan offline yang dirancang untuk meningkatkan kefasihan, mempersiapkan kesuksesan akademik, dan mempercepat kemajuan karier Anda.",
+        "El's Corner menawarkan program kursus bahasa Inggris berkualitas premium secara online dan offline yang dirancang untuk meningkatkan kefasihan, mempersiapkan kesuksesan akademik, dan mempercepat kemajuan karier Anda.",
       socialAria: { fb: "Facebook", ig: "Instagram", tw: "Twitter", ln: "LinkedIn" },
       quickLinksTitle: "Tautan Cepat",
       quickLinks: [
         { name: "Beranda", path: "/" },
         { name: "Tentang Kami", path: "/about" },
         { name: "Program Kursus", path: "/programs" },
+        { name: "English for Kids", path: "/kids-private" },
         { name: "Testimoni Siswa", path: "/testimonials" },
         { name: "Hubungi Kami", path: "/contact" },
       ],
@@ -164,7 +173,7 @@ const translations = {
         { name: "Bahasa Inggris Bisnis", path: "/programs" },
         { name: "Persiapan IELTS", path: "/programs" },
         { name: "Persiapan TOEFL iBT", path: "/programs" },
-        { name: "Bahasa Inggris Anak", path: "/programs" },
+        { name: "English for Kids", path: "/kids-private" },
       ],
       newsletterTitle: "Tetap Terupdate",
       newsletterText:
@@ -173,7 +182,7 @@ const translations = {
       newsletterBtn: "Gabung",
       newsletterSuccess:
         "Terima kasih! Anda telah berhasil berlangganan newsletter kami.",
-      copyright: "Lexicon English Academy. Hak Cipta Dilindungi Undang-Undang.",
+      copyright: "El's Corner. Hak Cipta Dilindungi Undang-Undang.",
       bottomLinks: [
         { name: "Kebijakan Privasi", path: "#" },
         { name: "Syarat dan Ketentuan", path: "#" },
@@ -187,8 +196,8 @@ const translations = {
         "Kami membantu mengatasi hambatan bahasa melalui pendidikan bahasa Inggris yang modern, efektif, dan dapat diakses baik secara online maupun tatap muka.",
       storyTitle: "Cerita dan Misi Kami",
       storyParagraphs: [
-        "Berdiri sejak tahun 2012, Lexicon English Academy memulai perjalanan dengan satu ruang kelas dan sebuah keyakinan bahwa belajar bahasa tidak seharusnya hanya menghafal aturan tata bahasa. Belajar bahasa harus menjadi pengalaman yang aktif, menyenangkan, dan relevan dengan kehidupan nyata.",
-        "Saat ini, Lexicon mengoperasikan beberapa pusat pembelajaran serta platform kelas online modern yang melayani siswa dari berbagai daerah dan latar belakang, mulai dari pelajar hingga profesional.",
+        "Berdiri sejak tahun 2012, El's Corner memulai perjalanan dengan satu ruang kelas dan sebuah keyakinan bahwa belajar bahasa tidak seharusnya hanya menghafal aturan tata bahasa. Belajar bahasa harus menjadi pengalaman yang aktif, menyenangkan, dan relevan dengan kehidupan nyata.",
+        "Saat ini, El's Corner mengoperasikan beberapa pusat pembelajaran serta platform kelas online modern yang melayani siswa dari berbagai daerah dan latar belakang, mulai dari pelajar hingga profesional.",
         "Misi kami tetap sama: memberikan pendidikan bahasa Inggris yang praktis, berkualitas tinggi, dan membantu setiap siswa berbicara dengan percaya diri, jelas, dan efektif.",
       ],
       visualPaneTitle: "Sejak 2012",
@@ -276,7 +285,7 @@ const translations = {
         {
           icon: "\u{1F4CD}",
           title: "Kantor Pusat",
-          val: "Lexicon Tower, Lantai 4\nJl. Pendidikan No. 10\nJakarta Pusat 10110",
+          val: "El's Corner Tower, Lantai 4\nJl. Pendidikan No. 10\nJakarta Pusat 10110",
         },
         {
           icon: "\u{1F4DE}",
@@ -286,7 +295,7 @@ const translations = {
         {
           icon: "\u2709\uFE0F",
           title: "Email Dukungan",
-          val: "info@lexicon-academy.com\nadmin@lexicon-academy.com",
+          val: "info@els-corner.com\nadmin@els-corner.com",
         },
         {
           icon: "\u23F0",
@@ -359,7 +368,7 @@ const translations = {
       title: "Kursus dan Program",
       subtitle:
         "Temukan kursus yang sesuai dengan target kecepatan belajar, latar belakang, dan batasan jadwal Anda.",
-      filters: ["Semua", "General", "Academic", "Professional", "Young Learners"],
+      filters: ["Semua", "General", "Academic", "Professional", "Young Learners", "Kids"],
       programs: [
         {
           title: "General English Mastery",
@@ -427,10 +436,264 @@ const translations = {
           price: "Rp 4.200.000",
           icon: "\u{1F4E3}",
         },
+        {
+          title: "English for Kids",
+          description:
+            "Program bahasa Inggris khusus anak usia 4\u201312 tahun dengan metode fun learning, gamifikasi, dan pengajar berpengalaman.",
+          category: "Kids",
+          format: "Online & Offline",
+          level: "Usia 4 - 12 Tahun",
+          duration: "16 Minggu",
+          price: "Rp 3.500.000",
+          icon: "\u{1F476}",
+        },
       ],
       noResultsTitle: "Tidak ada program ditemukan",
       noResultsDesc:
         "Silakan periksa kembali nanti atau hubungi kami untuk jadwal khusus.",
+    },
+    kidsPage: {
+      hero: {
+        tag: "English for Kids",
+        title: "Les Bahasa Inggris \u2013",
+        titleHighlight: "Fun & Interactive",
+        subtitle: "Program les bahasa Inggris khusus anak usia 4\u201312 tahun dengan metode belajar yang menyenangkan, interaktif, dan penuh permainan.",
+        btnPrimary: "Konsultasi via WA",
+        btnSecondary: "Info Program",
+        stats: [
+          { value: "4\u201312", label: "Tahun" },
+          { value: "Fun", label: "Learning" },
+          { value: "Native", label: "Teachers" },
+          { value: "Online", label: "& Offline" },
+        ],
+      },
+      advantages: {
+        tag: "Keunggulan Program",
+        title: "Mengapa English for Kids?",
+        subtitle: "Program dirancang khusus untuk perkembangan bahasa anak usia dini dengan pendekatan yang menyenangkan.",
+        cards: [
+          {
+            icon: "\u{1F3B6}",
+            title: "Belajar Sambil Bernyanyi",
+            desc: "Metode pembelajaran dengan lagu, irama, dan gerakan yang membantu anak mengingat kosakata dengan lebih mudah.",
+          },
+          {
+            icon: "\u{1F3AE}",
+            title: "Gamifikasi Interaktif",
+            desc: "Permainan edukatif dan kuis interaktif yang membuat anak antusias belajar tanpa merasa tertekan.",
+          },
+          {
+            icon: "\u{1F468}\u200D\u{1F3EB}",
+            title: "Pengajar Berpengalaman",
+            desc: "Instruktur bersertifikat TEFL yang ahli dalam mengajar bahasa Inggris untuk anak-anak.",
+          },
+          {
+            icon: "\u{1F4F1}",
+            title: "Akses Aplikasi Belajar",
+            desc: "Aplikasi mobile untuk latihan mandiri di rumah dengan materi yang sinkron dengan kurikulum kelas.",
+          },
+          {
+            icon: "\u{1F4DA}",
+            title: "Kurikulum Internasional",
+            desc: "Mengacu pada standar CEFR dan Cambridge Young Learners English (YLE) test.",
+          },
+          {
+            icon: "\u{1F91D}",
+            title: "Kelas Kelompok Kecil",
+            desc: "Maksimal 4\u20136 siswa per kelas sehingga perhatian guru lebih fokus pada setiap anak.",
+          },
+        ],
+      },
+      methods: {
+        tag: "Metode Belajar",
+        title: "Pendekatan Belajar Terbukti Efektif",
+        subtitle: "Kami menggunakan metode pembelajaran yang telah teruji untuk anak-anak.",
+        steps: [
+          {
+            icon: "\u{1F3A4}",
+            step: "01",
+            title: "Listen & Repeat",
+            desc: "Anak mendengarkan pelafalan native speaker dan mengulanginya, membangun kebiasaan pengucapan yang benar sejak awal.",
+          },
+          {
+            icon: "\u{1F3B2}",
+            step: "02",
+            title: "Play & Learn",
+            desc: "Belajar melalui permainan papan, kartu kosakata, dan aktivitas fisik yang merangsang daya ingat.",
+          },
+          {
+            icon: "\u{1F3AD}",
+            step: "03",
+            title: "Role Play",
+            desc: "Bermain peran dalam situasi sehari-hari seperti berbelanja, di taman, atau di restoran.",
+          },
+          {
+            icon: "\u{1F4C1}",
+            step: "04",
+            title: "Project-Based",
+            desc: "Proyek kreatif mingguan seperti membuat poster, cerita bergambar, atau pertunjukan pendek.",
+          },
+        ],
+      },
+      materials: {
+        tag: "Materi Pembelajaran",
+        title: "Yang Akan Dipelajari Anak Anda",
+        subtitle: "Kurikulum komprehensif yang mencakup seluruh aspek dasar bahasa Inggris.",
+        items: [
+          {
+            icon: "\u{1F1E6}\u{1F1FF}",
+            title: "Alphabet & Phonics",
+            desc: "Pengenalan huruf, bunyi, dan cara membaca dasar (phonics).",
+          },
+          {
+            icon: "\u{1F4CB}",
+            title: "Vocabulary Building",
+            desc: "Kosakata sehari-hari: angka, warna, hewan, makanan, anggota keluarga, dan benda di sekitar.",
+          },
+          {
+            icon: "\u{1F5E3}\uFE0F",
+            title: "Simple Conversation",
+            desc: "Percakapan sederhana seperti sapaan, perkenalan diri, dan ungkapan sehari-hari.",
+          },
+          {
+            icon: "\u{1F4D6}",
+            title: "Storytelling",
+            desc: "Membaca dan menceritakan kembali cerita pendek bergambar untuk melatih pemahaman.",
+          },
+          {
+            icon: "\u{270D}\uFE0F",
+            title: "Basic Writing",
+            desc: "Menulis huruf, kata, dan kalimat pendek dengan panduan yang menyenangkan.",
+          },
+          {
+            icon: "\u{1F399}\uFE0F",
+            title: "Listening & Speaking",
+            desc: "Latihan mendengarkan dan berbicara untuk membangun kepercayaan diri.",
+          },
+        ],
+      },
+      ages: {
+        tag: "Rentang Usia",
+        title: "Program Berdasarkan Kelompok Usia",
+        subtitle: "Kurikulum disesuaikan dengan tahap perkembangan kognitif dan motorik anak.",
+        groups: [
+          {
+            age: "4\u20136 Tahun",
+            title: "Little Stars",
+            desc: "Fokus pada pengenalan bahasa melalui lagu, gerakan, dan permainan sensori. Membangun kosakata dasar dan kebiasaan mendengarkan bahasa Inggris.",
+            color: "var(--accent-color)",
+          },
+          {
+            age: "7\u20139 Tahun",
+            title: "Bright Learners",
+            desc: "Pembelajaran lebih terstruktur dengan membaca dasar, menulis kata sederhana, dan percakapan pendek. Mulai mengenal tata bahasa dasar.",
+            color: "var(--secondary-color)",
+          },
+          {
+            age: "10\u201312 Tahun",
+            title: "Young Achievers",
+            desc: "Mengembangkan kefasihan berbicara, pemahaman bacaan, dan kemampuan menulis paragraf pendek. Persiapan untuk level remaja.",
+            color: "var(--primary-light)",
+          },
+        ],
+      },
+      whyUs: {
+        tag: "Mengapa Memilih Kami",
+        title: "Mengapa Orang Tua Mempercayai Kami",
+        subtitle: "Kami berkomitmen memberikan pengalaman belajar bahasa Inggris terbaik untuk anak Anda.",
+        reasons: [
+          {
+            icon: "\u{1F3C6}",
+            title: "15+ Tahun Pengalaman",
+            desc: "Telah dipercaya ribuan orang tua sejak 2012 dalam mendidik bahasa Inggris anak.",
+          },
+          {
+            icon: "\u{1F393}",
+            title: "Sertifikasi Internasional",
+            desc: "Kurikulum selaras dengan standar Cambridge Young Learners English (YLE).",
+          },
+          {
+            icon: "\u{1F4F1}",
+            title: "Laporan Perkembangan",
+            desc: "Orang tua mendapatkan laporan perkembangan anak secara berkala setiap bulan.",
+          },
+          {
+            icon: "\u{1F3E0}",
+            title: "Belajar dari Rumah",
+            desc: "Tersedia kelas online yang memudahkan anak belajar dari kenyamanan rumah.",
+          },
+          {
+            icon: "\u{1F4B0}",
+            title: "Harga Terjangkau",
+            desc: "Biaya kursus yang kompetitif dengan berbagai pilihan paket dan cicilan.",
+          },
+          {
+            icon: "\u{1F4DE}",
+            title: "Konsultasi Gratis",
+            desc: "Konsultasi via WhatsApp untuk membantu memilih program yang tepat untuk anak Anda.",
+          },
+        ],
+      },
+      testimonials: {
+        tag: "Testimoni Orang Tua",
+        title: "Apa Kata Orang Tua Siswa",
+        subtitle: "Dengarkan cerita dari orang tua yang telah mempercayakan pendidikan bahasa Inggris anak mereka kepada kami.",
+        cards: [
+          {
+            name: "Anita Wijaya",
+            childAge: "Anak usia 6 tahun",
+            rating: 5,
+            quote: "Anak saya jadi sangat percaya diri bicara bahasa Inggris. Metode belajarnya menyenangkan, setiap hari selalu semangat ikut kelas!",
+            initials: "AW",
+          },
+          {
+            name: "Rudi Hartono",
+            childAge: "Anak usia 9 tahun",
+            rating: 5,
+            quote: "Awalnya anak kami pemalu, tapi setelah 2 bulan di English for Kids, dia mulai berani ngobok pakai bahasa Inggris. Terima kasih El's Corner!",
+            initials: "RH",
+          },
+          {
+            name: "Sari Dewi",
+            childAge: "Anak usia 11 tahun",
+            rating: 5,
+            quote: "Kurikulumnya sangat terstruktur. Saya lihat perkembangan kosakata dan tata bahasa anak saya meningkat pesat setiap bulannya.",
+            initials: "SD",
+          },
+        ],
+      },
+      faqs: {
+        tag: "FAQ",
+        title: "Pertanyaan Umum English for Kids",
+        subtitle: "Temukan jawaban untuk pertanyaan yang sering diajukan tentang program English for Kids.",
+        items: [
+          {
+            q: "Apakah anak saya perlu memiliki dasar bahasa Inggris?",
+            a: "Tidak perlu. Program English for Kids dirancang untuk semua level, termasuk anak yang baru pertama kali belajar bahasa Inggris. Pengajar kami akan menyesuaikan metode dengan kemampuan masing-masing anak.",
+          },
+          {
+            q: "Berapa lama durasi setiap sesi kelas?",
+            a: "Setiap sesi berlangsung selama 45\u201360 menit, disesuaikan dengan rentang usia dan kapasitas konsentrasi anak.",
+          },
+          {
+            q: "Apakah tersedia kelas online?",
+            a: "Ya, kami menyediakan kelas online interaktif via Zoom dengan materi dan permainan digital yang tetap seru dan engaging untuk anak.",
+          },
+          {
+            q: "Bagaimana sistem pembayaramnya?",
+            a: "Biaya program dapat dibayarkan secara penuh di awal atau dicicil bulanan. Kami juga menyediakan paket trial selama 4 sesi.",
+          },
+          {
+            q: "Apakah anak saya akan mendapatkan sertifikat?",
+            a: "Ya, setiap siswa akan mendapatkan sertifikat kelulusan di akhir program sebagai bentuk apresiasi dan motivasi.",
+          },
+        ],
+      },
+      cta: {
+        title: "Daftarkan Anak Anda Sekarang!",
+        description: "Konsultasi gratis via WhatsApp untuk mengetahui program English for Kids yang paling sesuai untuk buah hati Anda. Gratis sesi trial!",
+        btnText: "Konsultasi Gratis via WA",
+      },
     },
     testimonialsPage: {
       tag: "Kesuksesan Siswa",
@@ -455,7 +718,7 @@ const translations = {
           course: "IELTS Prep",
           rating: 5,
           quote:
-            "Lexicon benar-benar mengubah metode persiapan saya. Saya mendapat skor 8.0! Tutors memberikan saran menulis yang luar biasa dan membimbing saya mengatur waktu.",
+            "El's Corner benar-benar mengubah metode persiapan saya. Saya mendapat skor 8.0! Tutors memberikan saran menulis yang luar biasa dan membimbing saya mengatur waktu.",
           initials: "SC",
         },
         {
@@ -504,12 +767,12 @@ const translations = {
 
   en: {
     nav: {
-      brand: "Lexicon English",
-      links: ["Home", "About Us", "Programs", "Testimonials", "Contact"],
-      paths: ["/", "/about", "/programs", "/testimonials", "/contact"],
+      brand: "El's Corner",
+      links: ["Home", "About Us", "Programs", "English for Kids", "Testimonials", "Contact"],
+      paths: ["/", "/about", "/programs", "/kids-private", "/testimonials", "/contact"],
       cta: "Free Consultation",
       langToggle: "ID",
-      whatsappMsg: "Hello! I'd like to consult about Lexicon English Academy programs.",
+      whatsappMsg: "Hello! I'd like to consult about El's Corner programs.",
     },
     hero: {
       tagline: "Free Consultation via WhatsApp",
@@ -519,7 +782,7 @@ const translations = {
         "Online and offline classes for children, teens, university students, and professionals. Master English communication, build academic confidence, and enhance your global career prospects with certified instructors.",
       btnPrimary: "Free WA Consultation",
       btnSecondary: "Info via WhatsApp",
-      whatsappMsg: "Hello! I'm interested in Lexicon English Academy programs. Please provide information.",
+      whatsappMsg: "Hello! I'm interested in El's Corner programs. Please provide information.",
       visualTitle: "Interactive Learning",
       visualSub: "Building English speaking confidence every day",
       stat1Value: "4.9 / 5.0",
@@ -528,6 +791,14 @@ const translations = {
       stat2Label: "Active Students",
     },
     home: {
+      banner: {
+        tag: "Special Program",
+        title: "English for Kids",
+        subtitle: "English lessons specifically for children aged 4–12 with fun learning methods. Build English speaking confidence from an early age!",
+        cta: "View English for Kids Program",
+        path: "/kids-private",
+        bgEmoji: "\u{1F476}",
+      },
       features: {
         tag: "Our Advantages",
         title: "Effective Methods for Fluency",
@@ -603,14 +874,14 @@ const translations = {
         tag: "Student Testimonials",
         title: "Our Alumni Success Stories",
         subtitle:
-          "Join thousands of students who have successfully achieved their goals and career advancement with Lexicon English Academy.",
+          "Join thousands of students who have successfully achieved their goals and career advancement with El's Corner.",
         cards: [
           {
             name: "Budi Santoso",
             course: "IELTS Preparation",
             rating: 5,
             quote:
-              "Studying at Lexicon truly changed how I prepare for tests. I managed to get a band score of 8.0! The feedback from teachers was very insightful.",
+              "Studying at El's Corner truly changed how I prepare for tests. I managed to get a band score of 8.0! The feedback from teachers was very insightful.",
             initials: "BS",
           },
           {
@@ -648,16 +919,17 @@ const translations = {
       },
     },
     footer: {
-      brand: "Lexicon",
+      brand: "El's Corner",
       brandHighlight: "English",
       description:
-        "Lexicon English Academy offers premium quality English course programs online and offline designed to improve fluency, prepare for academic success, and accelerate your career advancement.",
+        "El's Corner offers premium quality English course programs online and offline designed to improve fluency, prepare for academic success, and accelerate your career advancement.",
       socialAria: { fb: "Facebook", ig: "Instagram", tw: "Twitter", ln: "LinkedIn" },
       quickLinksTitle: "Quick Links",
       quickLinks: [
         { name: "Home", path: "/" },
         { name: "About Us", path: "/about" },
         { name: "Course Programs", path: "/programs" },
+        { name: "English for Kids", path: "/kids-private" },
         { name: "Student Testimonials", path: "/testimonials" },
         { name: "Contact Us", path: "/contact" },
       ],
@@ -667,7 +939,7 @@ const translations = {
         { name: "Business English", path: "/programs" },
         { name: "IELTS Preparation", path: "/programs" },
         { name: "TOEFL iBT Preparation", path: "/programs" },
-        { name: "English for Children", path: "/programs" },
+        { name: "English for Kids", path: "/kids-private" },
       ],
       newsletterTitle: "Stay Updated",
       newsletterText:
@@ -676,7 +948,7 @@ const translations = {
       newsletterBtn: "Subscribe",
       newsletterSuccess:
         "Thank you! You have successfully subscribed to our newsletter.",
-      copyright: "Lexicon English Academy. All Rights Reserved.",
+      copyright: "El's Corner. All Rights Reserved.",
       bottomLinks: [
         { name: "Privacy Policy", path: "#" },
         { name: "Terms and Conditions", path: "#" },
@@ -690,8 +962,8 @@ const translations = {
         "We help overcome language barriers through modern, effective English education accessible both online and in person.",
       storyTitle: "Our Story and Mission",
       storyParagraphs: [
-        "Founded in 2012, Lexicon English Academy began its journey with one classroom and a belief that language learning should not just be about memorizing grammar rules. Learning a language should be an active, enjoyable, and relevant experience to real life.",
-        "Today, Lexicon operates several learning centers and a modern online class platform serving students from various regions and backgrounds, from students to professionals.",
+        "Founded in 2012, El's Corner began its journey with one classroom and a belief that language learning should not just be about memorizing grammar rules. Learning a language should be an active, enjoyable, and relevant experience to real life.",
+        "Today, El's Corner operates several learning centers and a modern online class platform serving students from various regions and backgrounds, from students to professionals.",
         "Our mission remains the same: providing practical, high-quality English education and helping every student speak confidently, clearly, and effectively.",
       ],
       visualPaneTitle: "Since 2012",
@@ -779,7 +1051,7 @@ const translations = {
         {
           icon: "\u{1F4CD}",
           title: "Our Campus Headquarters",
-          val: "Lexicon Tower, 4th Floor\nJl. Pendidikan No. 10\nCentral Jakarta 10110",
+          val: "El's Corner Tower, 4th Floor\nJl. Pendidikan No. 10\nCentral Jakarta 10110",
         },
         {
           icon: "\u{1F4DE}",
@@ -789,7 +1061,7 @@ const translations = {
         {
           icon: "\u2709\uFE0F",
           title: "General Support Email",
-          val: "admissions@lexicon-academy.com\nstudent-services@lexicon-academy.com",
+          val: "admissions@els-corner.com\nstudent-services@els-corner.com",
         },
         {
           icon: "\u23F0",
@@ -862,7 +1134,7 @@ const translations = {
       title: "Courses and Programs",
       subtitle:
         "Find the course that matches your target learning speed, background level, and scheduling constraints.",
-      filters: ["All", "General", "Academic", "Professional", "Young Learners"],
+      filters: ["All", "General", "Academic", "Professional", "Young Learners", "Kids"],
       programs: [
         {
           title: "General English Mastery",
@@ -930,10 +1202,264 @@ const translations = {
           price: "$280",
           icon: "\u{1F4E3}",
         },
+        {
+          title: "English for Kids",
+          description:
+            "English program specifically for children aged 4\u201312 with fun learning methods, gamification, and experienced teachers.",
+          category: "Kids",
+          format: "Online & Offline",
+          level: "Ages 4 - 12",
+          duration: "16 Weeks",
+          price: "$250",
+          icon: "\u{1F476}",
+        },
       ],
       noResultsTitle: "No programs found",
       noResultsDesc:
         "Please check back later or contact us for custom schedules.",
+    },
+    kidsPage: {
+      hero: {
+        tag: "English for Kids",
+        title: "English Lessons \u2013 ",
+        titleHighlight: "Fun & Interactive",
+        subtitle: "English program specifically for children aged 4\u201312 with fun, interactive, and play-filled learning methods.",
+        btnPrimary: "WA Consultation",
+        btnSecondary: "Info Program",
+        stats: [
+          { value: "4\u201312", label: "Years Old" },
+          { value: "Fun", label: "Learning" },
+          { value: "Native", label: "Teachers" },
+          { value: "Online", label: "& Offline" },
+        ],
+      },
+      advantages: {
+        tag: "Program Advantages",
+        title: "Why English for Kids?",
+        subtitle: "Program specifically designed for children's early language development with a fun approach.",
+        cards: [
+          {
+            icon: "\u{1F3B6}",
+            title: "Learn with Songs",
+            desc: "Learning methods using songs, rhythms, and movements that help children remember vocabulary more easily.",
+          },
+          {
+            icon: "\u{1F3AE}",
+            title: "Interactive Gamification",
+            desc: "Educational games and interactive quizzes that make children excited to learn without feeling pressured.",
+          },
+          {
+            icon: "\u{1F468}\u200D\u{1F3EB}",
+            title: "Experienced Teachers",
+            desc: "TEFL-certified instructors who specialize in teaching English to children.",
+          },
+          {
+            icon: "\u{1F4F1}",
+            title: "Learning App Access",
+            desc: "Mobile app for independent practice at home with materials synchronized with the class curriculum.",
+          },
+          {
+            icon: "\u{1F4DA}",
+            title: "International Curriculum",
+            desc: "Aligned with CEFR and Cambridge Young Learners English (YLE) test standards.",
+          },
+          {
+            icon: "\u{1F91D}",
+            title: "Small Group Classes",
+            desc: "Maximum 4\u20136 students per class so teachers can focus more attention on each child.",
+          },
+        ],
+      },
+      methods: {
+        tag: "Learning Methods",
+        title: "Proven Effective Approach",
+        subtitle: "We use teaching methods that have been proven effective for children.",
+        steps: [
+          {
+            icon: "\u{1F3A4}",
+            step: "01",
+            title: "Listen & Repeat",
+            desc: "Children listen to native speaker pronunciation and repeat it, building correct pronunciation habits from the start.",
+          },
+          {
+            icon: "\u{1F3B2}",
+            step: "02",
+            title: "Play & Learn",
+            desc: "Learning through board games, vocabulary cards, and physical activities that stimulate memory.",
+          },
+          {
+            icon: "\u{1F3AD}",
+            step: "03",
+            title: "Role Play",
+            desc: "Role-playing in everyday situations like shopping, at the park, or at a restaurant.",
+          },
+          {
+            icon: "\u{1F4C1}",
+            step: "04",
+            title: "Project-Based",
+            desc: "Weekly creative projects such as making posters, picture stories, or short performances.",
+          },
+        ],
+      },
+      materials: {
+        tag: "Learning Materials",
+        title: "What Your Child Will Learn",
+        subtitle: "A comprehensive curriculum covering all basic aspects of English.",
+        items: [
+          {
+            icon: "\u{1F1E6}\u{1F1FF}",
+            title: "Alphabet & Phonics",
+            desc: "Introduction to letters, sounds, and basic reading (phonics).",
+          },
+          {
+            icon: "\u{1F4CB}",
+            title: "Vocabulary Building",
+            desc: "Everyday vocabulary: numbers, colors, animals, food, family members, and objects around us.",
+          },
+          {
+            icon: "\u{1F5E3}\uFE0F",
+            title: "Simple Conversation",
+            desc: "Simple conversations such as greetings, self-introductions, and everyday expressions.",
+          },
+          {
+            icon: "\u{1F4D6}",
+            title: "Storytelling",
+            desc: "Reading and retelling short picture stories to build comprehension.",
+          },
+          {
+            icon: "\u{270D}\uFE0F",
+            title: "Basic Writing",
+            desc: "Writing letters, words, and short sentences with fun guidance.",
+          },
+          {
+            icon: "\u{1F399}\uFE0F",
+            title: "Listening & Speaking",
+            desc: "Listening and speaking practice to build confidence.",
+          },
+        ],
+      },
+      ages: {
+        tag: "Age Groups",
+        title: "Programs by Age Group",
+        subtitle: "Curriculum tailored to each child's cognitive and motor development stage.",
+        groups: [
+          {
+            age: "4\u20136 Years",
+            title: "Little Stars",
+            desc: "Focus on language introduction through songs, movement, and sensory play. Build basic vocabulary and English listening habits.",
+            color: "var(--accent-color)",
+          },
+          {
+            age: "7\u20139 Years",
+            title: "Bright Learners",
+            desc: "More structured learning with basic reading, simple word writing, and short conversations. Begin learning basic grammar.",
+            color: "var(--secondary-color)",
+          },
+          {
+            age: "10\u201312 Years",
+            title: "Young Achievers",
+            desc: "Develop speaking fluency, reading comprehension, and short paragraph writing skills. Preparation for teen level.",
+            color: "var(--primary-light)",
+          },
+        ],
+      },
+      whyUs: {
+        tag: "Why Choose Us",
+        title: "Why Parents Trust Us",
+        subtitle: "We are committed to providing the best English learning experience for your child.",
+        reasons: [
+          {
+            icon: "\u{1F3C6}",
+            title: "15+ Years Experience",
+            desc: "Trusted by thousands of parents since 2012 in teaching children English.",
+          },
+          {
+            icon: "\u{1F393}",
+            title: "International Certification",
+            desc: "Curriculum aligned with Cambridge Young Learners English (YLE) standards.",
+          },
+          {
+            icon: "\u{1F4F1}",
+            title: "Progress Reports",
+            desc: "Parents receive regular monthly progress reports on their child's development.",
+          },
+          {
+            icon: "\u{1F3E0}",
+            title: "Learn from Home",
+            desc: "Online classes available for children to learn from the comfort of home.",
+          },
+          {
+            icon: "\u{1F4B0}",
+            title: "Affordable Price",
+            desc: "Competitive course fees with various package and installment options.",
+          },
+          {
+            icon: "\u{1F4DE}",
+            title: "Free Consultation",
+            desc: "WhatsApp consultation to help choose the right program for your child.",
+          },
+        ],
+      },
+      testimonials: {
+        tag: "Parent Testimonials",
+        title: "What Parents Say",
+        subtitle: "Hear from parents who have entrusted their children's English education to us.",
+        cards: [
+          {
+            name: "Anita Wijaya",
+            childAge: "Child aged 6",
+            rating: 5,
+            quote: "My child is now very confident speaking English. The learning method is fun, she's always excited to attend class!",
+            initials: "AW",
+          },
+          {
+            name: "Rudi Hartono",
+            childAge: "Child aged 9",
+            rating: 5,
+            quote: "Our son used to be shy, but after 2 months in English for Kids, he started daring to speak English. Thank you El's Corner!",
+            initials: "RH",
+          },
+          {
+            name: "Sari Dewi",
+            childAge: "Child aged 11",
+            rating: 5,
+            quote: "The curriculum is very structured. I can see my child's vocabulary and grammar improving significantly every month.",
+            initials: "SD",
+          },
+        ],
+      },
+      faqs: {
+        tag: "FAQ",
+        title: "English for Kids FAQ",
+        subtitle: "Find answers to frequently asked questions about the English for Kids program.",
+        items: [
+          {
+            q: "Does my child need prior English knowledge?",
+            a: "No. The English for Kids program is designed for all levels, including children who are learning English for the first time. Our teachers will adapt the method to each child's ability.",
+          },
+          {
+            q: "How long is each class session?",
+            a: "Each session lasts 45\u201360 minutes, adjusted according to the age range and attention capacity of the child.",
+          },
+          {
+            q: "Are online classes available?",
+            a: "Yes, we provide interactive online classes via Zoom with digital materials and games that remain fun and engaging for children.",
+          },
+          {
+            q: "How does payment work?",
+            a: "Program fees can be paid in full upfront or in monthly installments. We also offer a trial package of 4 sessions.",
+          },
+          {
+            q: "Will my child receive a certificate?",
+            a: "Yes, each student will receive a graduation certificate at the end of the program as a form of appreciation and motivation.",
+          },
+        ],
+      },
+      cta: {
+        title: "Register Your Child Now!",
+        description: "Free consultation via WhatsApp to find out the most suitable English for Kids program for your child. Free trial session!",
+        btnText: "Free WA Consultation",
+      },
     },
     testimonialsPage: {
       tag: "Student Success",
@@ -952,7 +1478,7 @@ const translations = {
           course: "IELTS Prep",
           rating: 5,
           quote:
-            "Lexicon completely changed my prep method. I scored an 8.0 overall band score! The tutors gave incredible writing suggestions and guided me on managing time.",
+            "El's Corner completely changed my prep method. I scored an 8.0 overall band score! The tutors gave incredible writing suggestions and guided me on managing time.",
           initials: "SC",
         },
         {

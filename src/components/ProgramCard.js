@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { getWhatsAppUrl } from '@/lib/constants';
 import styles from './ProgramCard.module.css';
 
 export default function ProgramCard({
@@ -14,6 +14,7 @@ export default function ProgramCard({
   price,
   icon = '📖'
 }) {
+  const whatsappMsg = `Halo! Saya tertarik dengan program *${title}* (${format}). Mohon informasinya lebih lanjut.`;
   return (
     <div className={styles.card}>
       {/* Header Visual */}
@@ -46,9 +47,9 @@ export default function ProgramCard({
             <span className={styles.priceLabel}>Mulai dari</span>
             <span className={styles.priceVal}>{price}</span>
           </div>
-          <Link href="/contact" className={`btn btn-primary btn-sm ${styles.enrollBtn}`} style={{ padding: '10px 16px', fontSize: '13px' }}>
-            Detail Kelas
-          </Link>
+          <a href={getWhatsAppUrl(whatsappMsg)} target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-sm ${styles.enrollBtn}`} style={{ padding: '10px 16px', fontSize: '13px' }}>
+            Konsultasi via WA
+          </a>
         </div>
       </div>
     </div>

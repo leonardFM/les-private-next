@@ -1,0 +1,22 @@
+Review seluruh project Next.js saya.
+
+Tujuan website:
+Mengubah pengunjung menjadi calon siswa les private melalui WhatsApp.
+
+Tolong analisis:
+
+- Kekurangan UI/UX
+- Kekurangan SEO
+- Kekurangan konversi
+- Posisi CTA yang kurang tepat
+- Informasi yang kurang
+- Komponen yang sebaiknya ditambahkan
+- Optimasi mobile
+- Optimasi performa
+
+Kemudian berikan prioritas:
+High Impact
+Medium Impact
+Low Impact
+
+Dan implementasikan perubahan yang termasuk High Impact.

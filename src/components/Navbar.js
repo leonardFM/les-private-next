@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from '@/i18n';
+import { getWhatsAppUrl } from '@/lib/constants';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t, locale, toggleLocale } = useTranslation();
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -24,13 +27,9 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const navLinks = [
-    { name: 'Beranda', path: '/' },
-    { name: 'Tentang Kami', path: '/about' },
-    { name: 'Program', path: '/programs' },
-    { name: 'Testimoni', path: '/testimonials' },
-    { name: 'Kontak', path: '/contact' },
-  ];
+  const linkNames = t('nav.links');
+  const linkPaths = t('nav.paths');
+  const navLinks = linkNames.map((name, i) => ({ name, path: linkPaths[i] }));
 
   return (
     <header className={styles.header}>
@@ -38,7 +37,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className={styles.logo} onClick={closeMenu}>
           <div className={styles.logoIcon}>L</div>
-          <span>El`s <span style={{ color: 'var(--secondary-color)' }}>Corner</span></span>
+          <span>{t('nav.brand')}</span>
         </Link>
 
         {/* Backdrop for mobile drawer */}
@@ -64,14 +63,25 @@ export default function Navbar() {
             );
           })}
           <li>
-            <Link 
-              href="/contact" 
+            <button
+              onClick={toggleLocale}
+              className={`${styles.langToggle} btn`}
+              style={{ padding: '8px 14px', fontSize: '13px', fontWeight: 700, minWidth: '44px' }}
+            >
+              {t('nav.langToggle')}
+            </button>
+          </li>
+          <li>
+            <a 
+              href={getWhatsAppUrl(t('nav.whatsappMsg'))}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary btn-sm ctaBtn" 
               style={{ padding: '8px 18px', fontSize: '14px' }}
               onClick={closeMenu}
             >
-              Daftar Sekarang
-            </Link>
+              {t('nav.cta')}
+            </a>
           </li>
         </ul>
 

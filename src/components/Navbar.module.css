@@ -28,24 +28,30 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoImg {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform var(--transition-fast);
+}
+
+.logo:hover .logoImg {
+  transform: scale(1.08);
+}
+
+.logoText {
   font-size: 22px;
   font-weight: 800;
   color: var(--primary-color);
   letter-spacing: -0.5px;
 }
 
-.logoIcon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-light));
-  border-radius: var(--border-radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 800;
-  font-size: 18px;
+.logo:hover .logoText {
+  color: var(--accent-color);
 }
 
 .navMenu {
@@ -63,13 +69,17 @@
   padding: 8px 0;
 }
 
+.navLink {
+  transition: color var(--transition-fast);
+}
+
 .navLink:hover {
-  color: var(--primary-light);
+  color: var(--primary-color);
 }
 
 .activeLink {
-  color: var(--primary-light);
-  font-weight: 600;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .activeLink::after {
@@ -78,14 +88,36 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background-color: var(--primary-light);
-  border-radius: 2px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  border-radius: 3px;
 }
 
 .ctaBtn {
   font-size: 14px;
   padding: 10px 20px;
+}
+
+.themeToggle {
+  background: var(--primary-soft) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 8px !important;
+  font-size: 18px !important;
+  min-width: 40px !important;
+  border-radius: var(--border-radius-sm) !important;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+.themeToggle:hover {
+  transform: scale(1.15) rotate(-15deg);
+  box-shadow: var(--shadow-md);
+}
+
+:global([data-theme='dark']) .themeToggle {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
 }
 
 /* Mobile Toggle Hamburger button */
@@ -161,7 +193,7 @@
   }
 
   .activeLink {
-    border-left: 3px solid var(--primary-light);
+    border-left: 3px solid var(--accent-color);
     padding-left: 12px;
   }
   
@@ -171,7 +203,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(15, 82, 186, 0.15);
+    background-color: rgba(0, 74, 173, 0.15);
     backdrop-filter: blur(4px);
     z-index: 1002;
     opacity: 0;

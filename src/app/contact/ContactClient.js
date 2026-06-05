@@ -55,7 +55,7 @@ ${formData.message}`;
   return (
     <div>
       {/* Page Header */}
-      <section className="section" style={{ backgroundColor: 'var(--primary-soft)', padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
+      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <span className="section-tag">{t('contact.tag')}</span>
           <h1 className="section-title" style={{ margin: 0 }}>{t('contact.title')}</h1>
@@ -65,13 +65,13 @@ ${formData.message}`;
         </div>
       </section>
 
-      <section className="section">
+      <section className="section bg-blue">
         <div className="container">
           <div className={styles.grid}>
             {/* Sidebar Details Info */}
             <div className={styles.infoPanel}>
-              <h2 style={{ fontSize: '28px', color: 'var(--foreground)', marginBottom: '10px' }}>{t('contact.infoTitle')}</h2>
-              <p style={{ color: 'var(--foreground-muted)', fontSize: '15px', marginBottom: '20px' }}>
+              <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>{t('contact.infoTitle')}</h2>
+              <p style={{ opacity: 0.85, fontSize: '15px', marginBottom: '20px' }}>
                 {t('contact.infoIntro')}
               </p>
               {contactInfos.map((info, idx) => (
@@ -200,7 +200,7 @@ ${formData.message}`;
       </section>
 
       {/* FAQ Accordion Section */}
-      <section className={styles.faqSection}>
+      <section className={`${styles.faqSection} bg-yellow`}>
         <div className="container">
           <div className="section-header">
             <span className="section-tag">{t('contact.faqTag')}</span>

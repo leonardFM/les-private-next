@@ -15,17 +15,17 @@ export default function CTASection({
 }) {
   return (
     <section className={styles.section}>
-      <div className={styles.bgDecoration} style={{ top: '-100px', left: '-100px' }}></div>
-      <div className={styles.bgDecoration} style={{ bottom: '-100px', right: '-100px' }}></div>
+      <div className={`${styles.bgDecoration} ${styles.bgDeco1}`}></div>
+      <div className={`${styles.bgDecoration} ${styles.bgDeco2}`}></div>
 
       <div className={styles.container}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.desc}>{description}</p>
         <div className={styles.actions}>
-          <a href={getWhatsAppUrl(primaryMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
+          <a href={getWhatsAppUrl(primaryMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
             {primaryActionText}
           </a>
-          <Link href={secondaryActionUrl} className="btn btn-secondary" style={{ color: '#ffffff', borderColor: '#ffffff' }}>
+          <Link href={secondaryActionUrl} className="btn btn-accent">
             {secondaryActionText}
           </Link>
         </div>

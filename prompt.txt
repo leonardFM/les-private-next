@@ -1,131 +1,81 @@
-update halaman landing page "/kids-private" untuk layanan les privat anak usia 4–8 tahun.
+Refactor halaman /kids-private agar mengikuti seluruh sistem website yang sudah ada.
 
-Halaman ini harus terasa sangat hangat, lembut, dan menyenangkan untuk orang tua. Bukan seperti aplikasi atau dashboard, tapi seperti tempat belajar anak yang penuh kasih, aman, dan playful.
+Requirements:
 
-Fokus utama adalah membuat orang tua merasa percaya dan ingin langsung menghubungi via WhatsApp.
+1. Dark Mode Support
 
----
+* Gunakan theme provider yang sudah digunakan oleh halaman lain.
+* Jangan membuat implementasi dark mode baru.
+* Gunakan design token yang sudah ada.
 
-## 🌼 ARAH DESAIN
-Gunakan vibe seperti:
-- ruang belajar anak yang nyaman dan ceria
-- playroom edukatif modern
-- scrapbook / album aktivitas anak
+Pastikan:
 
-Karakter UI:
-- lembut, tidak kaku
-- banyak rounded shape besar
-- warna pastel hangat (cream, soft blue, mint, light yellow, pink muda)
-- shadow halus seperti benda ringan
-- layout tidak terlalu simetris
+* Background berubah sesuai theme.
+* Card tetap memiliki kontras yang baik.
+* CTA tetap menonjol.
+* Ilustrasi tetap terlihat baik di dark mode.
 
----
+2. Multi Language Support
 
-## 🎬 ANIMASI (WAJIB, TAPI LEMBUT)
+* Gunakan sistem locale/i18n yang sudah dipakai website.
+* Jangan hardcode text.
 
-Tambahkan animasi yang halus dan tidak berlebihan:
+Semua text harus menggunakan translation key.
 
-- card program floating pelan seperti balon
-- hover card: naik sedikit + shadow muncul lembut
-- gambar sedikit zoom saat hover
-- fade-in saat scroll untuk setiap section
-- tombol WhatsApp punya efek “soft pulse” pelan
-- transisi antar elemen smooth dan natural
+Contoh:
 
-Animasi harus:
-- pelan (3–6 detik)
-- tidak mengganggu
-- terasa hidup tapi tetap tenang
+t("kids.hero.title")
+t("kids.hero.subtitle")
+t("kids.programs.title")
 
----
+Buat translation file untuk:
 
-## 🧸 STRUKTUR HALAMAN
+* English
+* Indonesian
 
-### HERO
-Buat pembuka yang sangat hangat.
+3. Reusable Components
+   Pisahkan section menjadi component:
 
-Gunakan 1 gambar utama anak sedang belajar dengan suasana bahagia.
+components/kids/
+├── HeroSection
+├── ProgramSection
+├── WhyChooseUsSection
+├── LearningJourneySection
+├── TestimonialSection
+├── FAQSection
+└── CTASection
 
-Tampilkan:
-- headline sederhana, emosional, dan mudah dipahami orang tua
-- penjelasan singkat bahwa anak belajar dengan cara menyenangkan
-- tombol utama WhatsApp yang paling menonjol
-- tombol trial class sebagai opsi kedua
+4. Theme Tokens
+   Gunakan token global website:
 
-Hero harus langsung memberi rasa aman dan percaya.
+--primary
+--accent
+--background
+--foreground
+--card
+--border
 
----
+Jangan menggunakan warna hardcoded.
 
-### PROGRAM BELAJAR
-Tampilkan sebagai “dunia belajar anak”.
+5. Accessibility
 
-Gunakan kartu yang terasa seperti mainan / cerita, bukan list bisnis.
+* Dark mode harus tetap readable.
+* Semua icon dan illustration harus memiliki kontras yang cukup.
+* Support keyboard navigation.
 
-Program:
-- membaca & menulis dasar
-- matematika dasar
-- kreativitas & seni
-- fokus & percaya diri
+6. Branding
+   Gunakan logo dari /public/logo.
 
-Setiap kartu:
-- ada gambar
-- hover interaktif
-- animasi floating ringan
+7. Future Scalability
+   Pastikan section baru dapat ditambahkan tanpa mengubah struktur halaman utama.
 
----
+8. Premium UI
 
-### CARA BELAJAR
-Tampilkan sebagai alur cerita sederhana:
+* Glassmorphism ringan
+* Soft shadows
+* Smooth transitions
+* Hover animations
+* Responsive design
 
-1. ngobrol dengan orang tua
-2. memilih tutor yang cocok
-3. mulai belajar dengan menyenangkan
-
-Buat seperti perjalanan lembut, bukan step formal.
-
----
-
-### AKTIVITAS ANAK
-Tampilkan gambar aktivitas belajar anak seperti album cerita.
-
-Layout:
-- tidak simetris
-- seperti scrapbook atau Pinterest style
-- terasa hidup dan natural
-
----
-
-### TESTIMONIAL
-Tampilkan pengalaman orang tua dengan gaya cerita singkat.
-
-Gunakan gaya:
-- hangat
-- personal
-- seperti review nyata
-
----
-
-### FINAL CTA
-Buat penutup yang emosional dan tenang.
-
-Gunakan gambar anak tersenyum atau bahagia belajar.
-
-Tampilkan:
-- pesan ajakan yang lembut
-- tombol WhatsApp besar sebagai aksi utama
-- suasana yang menenangkan
-
----
-
-## 📱 MOBILE EXPERIENCE
-- semua section harus vertical flow yang nyaman
-- tombol WhatsApp selalu mudah dijangkau
-- program bisa scroll horizontal
-
----
-
-## ⚠️ PENTING
-- gunakan gambar dari folder public/image
-- jangan gunakan layout grid yang kaku atau terlalu simetris
-- prioritaskan rasa hangat dan storytelling visual
-- hasil harus siap production dan terlihat seperti website les privat anak premium
+Tujuan:
+Halaman /kids-private harus terlihat sebagai bagian dari website utama, bukan halaman yang dibuat terpisah.

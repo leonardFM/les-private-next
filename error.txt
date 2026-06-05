@@ -1,11 +1,21 @@
-Recoverable Error
+Image with src "/image/H9MmxzgAQl0PXnNo3Z3iWEV--Y3ztW2ZDfHKC2OlWo2Yeg31o5g2HDUsARe3MmZZRjNdvu2C_c6CARYpnyH1v5BcPx6udCfAFwf0MGHJw4kwISgQjZeNehIhRzFzAabeQnQhcjiLL2XQamMMPIUgbuK-gPW3FglPQmU4ZcT09C0YxdynQXsDJ-roAXt-mMnu.jpg" is missing required "width" property.
+src/components/kids/HeroSection.js (42:9) @ HeroSection
 
 
-Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
+  40 |       </div>
+  41 |       <div className={styles.heroVisual}>
+> 42 |         <Image src={funImg} alt="" className={styles.heroVisualImg} />
+     |         ^
+  43 |         <div className={styles.heroBadge}>
+  44 |           <span className={styles.heroBadgeIcon}>🎉</span>
+  45 |           <div>
+Call Stack
+16
 
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+Show 13 ignore-listed frame(s)
+HeroSection
+src/components/kids/HeroSection.js (42:9)
+KidsPrivateClient
+src/app/kids-private/KidsPrivateClient.js (37:7)
+KidsPrivatePage
+src/app/kids-private/page.js (10:10)

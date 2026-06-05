@@ -1,0 +1,137 @@
+.sec {
+  padding: 80px 0;
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--background) 100%);
+}
+
+[data-theme='dark'] .sec {
+  background: linear-gradient(180deg, var(--primary-soft) 0%, var(--background) 100%);
+}
+
+.head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.flow {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.item:last-child { margin-bottom: 0; }
+
+.imgCol {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imgWrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+  border: 2px solid var(--border-color);
+}
+
+.imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.item:hover .imgWrap img { transform: scale(1.06); }
+
+.num {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.line {
+  width: 2px;
+  flex: 1;
+  min-height: 30px;
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+  opacity: 0.2;
+  margin: 4px 0;
+}
+
+.content {
+  padding-top: 8px;
+  flex: 1;
+}
+
+.content h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--foreground);
+}
+
+.content p {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .sec { padding: 50px 0; }
+  .title { font-size: 26px; }
+  .item { gap: 20px; }
+  .imgWrap { width: 80px; height: 80px; }
+  .content { padding-top: 4px; }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/i18n';
 import styles from './Footer.module.css';
@@ -28,8 +29,17 @@ export default function Footer() {
           {/* Column 1 - Brand Info */}
           <div className={styles.logoArea}>
             <div className={styles.logo}>
-              <div className={styles.logoIcon}>L</div>
-              <span>{t('footer.brand')}<span style={{ color: 'var(--secondary-color)' }}>{t('footer.brandHighlight')}</span></span>
+              <Image
+                src="/logo/logo-png.png"
+                alt="El's Corner"
+                width={56}
+                height={56}
+                className={styles.logoImg}
+              />
+              <div className={styles.logoText}>
+                <span className={styles.brandName}>{t('footer.brand')}</span>
+                <span className={styles.brandHighlight}>{t('footer.brandHighlight')}</span>
+              </div>
             </div>
             <p className={styles.desc}>
               {t('footer.description')}

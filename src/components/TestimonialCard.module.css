@@ -1,30 +1,47 @@
 .card {
   background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  padding: 32px;
+  border: 1px solid rgba(0, 74, 173, 0.06);
+  border-radius: var(--border-radius-lg);
+  padding: 36px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-bounce);
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary-soft);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(0, 74, 173, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .quoteIcon {
   position: absolute;
   top: 24px;
   right: 32px;
-  font-size: 64px;
+  font-size: 72px;
   line-height: 1;
-  color: var(--primary-soft);
-  opacity: 0.5;
+  color: var(--accent-soft);
+  opacity: 0.6;
   font-family: serif;
   user-select: none;
   pointer-events: none;
@@ -35,12 +52,12 @@
   gap: 4px;
   margin-bottom: 20px;
   color: var(--accent-color);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .quoteText {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--foreground-muted);
   font-style: italic;
   margin-bottom: 24px;
@@ -53,22 +70,21 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--accent-soft);
   padding-top: 16px;
 }
 
 .avatar {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-soft) 0%, hsl(var(--primary-hue), 85%, 85%) 100%);
-  color: var(--primary-light);
+  border-radius: var(--border-radius-sm);
+  background: linear-gradient(135deg, var(--primary-color) 0%, hsl(214, 65%, 50%) 100%);
+  color: white;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  border: 2px solid var(--border-color);
 }
 
 .meta {
@@ -84,6 +100,6 @@
 
 .course {
   font-size: 12px;
-  color: var(--primary-light);
+  color: var(--primary-color);
   font-weight: 600;
 }

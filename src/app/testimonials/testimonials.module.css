@@ -19,20 +19,20 @@
 }
 
 .filterBtn:hover {
-  border-color: var(--primary-light);
-  color: var(--primary-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
   background-color: var(--primary-soft);
 }
 
 .filterActive {
-  background-color: var(--primary-light);
+  background-color: var(--primary-color);
   color: #ffffff;
-  border-color: var(--primary-light);
-  box-shadow: 0 4px 12px rgba(15, 82, 186, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);
 }
 
 .filterActive:hover {
-  background-color: var(--primary-color);
+  background-color: var(--primary-blue-hover);
   color: #ffffff;
 }
 
@@ -87,7 +87,7 @@
 .statVal {
   font-size: 32px;
   font-weight: 800;
-  color: var(--primary-light);
+  color: var(--accent-color);
 }
 
 .statLabel {

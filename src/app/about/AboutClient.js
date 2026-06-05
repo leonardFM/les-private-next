@@ -15,9 +15,8 @@ export default function AboutClient() {
   return (
   <div>
     <section
-      className="section"
+      className="section bg-yellow"
       style={{
-        backgroundColor: 'var(--primary-soft)',
         padding: '60px 0',
         borderBottom: '1px solid var(--border-color)',
       }}
@@ -41,15 +40,15 @@ export default function AboutClient() {
       </div>
     </section>
 
-    <section className="section">
+    <section className="section bg-blue">
       <div className="container">
         <div className={styles.storyRow}>
             <div className={styles.storyContent}>
-              <h2 style={{ fontSize: '28px', color: 'var(--foreground)' }}>
+              <h2 style={{ fontSize: '28px' }}>
                 {t('about.storyTitle')}
               </h2>
               {t('about.storyParagraphs').map((p, i) => (
-                <p key={i} style={{ color: 'var(--foreground-muted)' }}>{p}</p>
+                <p key={i} style={{ opacity: 0.85 }}>{p}</p>
               ))}
           </div>
 
@@ -79,7 +78,7 @@ export default function AboutClient() {
       </div>
     </section>
 
-    <section className={`${styles.campusSection} section`}>
+    <section className={`${styles.campusSection} section bg-yellow`}>
       <div className="container">
         <div className="section-header">
           <span className="section-tag">{t('about.campusTag')}</span>
@@ -103,7 +102,7 @@ export default function AboutClient() {
       </div>
     </section>
 
-    <section className={`${styles.teachersSection} section`}>
+    <section className={`${styles.teachersSection} section bg-blue`}>
       <div className="container">
         <div className="section-header">
           <span className="section-tag">{t('about.teachersTag')}</span>

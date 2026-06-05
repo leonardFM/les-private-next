@@ -1,49 +1,66 @@
 .card {
   background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
+  border: 1px solid rgba(0, 74, 173, 0.06);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-bounce);
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-soft);
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(0, 74, 173, 0.12);
 }
 
 .imagePlaceholder {
   height: 180px;
-  background: linear-gradient(135deg, hsl(var(--primary-hue), 85%, 28%) 0%, var(--primary-light) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, hsl(214, 65%, 50%) 50%, hsl(214, 55%, 60%) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 24px;
   color: white;
+  border-bottom: 3px solid var(--accent-color);
+}
+
+.imagePlaceholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .icon {
-  font-size: 48px;
+  font-size: 52px;
   opacity: 0.95;
+  animation: float 5s ease-in-out infinite;
 }
 
 .badge {
   position: absolute;
   top: 16px;
   right: 16px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 50px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--accent-color);
   color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(255, 222, 89, 0.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
 
 :global([data-theme='dark']) .badge {
@@ -52,33 +69,38 @@
 }
 
 .body {
-  padding: 24px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .category {
-  font-size: 12px;
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--primary-soft);
+  border-radius: 50px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--secondary-color);
-  margin-bottom: 8px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
   letter-spacing: 0.5px;
+  align-self: flex-start;
 }
 
 .title {
   font-size: 20px;
   font-weight: 800;
   color: var(--foreground);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   line-height: 1.3;
 }
 
 .desc {
   font-size: 14px;
   color: var(--foreground-muted);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 20px;
   flex-grow: 1;
 }
@@ -86,9 +108,9 @@
 .metaGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
   padding-top: 16px;
-  border-top: 1px solid var(--border-color);
+  border-top: 2px dashed var(--accent-soft);
   margin-bottom: 20px;
 }
 
@@ -96,6 +118,9 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  background: var(--primary-soft);
+  padding: 10px 14px;
+  border-radius: var(--border-radius-sm);
 }
 
 .metaLabel {
@@ -108,8 +133,8 @@
 
 .metaVal {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--foreground);
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
 .footer {
@@ -127,12 +152,13 @@
 .priceLabel {
   font-size: 11px;
   color: var(--foreground-muted);
+  font-weight: 600;
 }
 
 .priceVal {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
-  color: var(--primary-light);
+  color: var(--primary-color);
 }
 
 .enrollBtn {

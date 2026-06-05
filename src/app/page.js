@@ -26,7 +26,14 @@ export default function Home() {
       <PromotionalBanner />
 
       {/* Why Choose Us Features */}
-      <section className={`${styles.features} section`}>
+      <section className={`${styles.features} section bg-yellow`}>
+        {/* Blob decoration */}
+        <div className={styles.blobYellow1} />
+        <div className={styles.blobYellow2} />
+        {/* Floating elements */}
+        <div className={styles.floatStar1}>⭐</div>
+        <div className={styles.floatBook1}>📚</div>
+
         <div className="container">
           <div className="section-header">
             <span className="section-tag">{t('home.features.tag')}</span>
@@ -49,7 +56,14 @@ export default function Home() {
       </section>
 
       {/* Featured Programs Preview */}
-      <section className="section">
+      <section className="section bg-blue">
+        {/* Blob decorations */}
+        <div className={styles.blobBlue1} />
+        <div className={styles.blobBlue2} />
+        {/* Floating elements */}
+        <div className={styles.floatGlobe}>🌍</div>
+        <div className={styles.floatGradCap}>🎓</div>
+
         <div className="container">
           <div className="section-header">
             <span className="section-tag">{t('home.programs.tag')}</span>
@@ -74,7 +88,12 @@ export default function Home() {
       </section>
 
       {/* Highlight Stats Banner */}
-      <section className={styles.stats}>
+      <section className={`${styles.stats} bg-yellow`}>
+        <div className={styles.blobYellow3} />
+        <div className={styles.blobYellow4} />
+        <div className={styles.floatStar2}>✨</div>
+        <div className={styles.floatSpeech}>💬</div>
+
         <div className="container">
           <div className={styles.statsGrid}>
             {stats.map((stat, index) => (
@@ -88,7 +107,12 @@ export default function Home() {
       </section>
 
       {/* Highlight Testimonials */}
-      <section className="section">
+      <section className="section bg-blue">
+        <div className={styles.blobBlue3} />
+        <div className={styles.blobBlue4} />
+        <div className={styles.floatStar3}>🌟</div>
+        <div className={styles.floatBook2}>📖</div>
+
         <div className="container">
           <div className="section-header">
             <span className="section-tag">{t('home.testimonials.tag')}</span>

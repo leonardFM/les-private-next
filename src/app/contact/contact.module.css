@@ -36,7 +36,7 @@
   height: 44px;
   border-radius: 50%;
   background-color: var(--primary-soft);
-  color: var(--primary-light);
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,7 +165,6 @@
 
 /* FAQ Accordion */
 .faqSection {
-  background-color: var(--card-bg);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 80px 0;
@@ -209,7 +208,7 @@
 }
 
 .faqHeader:hover {
-  color: var(--primary-light);
+  color: var(--accent-color);
 }
 
 .faqTrigger {
@@ -220,7 +219,7 @@
 
 .faqTriggerOpen {
   transform: rotate(45deg);
-  color: var(--primary-light);
+  color: var(--accent-color);
 }
 
 .faqContent {

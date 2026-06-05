@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/i18n';
+import { useTheme } from '@/context';
 import { getWhatsAppUrl } from '@/lib/constants';
 import styles from './Navbar.module.css';
 
@@ -11,6 +13,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { t, locale, toggleLocale } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -36,8 +39,15 @@ export default function Navbar() {
       <div className={styles.navContainer}>
         {/* Logo */}
         <Link href="/" className={styles.logo} onClick={closeMenu}>
-          <div className={styles.logoIcon}>L</div>
-          <span>{t('nav.brand')}</span>
+          <Image
+            src="/logo/logo-png.png"
+            alt="El's Corner"
+            width={48}
+            height={48}
+            className={styles.logoImg}
+            priority
+          />
+          <span className={styles.logoText}>{t('nav.brand')}</span>
         </Link>
 
         {/* Backdrop for mobile drawer */}
@@ -62,6 +72,15 @@ export default function Navbar() {
               </li>
             );
           })}
+          <li>
+            <button
+              onClick={toggleTheme}
+              className={`${styles.themeToggle} btn`}
+              aria-label="Toggle Dark Mode"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          </li>
           <li>
             <button
               onClick={toggleLocale}

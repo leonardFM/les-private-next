@@ -37,7 +37,7 @@
 .visualPaneTitle {
   font-size: 24px;
   font-weight: 800;
-  color: var(--primary-color);
+  color: var(--accent-color);
   margin-bottom: 12px;
 }
 
@@ -96,7 +96,6 @@
 
 /* Instructors Grid */
 .teachersSection {
-  background-color: var(--card-bg);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -172,7 +171,6 @@
 
 /* Offline Facilities Section */
 .campusSection {
-  background-color: var(--background);
 }
 
 .campusGrid {
@@ -201,7 +199,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-light);
+  color: var(--accent-color);
   font-size: 40px;
   border-bottom: 1px solid var(--border-color);
 }

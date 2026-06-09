@@ -9,6 +9,10 @@ import styles from './admin.module.css';
 const navItems = [
   { label: 'Dashboard', path: '/admin', icon: '📊' },
   { label: 'Students', path: '/admin/students', icon: '👨‍🎓' },
+  { label: 'Teachers', path: '/admin/teachers', icon: '👩‍🏫' },
+  { label: 'Schedules', path: '/admin/schedules', icon: '📅' },
+  { label: 'Modules', path: '/admin/modules', icon: '📖' },
+  { label: 'Homework', path: '/admin/homeworks', icon: '📝' },
   { label: 'Payments', path: '/admin/payments', icon: '💳' },
   { label: 'Leads', path: '/admin/leads', icon: '📋' },
   { label: 'Programs', path: '/admin/programs', icon: '📚' },

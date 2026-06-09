@@ -1,47 +1,34 @@
+// Run: node scripts/init-db.mjs
+// This ensures all tables exist without needing to load a page
+
+import '../src/lib/db.js';
+
+// The initDb is called when the module is loaded via page access.
+// This standalone script uses the query function directly to run schema SQL.
 import { Pool } from 'pg';
 
-let pool;
-
-function getPool() {
-  if (!pool) {
-    if (!process.env.DATABASE_URL) {
-      throw new Error('DATABASE_URL environment variable is not set');
-    }
-    pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      max: 20,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 10000,
-    });
-  }
-  return pool;
+const DATABASE_URL = process.env.DATABASE_URL;
+if (!DATABASE_URL || DATABASE_URL.includes('placeholder')) {
+  console.error('DATABASE_URL not set or is placeholder');
+  process.exit(1);
 }
 
-export async function query(text, params) {
-  const client = await getPool().connect();
+const pool = new Pool({ connectionString: DATABASE_URL });
+
+async function run(sql) {
   try {
-    const result = await client.query(text, params);
-    return result;
-  } finally {
-    client.release();
+    await pool.query(sql);
+    console.log('  ✓', sql.split('\n')[0].slice(0, 70).trim());
+  } catch (err) {
+    console.warn('  ⚠', err.message.slice(0, 80));
   }
 }
 
-export async function get(text, params) {
-  const result = await query(text, params);
-  return result.rows[0] || null;
-}
-
-export async function all(text, params) {
-  const result = await query(text, params);
-  return result.rows;
-}
-
-export async function initDb() {
-  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('placeholder')) return;
+async function main() {
+  console.log('Running database migration...\n');
 
   const statements = [
-    // --- Core tables ---
+    // Core tables
     `CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       email TEXT UNIQUE NOT NULL,
@@ -73,7 +60,7 @@ export async function initDb() {
       level TEXT DEFAULT '{}',
       duration TEXT DEFAULT '',
       price TEXT DEFAULT '{}',
-      icon TEXT DEFAULT '📖',
+      icon TEXT DEFAULT E'📖',
       active INTEGER DEFAULT 1,
       featured INTEGER DEFAULT 0,
       created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -126,7 +113,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Student packages & sessions (depends on students) ---
     `CREATE TABLE IF NOT EXISTS student_packages (
       id SERIAL PRIMARY KEY,
       student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
@@ -147,7 +133,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Payments (depends on students, users, packages) ---
     `CREATE TABLE IF NOT EXISTS payments (
       id SERIAL PRIMARY KEY,
       order_id TEXT UNIQUE NOT NULL,
@@ -165,7 +150,6 @@ export async function initDb() {
       updated_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Teachers ---
     `CREATE TABLE IF NOT EXISTS teachers (
       id SERIAL PRIMARY KEY,
       user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
@@ -177,7 +161,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Schedules (depends on student_packages, teachers, students) ---
     `CREATE TABLE IF NOT EXISTS schedules (
       id SERIAL PRIMARY KEY,
       student_package_id INTEGER NOT NULL REFERENCES student_packages(id) ON DELETE CASCADE,
@@ -192,7 +175,6 @@ export async function initDb() {
       updated_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Meetings (depends on schedules) ---
     `CREATE TABLE IF NOT EXISTS meetings (
       id SERIAL PRIMARY KEY,
       schedule_id INTEGER NOT NULL REFERENCES schedules(id) ON DELETE CASCADE,
@@ -204,7 +186,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Modules (depends on packages) ---
     `CREATE TABLE IF NOT EXISTS modules (
       id SERIAL PRIMARY KEY,
       package_id INTEGER NOT NULL REFERENCES packages(id) ON DELETE CASCADE,
@@ -215,7 +196,6 @@ export async function initDb() {
       updated_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Materials (depends on modules) ---
     `CREATE TABLE IF NOT EXISTS materials (
       id SERIAL PRIMARY KEY,
       module_id INTEGER NOT NULL REFERENCES modules(id) ON DELETE CASCADE,
@@ -227,7 +207,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Homeworks (depends on modules, teachers, student_packages) ---
     `CREATE TABLE IF NOT EXISTS homeworks (
       id SERIAL PRIMARY KEY,
       module_id INTEGER REFERENCES modules(id) ON DELETE SET NULL,
@@ -241,7 +220,6 @@ export async function initDb() {
       updated_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Homework submissions (depends on homeworks, students) ---
     `CREATE TABLE IF NOT EXISTS homework_submissions (
       id SERIAL PRIMARY KEY,
       homework_id INTEGER NOT NULL REFERENCES homeworks(id) ON DELETE CASCADE,
@@ -251,7 +229,6 @@ export async function initDb() {
       submitted_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Homework grades (depends on homework_submissions) ---
     `CREATE TABLE IF NOT EXISTS homework_grades (
       id SERIAL PRIMARY KEY,
       homework_submission_id INTEGER NOT NULL REFERENCES homework_submissions(id) ON DELETE CASCADE,
@@ -260,30 +237,43 @@ export async function initDb() {
       feedback TEXT,
       graded_at TIMESTAMPTZ DEFAULT NOW()
     )`,
+  ];
 
-    // --- Indexes ---
-    `CREATE INDEX IF NOT EXISTS idx_session_records_package_id ON session_records(student_package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_student_packages_student_id ON student_packages(student_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_student_packages_status ON student_packages(status)`,
-    `CREATE INDEX IF NOT EXISTS idx_students_created_at ON students(created_at DESC)`,
-    `CREATE INDEX IF NOT EXISTS idx_programs_active ON programs(active)`,
-    `CREATE INDEX IF NOT EXISTS idx_testimonials_active ON testimonials(active)`,
-    `CREATE INDEX IF NOT EXISTS idx_payments_order_id ON payments(order_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_payments_payment_status ON payments(payment_status)`,
-    `CREATE INDEX IF NOT EXISTS idx_payments_student_id ON payments(student_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_schedules_student_package_id ON schedules(student_package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_schedules_student_id ON schedules(student_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_schedules_teacher_id ON schedules(teacher_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_schedules_date ON schedules(date)`,
-    `CREATE UNIQUE INDEX IF NOT EXISTS idx_meetings_schedule_id ON meetings(schedule_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_modules_package_id ON modules(package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_materials_module_id ON materials(module_id)`,
-    `CREATE UNIQUE INDEX IF NOT EXISTS idx_homework_grades_submission_id ON homework_grades(homework_submission_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homeworks_student_package_id ON homeworks(student_package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homework_submissions_homework_id ON homework_submissions(homework_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homework_submissions_student_id ON homework_submissions(student_id)`,
+  for (const sql of statements) {
+    await run(sql);
+  }
 
-    // --- ALTER TABLE migrations ---
+  // Indexes
+  console.log('\nCreating indexes...');
+  const indexes = [
+    'CREATE INDEX IF NOT EXISTS idx_session_records_package_id ON session_records(student_package_id)',
+    'CREATE INDEX IF NOT EXISTS idx_student_packages_student_id ON student_packages(student_id)',
+    'CREATE INDEX IF NOT EXISTS idx_student_packages_status ON student_packages(status)',
+    'CREATE INDEX IF NOT EXISTS idx_students_created_at ON students(created_at DESC)',
+    'CREATE INDEX IF NOT EXISTS idx_programs_active ON programs(active)',
+    'CREATE INDEX IF NOT EXISTS idx_testimonials_active ON testimonials(active)',
+    'CREATE INDEX IF NOT EXISTS idx_payments_order_id ON payments(order_id)',
+    'CREATE INDEX IF NOT EXISTS idx_payments_payment_status ON payments(payment_status)',
+    'CREATE INDEX IF NOT EXISTS idx_payments_student_id ON payments(student_id)',
+    'CREATE INDEX IF NOT EXISTS idx_schedules_student_package_id ON schedules(student_package_id)',
+    'CREATE INDEX IF NOT EXISTS idx_schedules_student_id ON schedules(student_id)',
+    'CREATE INDEX IF NOT EXISTS idx_schedules_teacher_id ON schedules(teacher_id)',
+    'CREATE INDEX IF NOT EXISTS idx_schedules_date ON schedules(date)',
+    'CREATE UNIQUE INDEX IF NOT EXISTS idx_meetings_schedule_id ON meetings(schedule_id)',
+    'CREATE INDEX IF NOT EXISTS idx_modules_package_id ON modules(package_id)',
+    'CREATE INDEX IF NOT EXISTS idx_materials_module_id ON materials(module_id)',
+    'CREATE UNIQUE INDEX IF NOT EXISTS idx_homework_grades_submission_id ON homework_grades(homework_submission_id)',
+    'CREATE INDEX IF NOT EXISTS idx_homeworks_student_package_id ON homeworks(student_package_id)',
+    'CREATE INDEX IF NOT EXISTS idx_homework_submissions_homework_id ON homework_submissions(homework_id)',
+    'CREATE INDEX IF NOT EXISTS idx_homework_submissions_student_id ON homework_submissions(student_id)',
+  ];
+  for (const sql of indexes) {
+    await run(sql);
+  }
+
+  // ALTER TABLE migrations
+  console.log('\nRunning ALTER TABLE migrations...');
+  const alters = [
     `ALTER TABLE users ADD COLUMN IF NOT EXISTS role TEXT DEFAULT 'admin'`,
     `ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT`,
     `ALTER TABLE payments ADD COLUMN IF NOT EXISTS user_id INTEGER REFERENCES users(id) ON DELETE SET NULL`,
@@ -291,12 +281,15 @@ export async function initDb() {
     `ALTER TABLE students ADD COLUMN IF NOT EXISTS user_id INTEGER REFERENCES users(id) ON DELETE SET NULL`,
     `ALTER TABLE session_records ADD COLUMN IF NOT EXISTS schedule_id INTEGER REFERENCES schedules(id) ON DELETE SET NULL`,
   ];
-
-  for (const sql of statements) {
-    try {
-      await query(sql);
-    } catch (err) {
-      console.warn('initDb: skipped statement:', err.message.replace(/\n/g, ' ').slice(0, 120));
-    }
+  for (const sql of alters) {
+    await run(sql);
   }
+
+  await pool.end();
+  console.log('\nMigration complete.');
 }
+
+main().catch(err => {
+  console.error('Migration failed:', err.message);
+  process.exit(1);
+});

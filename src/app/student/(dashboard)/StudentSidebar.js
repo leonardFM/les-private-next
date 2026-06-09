@@ -10,6 +10,9 @@ const navItems = [
   { label: 'Dashboard', path: '/student/dashboard', icon: '📊' },
   { label: 'Packages', path: '/student/packages', icon: '📦' },
   { label: 'My Packages', path: '/student/my-packages', icon: '🎓' },
+  { label: 'Schedules', path: '/student/schedules', icon: '📅' },
+  { label: 'Materials', path: '/student/materials', icon: '📖' },
+  { label: 'Homework', path: '/student/homeworks', icon: '📝' },
   { label: 'Payments', path: '/student/payments', icon: '💳' },
   { label: 'Profile', path: '/student/profile', icon: '👤' },
 ];

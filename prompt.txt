@@ -1,72 +1,112 @@
-Analyze the complete Midtrans payment flow.
+You are a senior backend engineer specializing in PostgreSQL + Node.js (Next.js App Router).
 
-Current status:
+Task:
+Fix ALL runtime errors related to missing database relations in PostgreSQL.
 
-* PostgreSQL works
-* Payment record is created successfully
-* POST /api/payments/create returns 200
-* Midtrans popup UI does not appear
+Current error:
+- relation "homeworks" does not exist
+- relation "schedules" does not exist
 
-Tasks:
+---
 
-1. Trace the entire payment flow:
+## Step 1: Inspect database usage in codebase
+Search all SQL queries in:
+- src/lib/db.js
+- src/lib/modules/**
+- src/app/**
 
-   * payment button
-   * frontend request
-   * API response
-   * Midtrans Snap popup
+Identify all referenced tables:
+- homeworks
+- schedules
+- modules
+- students
+- any other missing relations
 
-2. Verify the API response contains:
+---
 
-   * snap_token
-   * redirect_url
-   * order_id
+## Step 2: Verify schema consistency
+For each table:
+- check if it exists in migrations / schema / SQL files
+- if not found, determine expected structure from usage in code
 
-3. Verify Midtrans Snap script is loaded:
+---
 
-https://app.sandbox.midtrans.com/snap/snap.js
+## Step 3: Fix missing tables (IMPORTANT)
 
-4. Verify window.snap exists before calling payment.
+If table DOES NOT exist in database schema:
 
-5. Add robust error handling:
+### Option A (preferred if schema is intended)
+Create PostgreSQL migration SQL for missing tables.
 
-* missing token
-* missing snap script
-* network errors
-* popup blocked
+Example format:
 
-6. Add console logs:
+CREATE TABLE IF NOT EXISTS homeworks (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  module_id INTEGER,
+  created_at TIMESTAMP DEFAULT NOW()
+);
 
-* API response
-* snap token
-* window.snap status
+CREATE TABLE IF NOT EXISTS schedules (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  start_time TIMESTAMP,
+  end_time TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW()
+);
 
-7. Ensure payment flow:
+Rules:
+- Infer columns from code usage
+- Ensure foreign keys are added if relationships exist
+- Use correct PostgreSQL types
 
-Create Payment
-↓
-Receive snap token
-↓
-window.snap.pay(token)
-↓
-Popup appears
-↓
-Success callback
-↓
-Pending callback
-↓
-Error callback
-↓
-Close callback
+---
 
-8. Add loading state to payment button.
+### Option B (if table is legacy / unused)
+- Remove or comment out queries referencing it
+- Ensure no runtime calls still use it
 
-9. Add user-friendly error messages.
+---
 
-10. Show:
+## Step 4: Fix schema mismatch issues
+Check for:
+- plural vs singular mismatch (homework vs homeworks)
+- schema prefix issues (public.homeworks vs homeworks)
+- case sensitivity issues
 
-* files involved
-* root cause analysis
-* exact bug found
+Normalize all queries to match actual DB schema.
 
-Then implement the fix.
+---
+
+## Step 5: Ensure initDb stability
+Fix initDb so it:
+- does NOT crash if tables are missing
+- logs missing tables clearly
+- does not silently skip critical tables
+
+---
+
+## Step 6: Validate application
+Ensure:
+- Student pages load without DB errors
+- Admin schedules page works
+- Homework pages work
+- No "relation does not exist" errors remain
+
+---
+
+## Constraints:
+- DO NOT change business logic
+- DO NOT change UI
+- ONLY fix database schema, migrations, and SQL queries
+- Prefer creating migrations over deleting features
+
+---
+
+## Output:
+Provide:
+- list of missing tables found
+- SQL migrations created
+- queries fixed
+- files modified

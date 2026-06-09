@@ -4,20 +4,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { logout } from '@/lib/actions';
-import styles from './admin.module.css';
+import styles from './student.module.css';
 
 const navItems = [
-  { label: 'Dashboard', path: '/admin', icon: '📊' },
-  { label: 'Students', path: '/admin/students', icon: '👨‍🎓' },
-  { label: 'Payments', path: '/admin/payments', icon: '💳' },
-  { label: 'Leads', path: '/admin/leads', icon: '📋' },
-  { label: 'Programs', path: '/admin/programs', icon: '📚' },
-  { label: 'Testimonials', path: '/admin/testimonials', icon: '⭐' },
-  { label: 'FAQs', path: '/admin/faqs', icon: '❓' },
-  { label: 'Settings', path: '/admin/settings', icon: '⚙️' },
+  { label: 'Dashboard', path: '/student/dashboard', icon: '📊' },
+  { label: 'Packages', path: '/student/packages', icon: '📦' },
+  { label: 'My Packages', path: '/student/my-packages', icon: '🎓' },
+  { label: 'Payments', path: '/student/payments', icon: '💳' },
+  { label: 'Profile', path: '/student/profile', icon: '👤' },
 ];
 
-export default function AdminSidebar({ user }) {
+export default function StudentSidebar({ user }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -33,8 +30,8 @@ export default function AdminSidebar({ user }) {
       <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ''}`}>
         <div className={styles.sidebarHeader}>
           <div>
-            <Link href="/admin" className={styles.brand} onClick={close}>El's Corner</Link>
-            <span className={styles.brandSub}>Admin Panel</span>
+            <Link href="/student/dashboard" className={styles.brand} onClick={close}>El&apos;s Corner</Link>
+            <span className={styles.brandSub}>Student Portal</span>
           </div>
           <button className={styles.menuToggle} onClick={() => setOpen(false)} aria-label="Close menu">
             ✕
@@ -43,7 +40,7 @@ export default function AdminSidebar({ user }) {
 
         <nav className={styles.nav}>
           {navItems.map((item) => {
-            const isActive = pathname === item.path || (item.path !== '/admin' && pathname.startsWith(item.path));
+            const isActive = pathname === item.path;
             return (
               <Link
                 key={item.path}

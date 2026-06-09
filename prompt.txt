@@ -1,17 +1,72 @@
-Generate a PostgreSQL migration script from the previous SQLite schema.
+Analyze the complete Midtrans payment flow.
 
-Include all tables:
+Current status:
 
-* users
-* leads
-* programs
-* testimonials
-* faqs
-* settings
-* students
-* student_packages
-* session_records
+* PostgreSQL works
+* Payment record is created successfully
+* POST /api/payments/create returns 200
+* Midtrans popup UI does not appear
 
-Convert SQLite types to PostgreSQL types.
+Tasks:
 
-Output a single schema.sql file that can be executed in Neon PostgreSQL.
+1. Trace the entire payment flow:
+
+   * payment button
+   * frontend request
+   * API response
+   * Midtrans Snap popup
+
+2. Verify the API response contains:
+
+   * snap_token
+   * redirect_url
+   * order_id
+
+3. Verify Midtrans Snap script is loaded:
+
+https://app.sandbox.midtrans.com/snap/snap.js
+
+4. Verify window.snap exists before calling payment.
+
+5. Add robust error handling:
+
+* missing token
+* missing snap script
+* network errors
+* popup blocked
+
+6. Add console logs:
+
+* API response
+* snap token
+* window.snap status
+
+7. Ensure payment flow:
+
+Create Payment
+↓
+Receive snap token
+↓
+window.snap.pay(token)
+↓
+Popup appears
+↓
+Success callback
+↓
+Pending callback
+↓
+Error callback
+↓
+Close callback
+
+8. Add loading state to payment button.
+
+9. Add user-friendly error messages.
+
+10. Show:
+
+* files involved
+* root cause analysis
+* exact bug found
+
+Then implement the fix.

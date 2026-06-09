@@ -3,30 +3,32 @@ import Link from 'next/link';
 import styles from './admin.module.css';
 
 async function getStats() {
-  const expiring = await all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
-    JOIN students s ON s.id = sp.student_id
-    WHERE sp.status = 'active' AND sp.remaining_sessions <= 3 ORDER BY sp.remaining_sessions ASC LIMIT 5`);
-
-  const [totalLeads, newLeads, totalPrograms, totalTestimonials, totalFaqs, totalStudents, activePackages] = await Promise.all([
-    get('SELECT COUNT(*)::int AS count FROM leads'),
-    get("SELECT COUNT(*)::int AS count FROM leads WHERE status = 'new'"),
-    get('SELECT COUNT(*)::int AS count FROM programs'),
-    get('SELECT COUNT(*)::int AS count FROM testimonials'),
-    get('SELECT COUNT(*)::int AS count FROM faqs'),
-    get('SELECT COUNT(*)::int AS count FROM students'),
-    get("SELECT COUNT(*)::int AS count FROM student_packages WHERE status = 'active'"),
+  const [counts, expiring, recentLeads] = await Promise.all([
+    get(`
+      SELECT
+        (SELECT COUNT(*) FROM leads)::int AS total_leads,
+        (SELECT COUNT(*) FROM leads WHERE status = 'new')::int AS new_leads,
+        (SELECT COUNT(*) FROM programs)::int AS total_programs,
+        (SELECT COUNT(*) FROM testimonials)::int AS total_testimonials,
+        (SELECT COUNT(*) FROM faqs)::int AS total_faqs,
+        (SELECT COUNT(*) FROM students)::int AS total_students,
+        (SELECT COUNT(*) FROM student_packages WHERE status = 'active')::int AS active_packages
+    `),
+    all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
+      JOIN students s ON s.id = sp.student_id
+      WHERE sp.status = 'active' AND sp.remaining_sessions <= 3
+      ORDER BY sp.remaining_sessions ASC LIMIT 5`),
+    all('SELECT * FROM leads ORDER BY created_at DESC LIMIT 5'),
   ]);
 
-  const recentLeads = await all('SELECT * FROM leads ORDER BY created_at DESC LIMIT 5');
-
   return {
-    totalLeads: Number(totalLeads.count),
-    newLeads: Number(newLeads.count),
-    totalPrograms: Number(totalPrograms.count),
-    totalTestimonials: Number(totalTestimonials.count),
-    totalFaqs: Number(totalFaqs.count),
-    totalStudents: Number(totalStudents.count),
-    activePackages: Number(activePackages.count),
+    totalLeads: counts.total_leads,
+    newLeads: counts.new_leads,
+    totalPrograms: counts.total_programs,
+    totalTestimonials: counts.total_testimonials,
+    totalFaqs: counts.total_faqs,
+    totalStudents: counts.total_students,
+    activePackages: counts.active_packages,
     recentLeads,
     expiringPackages: expiring,
   };

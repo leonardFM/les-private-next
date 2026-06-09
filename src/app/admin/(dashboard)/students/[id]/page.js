@@ -21,13 +21,29 @@ export default async function StudentDetailPage({ params }) {
   const student = await get('SELECT * FROM students WHERE id = $1', [id]);
   if (!student) return <div className={styles.emptyState}><h3>Student not found</h3></div>;
 
-  const packages = await all('SELECT * FROM student_packages WHERE student_id = $1 ORDER BY created_at DESC', [id]);
-  const programs = await all("SELECT id, title, duration FROM programs WHERE active = 1");
+  const [packages, programs] = await Promise.all([
+    all('SELECT * FROM student_packages WHERE student_id = $1 ORDER BY created_at DESC', [id]),
+    all("SELECT id, title, duration FROM programs WHERE active = 1"),
+  ]);
 
-  const packagesWithSessions = await Promise.all(packages.map(async pkg => ({
-    ...pkg,
-    sessions: await all('SELECT * FROM session_records WHERE student_package_id = $1 ORDER BY session_date DESC', [pkg.id]),
-  })));
+  let packagesWithSessions = packages;
+  if (packages.length > 0) {
+    const packageIds = packages.map(p => p.id);
+    const placeholders = packageIds.map((_, i) => `$${i + 1}`).join(',');
+    const allSessions = await all(
+      `SELECT * FROM session_records WHERE student_package_id IN (${placeholders}) ORDER BY session_date DESC`,
+      packageIds
+    );
+    const sessionsByPackage = {};
+    for (const s of allSessions) {
+      if (!sessionsByPackage[s.student_package_id]) sessionsByPackage[s.student_package_id] = [];
+      sessionsByPackage[s.student_package_id].push(s);
+    }
+    packagesWithSessions = packages.map(pkg => ({
+      ...pkg,
+      sessions: sessionsByPackage[pkg.id] || [],
+    }));
+  }
 
   return (
     <div>

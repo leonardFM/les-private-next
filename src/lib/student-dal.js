@@ -3,24 +3,24 @@ import { redirect } from 'next/navigation';
 import { decrypt } from './session';
 import { get } from './db';
 
-export async function verifySession() {
+export async function verifyStudentSession() {
   const cookieStore = await cookies();
   const cookie = cookieStore.get('session')?.value;
 
   if (!cookie) {
-    redirect('/admin/login');
+    redirect('/student/login');
   }
 
   const payload = await decrypt(cookie);
 
   if (!payload?.userId) {
-    redirect('/admin/login');
+    redirect('/student/login');
   }
 
-  const user = await get('SELECT id, name, email, role FROM users WHERE id = $1', [payload.userId]);
+  const user = await get('SELECT id, name, email, role, phone FROM users WHERE id = $1', [payload.userId]);
 
-  if (!user) {
-    redirect('/admin/login');
+  if (!user || user.role !== 'student') {
+    redirect('/student/login');
   }
 
   return user;

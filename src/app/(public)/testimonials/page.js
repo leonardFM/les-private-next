@@ -10,7 +10,7 @@ export const metadata = {
 export default async function Testimonials() {
   const cookieStore = await cookies();
   const locale = cookieStore.get('locale')?.value || 'id';
-  const testimonials = getTestimonials(locale);
+  const testimonials = await getTestimonials(locale);
 
   return <TestimonialsClient testimonials={testimonials} />;
 }

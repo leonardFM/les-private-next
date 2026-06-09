@@ -1,25 +1,39 @@
-import { getDb } from '@/lib/db';
+import { get, all } from '@/lib/db';
 import Link from 'next/link';
 import styles from './admin.module.css';
 
-function getStats() {
-  const db = getDb();
-  const expiring = db.prepare("SELECT sp.*, s.name AS student_name FROM student_packages sp JOIN students s ON s.id = sp.student_id WHERE sp.status = 'active' AND sp.remaining_sessions <= 3 ORDER BY sp.remaining_sessions ASC LIMIT 5").all();
+async function getStats() {
+  const expiring = await all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
+    JOIN students s ON s.id = sp.student_id
+    WHERE sp.status = 'active' AND sp.remaining_sessions <= 3 ORDER BY sp.remaining_sessions ASC LIMIT 5`);
+
+  const [totalLeads, newLeads, totalPrograms, totalTestimonials, totalFaqs, totalStudents, activePackages] = await Promise.all([
+    get('SELECT COUNT(*)::int AS count FROM leads'),
+    get("SELECT COUNT(*)::int AS count FROM leads WHERE status = 'new'"),
+    get('SELECT COUNT(*)::int AS count FROM programs'),
+    get('SELECT COUNT(*)::int AS count FROM testimonials'),
+    get('SELECT COUNT(*)::int AS count FROM faqs'),
+    get('SELECT COUNT(*)::int AS count FROM students'),
+    get("SELECT COUNT(*)::int AS count FROM student_packages WHERE status = 'active'"),
+  ]);
+
+  const recentLeads = await all('SELECT * FROM leads ORDER BY created_at DESC LIMIT 5');
+
   return {
-    totalLeads: db.prepare('SELECT COUNT(*) AS count FROM leads').get().count,
-    newLeads: db.prepare("SELECT COUNT(*) AS count FROM leads WHERE status = 'new'").get().count,
-    totalPrograms: db.prepare('SELECT COUNT(*) AS count FROM programs').get().count,
-    totalTestimonials: db.prepare('SELECT COUNT(*) AS count FROM testimonials').get().count,
-    totalFaqs: db.prepare('SELECT COUNT(*) AS count FROM faqs').get().count,
-    totalStudents: db.prepare('SELECT COUNT(*) AS count FROM students').get().count,
-    activePackages: db.prepare("SELECT COUNT(*) AS count FROM student_packages WHERE status = 'active'").get().count,
-    recentLeads: db.prepare('SELECT * FROM leads ORDER BY created_at DESC LIMIT 5').all(),
+    totalLeads: Number(totalLeads.count),
+    newLeads: Number(newLeads.count),
+    totalPrograms: Number(totalPrograms.count),
+    totalTestimonials: Number(totalTestimonials.count),
+    totalFaqs: Number(totalFaqs.count),
+    totalStudents: Number(totalStudents.count),
+    activePackages: Number(activePackages.count),
+    recentLeads,
     expiringPackages: expiring,
   };
 }
 
 export default async function AdminDashboardPage() {
-  const stats = getStats();
+  const stats = await getStats();
 
   return (
     <div>

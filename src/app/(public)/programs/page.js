@@ -10,7 +10,7 @@ export const metadata = {
 export default async function Programs() {
   const cookieStore = await cookies();
   const locale = cookieStore.get('locale')?.value || 'id';
-  const programs = getPrograms(locale);
+  const programs = await getPrograms(locale);
 
   return <ProgramsClient programs={programs} />;
 }

@@ -1,4 +1,4 @@
-import { getDb } from '@/lib/db';
+import { all } from '@/lib/db';
 import Link from 'next/link';
 import DeleteForm from '../_components/DeleteForm';
 import { deleteTestimonial } from '@/lib/actions';
@@ -7,13 +7,8 @@ import AdminTable, { EmptyState } from '../_components/AdminTable';
 import { j } from '@/lib/utils';
 import styles from '../admin.module.css';
 
-function getTestimonials() {
-  const db = getDb();
-  return db.prepare('SELECT * FROM testimonials ORDER BY created_at DESC').all();
-}
-
 export default async function AdminTestimonialsPage() {
-  const testimonials = getTestimonials();
+  const testimonials = await all('SELECT * FROM testimonials ORDER BY created_at DESC');
 
   return (
     <div>

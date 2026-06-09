@@ -10,7 +10,7 @@ export const metadata = {
 export default async function Contact() {
   const cookieStore = await cookies();
   const locale = cookieStore.get('locale')?.value || 'id';
-  const faqs = getFaqs(locale);
+  const faqs = await getFaqs(locale);
 
   return <ContactClient faqs={faqs} />;
 }

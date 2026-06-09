@@ -1,33 +1,53 @@
-import Database from 'better-sqlite3';
-import path from 'path';
+import { Pool } from 'pg';
 
-const DB_PATH = path.join(process.cwd(), 'data', 'admin.db');
+let pool;
 
-let db;
-
-export function getDb() {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
+function getPool() {
+  if (!pool) {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
   }
-  return db;
+  return pool;
 }
 
-export function initDb() {
-  const db = getDb();
+export async function query(text, params) {
+  const client = await getPool().connect();
+  try {
+    const result = await client.query(text, params);
+    return result;
+  } finally {
+    client.release();
+  }
+}
 
-  db.exec(`
+export async function get(text, params) {
+  const result = await query(text, params);
+  return result.rows[0] || null;
+}
+
+export async function all(text, params) {
+  const result = await query(text, params);
+  return result.rows;
+}
+
+export async function initDb() {
+  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('placeholder')) return;
+  try {
+    await query(`
     CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       name TEXT NOT NULL,
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS leads (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       phone TEXT,
@@ -35,11 +55,11 @@ export function initDb() {
       format TEXT,
       message TEXT,
       status TEXT DEFAULT 'new',
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS programs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       title TEXT NOT NULL DEFAULT '{}',
       description TEXT DEFAULT '{}',
       category TEXT DEFAULT '',
@@ -50,12 +70,12 @@ export function initDb() {
       icon TEXT DEFAULT '📖',
       active INTEGER DEFAULT 1,
       featured INTEGER DEFAULT 0,
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS testimonials (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL DEFAULT '{}',
       course TEXT DEFAULT '{}',
       rating INTEGER DEFAULT 5,
@@ -63,17 +83,17 @@ export function initDb() {
       initials TEXT DEFAULT '',
       active INTEGER DEFAULT 1,
       featured INTEGER DEFAULT 0,
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS faqs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       question TEXT NOT NULL DEFAULT '{}',
       answer TEXT NOT NULL DEFAULT '{}',
       sort_order INTEGER DEFAULT 0,
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS settings (
@@ -82,16 +102,16 @@ export function initDb() {
     );
 
     CREATE TABLE IF NOT EXISTS students (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       phone TEXT,
       notes TEXT,
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS student_packages (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
       package_name TEXT NOT NULL,
       total_sessions INTEGER NOT NULL DEFAULT 0,
@@ -99,15 +119,18 @@ export function initDb() {
       start_date TEXT NOT NULL,
       end_date TEXT,
       status TEXT DEFAULT 'active',
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW()
     );
 
     CREATE TABLE IF NOT EXISTS session_records (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       student_package_id INTEGER NOT NULL REFERENCES student_packages(id) ON DELETE CASCADE,
       session_date TEXT NOT NULL,
       notes TEXT,
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  } catch (err) {
+    console.warn('initDb skipped:', err.message);
+  }
 }

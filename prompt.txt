@@ -1,70 +1,17 @@
-Analyze the current dashboard implementation and refactor it for a clean, modern, responsive admin experience.
+Generate a PostgreSQL migration script from the previous SQLite schema.
 
-Goals:
+Include all tables:
 
-* Improve layout consistency
-* Improve responsiveness
-* Improve usability
-* Reduce code duplication
-* Reuse existing components whenever possible
+* users
+* leads
+* programs
+* testimonials
+* faqs
+* settings
+* students
+* student_packages
+* session_records
 
-Tasks:
+Convert SQLite types to PostgreSQL types.
 
-1. Audit the dashboard UI
-
-   * Identify inconsistent spacing
-   * Identify inconsistent typography
-   * Identify duplicated components
-   * Identify responsiveness issues
-
-2. Refactor layout
-
-   * Consistent page container
-   * Consistent card components
-   * Consistent table layouts
-   * Consistent form layouts
-
-3. Responsive Design
-
-   * Mobile-first approach
-   * Sidebar collapses on mobile
-   * Tables become scrollable on small screens
-   * Cards stack correctly on tablet/mobile
-   * Forms adapt to screen size
-
-4. Dashboard UX
-
-   * Better empty states
-   * Better loading states
-   * Better error states
-   * Consistent action buttons
-
-5. Design System
-
-   * Standardize spacing
-   * Standardize typography
-   * Standardize border radius
-   * Standardize shadows
-   * Standardize colors
-
-6. Component Structure
-
-   * Extract reusable components
-   * Remove duplicated UI code
-   * Improve maintainability
-
-7. Performance
-
-   * Remove unnecessary re-renders
-   * Remove unused components
-   * Remove dead code
-
-Deliverables:
-
-* UI audit report
-* Refactor plan
-* File changes summary
-* Then implement improvements
-
-Do not add new business features.
-Focus only on dashboard quality, responsiveness, maintainability, and user experience.
+Output a single schema.sql file that can be executed in Neon PostgreSQL.

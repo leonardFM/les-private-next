@@ -1,17 +1,12 @@
-import { getDb } from '@/lib/db';
+import { get } from '@/lib/db';
 import { updateLeadStatus, deleteLead } from '@/lib/actions';
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../../admin.module.css';
 
-function getLead(id) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM leads WHERE id = ?').get(id);
-}
-
 export default async function LeadDetailPage({ params }) {
   const { id } = await params;
-  const lead = getLead(id);
+  const lead = await get('SELECT * FROM leads WHERE id = $1', [id]);
 
   if (!lead) notFound();
 
@@ -51,7 +46,9 @@ export default async function LeadDetailPage({ params }) {
           </form>
           <form action={async () => {
             'use server';
-            await deleteLead(lead.id);
+            const form = new FormData();
+            form.set('id', lead.id);
+            await deleteLead(form);
             redirect('/admin/leads');
           }}>
             <button type="submit" className={`${styles.cancelBtn} ${styles.actionDanger}`}>Delete Lead</button>

@@ -1,19 +1,10 @@
-import { initDb, getDb } from '@/lib/db';
-import { verifySession } from '@/lib/dal';
-import { getStudentById, getStudentPackages, getPackageSessions } from '@/lib/data';
+import { all, get } from '@/lib/db';
 import Link from 'next/link';
 import StudentForm from '../StudentForm';
 import PackageForm from '../PackageForm';
 import SessionForm from '../SessionForm';
 import { updatePackageStatus } from '@/lib/actions';
 import styles from '../../admin.module.css';
-
-initDb();
-
-function getPrograms() {
-  const db = getDb();
-  return db.prepare('SELECT id, title, duration FROM programs WHERE active = 1').all();
-}
 
 function getBadgeClass(status) {
   const map = {
@@ -26,18 +17,17 @@ function getBadgeClass(status) {
 }
 
 export default async function StudentDetailPage({ params }) {
-  await verifySession();
   const { id } = await params;
-  const student = getStudentById(id);
+  const student = await get('SELECT * FROM students WHERE id = $1', [id]);
   if (!student) return <div className={styles.emptyState}><h3>Student not found</h3></div>;
 
-  const packages = getStudentPackages(id);
-  const programs = getPrograms();
+  const packages = await all('SELECT * FROM student_packages WHERE student_id = $1 ORDER BY created_at DESC', [id]);
+  const programs = await all("SELECT id, title, duration FROM programs WHERE active = 1");
 
-  const packagesWithSessions = packages.map(pkg => ({
+  const packagesWithSessions = await Promise.all(packages.map(async pkg => ({
     ...pkg,
-    sessions: getPackageSessions(pkg.id),
-  }));
+    sessions: await all('SELECT * FROM session_records WHERE student_package_id = $1 ORDER BY session_date DESC', [pkg.id]),
+  })));
 
   return (
     <div>
@@ -46,18 +36,15 @@ export default async function StudentDetailPage({ params }) {
           <h1 className={styles.pageTitle}>{student.name}</h1>
           <p className={styles.pageSubtitle}>{student.email} {student.phone ? `• ${student.phone}` : ''}</p>
         </div>
-        <Link href="/admin/students" className={styles.addBtn} style={{ background: 'transparent', color: 'var(--foreground)', border: '1px solid var(--border-color)' }}>← Back</Link>
+        <Link href="/admin/students" className={styles.backBtn}>← Back</Link>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 32 }}>
         <StudentForm student={student} />
-
-        <div>
-          <PackageForm studentId={id} programs={programs} />
-        </div>
+        <PackageForm studentId={id} programs={programs} />
       </div>
 
-      <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px' }}>Packages</h2>
+      <h2 className={styles.sectionHeading}>Packages</h2>
 
       {packagesWithSessions.length > 0 ? packagesWithSessions.map(pkg => (
         <div key={pkg.id} className={styles.formCard} style={{ marginBottom: 24 }}>
@@ -71,7 +58,7 @@ export default async function StudentDetailPage({ params }) {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
               <span className={`${styles.badge} ${getBadgeClass(pkg.status)}`}>{pkg.status}</span>
-              <span style={{ fontSize: 24, fontWeight: 800, color: pkg.remaining_sessions <= 3 ? '#DC2626' : 'var(--primary-blue)' }}>
+              <span style={{ fontSize: 24, fontWeight: 800, color: pkg.remaining_sessions <= 3 ? 'var(--danger-color)' : 'var(--primary-blue)' }}>
                 {pkg.remaining_sessions}<span style={{ fontSize: 14, fontWeight: 400, color: 'var(--foreground-muted)' }}>/{pkg.total_sessions}</span>
               </span>
             </div>
@@ -103,22 +90,24 @@ export default async function StudentDetailPage({ params }) {
             <>
               <h4 style={{ margin: '0 0 12px', fontSize: 14, fontWeight: 600, color: 'var(--foreground-muted)' }}>Session History</h4>
               <div className={styles.tableWrapper}>
-                <table className={styles.table}>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pkg.sessions.map(s => (
-                      <tr key={s.id}>
-                        <td>{new Date(s.session_date).toLocaleDateString()}</td>
-                        <td>{s.notes || '-'}</td>
+                <div className={styles.tableScroll}>
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Notes</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {pkg.sessions.map(s => (
+                        <tr key={s.id}>
+                          <td>{new Date(s.session_date).toLocaleDateString()}</td>
+                          <td>{s.notes || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </>
           )}

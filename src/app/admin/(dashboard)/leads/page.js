@@ -1,16 +1,11 @@
-import { getDb } from '@/lib/db';
+import { all } from '@/lib/db';
 import Link from 'next/link';
 import AdminPageHeader from '../_components/AdminPageHeader';
 import AdminTable, { EmptyState } from '../_components/AdminTable';
 import styles from '../admin.module.css';
 
-function getLeads() {
-  const db = getDb();
-  return db.prepare('SELECT * FROM leads ORDER BY created_at DESC').all();
-}
-
 export default async function AdminLeadsPage() {
-  const leads = getLeads();
+  const leads = await all('SELECT * FROM leads ORDER BY created_at DESC');
 
   return (
     <div>

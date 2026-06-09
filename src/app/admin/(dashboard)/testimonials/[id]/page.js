@@ -1,16 +1,11 @@
-import { getDb } from '@/lib/db';
+import { get } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import TestimonialForm from '../TestimonialForm';
 import styles from '../../admin.module.css';
 
-function getTestimonial(id) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM testimonials WHERE id = ?').get(id);
-}
-
 export default async function EditTestimonialPage({ params }) {
   const { id } = await params;
-  const testimonial = getTestimonial(id);
+  const testimonial = await get('SELECT * FROM testimonials WHERE id = $1', [id]);
   if (!testimonial) notFound();
 
   return (

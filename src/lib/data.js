@@ -1,6 +1,4 @@
-import { initDb, getDb } from './db';
-
-initDb();
+import { initDb, get, all } from './db';
 
 function t(val, locale) {
   if (!val) return '';
@@ -21,53 +19,47 @@ function parseRow(row, locale, fields) {
   return result;
 }
 
-export function getPrograms(locale = 'id', featuredOnly = false) {
-  const db = getDb();
+export async function getPrograms(locale = 'id', featuredOnly = false) {
   let sql = 'SELECT * FROM programs WHERE active = 1';
   const params = [];
   if (featuredOnly) {
     sql += ' AND featured = 1';
   }
   sql += ' ORDER BY id ASC';
-  const rows = db.prepare(sql).all(...params);
+  const rows = await all(sql, params);
   return rows.map(r => parseRow(r, locale, ['title', 'description', 'format', 'level', 'price']));
 }
 
-export function getProgramById(id, locale = 'id') {
-  const db = getDb();
-  const row = db.prepare('SELECT * FROM programs WHERE id = ?').get(id);
+export async function getProgramById(id, locale = 'id') {
+  const row = await get('SELECT * FROM programs WHERE id = $1', [id]);
   return parseRow(row, locale, ['title', 'description', 'format', 'level', 'price']);
 }
 
-export function getTestimonials(locale = 'id', featuredOnly = false) {
-  const db = getDb();
+export async function getTestimonials(locale = 'id', featuredOnly = false) {
   let sql = 'SELECT * FROM testimonials WHERE active = 1';
   const params = [];
   if (featuredOnly) {
     sql += ' AND featured = 1';
   }
   sql += ' ORDER BY id ASC';
-  const rows = db.prepare(sql).all(...params);
+  const rows = await all(sql, params);
   return rows.map(r => parseRow(r, locale, ['name', 'course', 'quote']));
 }
 
-export function getTestimonialById(id, locale = 'id') {
-  const db = getDb();
-  const row = db.prepare('SELECT * FROM testimonials WHERE id = ?').get(id);
+export async function getTestimonialById(id, locale = 'id') {
+  const row = await get('SELECT * FROM testimonials WHERE id = $1', [id]);
   return parseRow(row, locale, ['name', 'course', 'quote']);
 }
 
-export function getFaqs(locale = 'id') {
-  const db = getDb();
-  const rows = db.prepare('SELECT * FROM faqs ORDER BY sort_order ASC, id ASC').all();
+export async function getFaqs(locale = 'id') {
+  const rows = await all('SELECT * FROM faqs ORDER BY sort_order ASC, id ASC');
   return rows.map(r => parseRow(r, locale, ['question', 'answer']));
 }
 
 const BILINGUAL_SETTINGS = ['site_name', 'site_description', 'address'];
 
-export function getSetting(key, locale = 'id') {
-  const db = getDb();
-  const row = db.prepare('SELECT value FROM settings WHERE key = ?').get(key);
+export async function getSetting(key, locale = 'id') {
+  const row = await get('SELECT value FROM settings WHERE key = $1', [key]);
   if (!row) return null;
   if (BILINGUAL_SETTINGS.includes(key)) {
     return t(row.value, locale);
@@ -75,9 +67,8 @@ export function getSetting(key, locale = 'id') {
   return row.value;
 }
 
-export function getAllSettings(locale = 'id') {
-  const db = getDb();
-  const rows = db.prepare('SELECT * FROM settings').all();
+export async function getAllSettings(locale = 'id') {
+  const rows = await all('SELECT * FROM settings');
   const settings = {};
   rows.forEach(r => {
     if (BILINGUAL_SETTINGS.includes(r.key)) {
@@ -89,50 +80,54 @@ export function getAllSettings(locale = 'id') {
   return settings;
 }
 
-export function getStudents() {
-  const db = getDb();
-  return db.prepare('SELECT * FROM students ORDER BY created_at DESC').all();
+export async function getStudents() {
+  return all(`SELECT s.*,
+    (SELECT COUNT(*) FROM student_packages WHERE student_id = s.id AND status = 'active') AS active_packages
+    FROM students s ORDER BY s.created_at DESC`);
 }
 
-export function getStudentById(id) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM students WHERE id = ?').get(id);
+export async function getStudentById(id) {
+  return get('SELECT * FROM students WHERE id = $1', [id]);
 }
 
-export function getStudentPackages(studentId) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM student_packages WHERE student_id = ? ORDER BY created_at DESC').all(studentId);
+export async function getStudentPackages(studentId) {
+  return all('SELECT * FROM student_packages WHERE student_id = $1 ORDER BY created_at DESC', [studentId]);
 }
 
-export function getPackageSessions(packageId) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM session_records WHERE student_package_id = ? ORDER BY session_date DESC').all(packageId);
+export async function getPackageSessions(packageId) {
+  return all('SELECT * FROM session_records WHERE student_package_id = $1 ORDER BY session_date DESC', [packageId]);
 }
 
-export function getActivePackages() {
-  const db = getDb();
-  return db.prepare(`SELECT sp.*, s.name AS student_name FROM student_packages sp
+export async function getActivePackages() {
+  return all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
     JOIN students s ON s.id = sp.student_id
-    WHERE sp.status = 'active' ORDER BY sp.created_at DESC`).all();
+    WHERE sp.status = 'active' ORDER BY sp.created_at DESC`);
 }
 
-export function getExpiringPackages(days = 30) {
-  const db = getDb();
-  return db.prepare(`SELECT sp.*, s.name AS student_name FROM student_packages sp
+export async function getExpiringPackages(days = 30) {
+  return all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
     JOIN students s ON s.id = sp.student_id
-    WHERE sp.status = 'active' AND sp.remaining_sessions <= ?
-    ORDER BY sp.remaining_sessions ASC`).all(days);
+    WHERE sp.status = 'active' AND sp.remaining_sessions <= $1
+    ORDER BY sp.remaining_sessions ASC`, [days]);
 }
 
-export function getStats() {
-  const db = getDb();
+export async function getStats() {
+  const [totalLeads, newLeads, totalPrograms, totalTestimonials, totalStudents, activePackages, expiringPackages] = await Promise.all([
+    get('SELECT COUNT(*) AS count FROM leads'),
+    get("SELECT COUNT(*) AS count FROM leads WHERE status = 'new'"),
+    get('SELECT COUNT(*) AS count FROM programs'),
+    get('SELECT COUNT(*) AS count FROM testimonials'),
+    get('SELECT COUNT(*) AS count FROM students'),
+    get("SELECT COUNT(*) AS count FROM student_packages WHERE status = 'active'"),
+    get("SELECT COUNT(*) AS count FROM student_packages WHERE status = 'active' AND remaining_sessions <= 3"),
+  ]);
   return {
-    totalLeads: db.prepare('SELECT COUNT(*) AS count FROM leads').get().count,
-    newLeads: db.prepare("SELECT COUNT(*) AS count FROM leads WHERE status = 'new'").get().count,
-    totalPrograms: db.prepare('SELECT COUNT(*) AS count FROM programs').get().count,
-    totalTestimonials: db.prepare('SELECT COUNT(*) AS count FROM testimonials').get().count,
-    totalStudents: db.prepare('SELECT COUNT(*) AS count FROM students').get().count,
-    activePackages: db.prepare("SELECT COUNT(*) AS count FROM student_packages WHERE status = 'active'").get().count,
-    expiringPackages: db.prepare("SELECT COUNT(*) AS count FROM student_packages WHERE status = 'active' AND remaining_sessions <= 3").get().count,
+    totalLeads: Number(totalLeads.count),
+    newLeads: Number(newLeads.count),
+    totalPrograms: Number(totalPrograms.count),
+    totalTestimonials: Number(totalTestimonials.count),
+    totalStudents: Number(totalStudents.count),
+    activePackages: Number(activePackages.count),
+    expiringPackages: Number(expiringPackages.count),
   };
 }

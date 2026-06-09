@@ -3,11 +3,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcryptjs';
-import { getDb, initDb } from './db';
+import { get, query } from './db';
 import { encrypt, decrypt } from './session';
 import { revalidatePath } from 'next/cache';
-
-initDb();
 
 export async function login(formData) {
   const email = formData.get('email');
@@ -17,8 +15,7 @@ export async function login(formData) {
     return { error: 'Email and password are required.' };
   }
 
-  const db = getDb();
-  const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
+  const user = await get('SELECT * FROM users WHERE email = $1', [email]);
 
   if (!user) {
     return { error: 'Invalid email or password.' };
@@ -51,104 +48,101 @@ export async function logout() {
 }
 
 export async function createLead(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  db.prepare('INSERT INTO leads (name, email, phone, program, format, message) VALUES (?, ?, ?, ?, ?, ?)').run(
-    data.name, data.email, data.phone || null, data.program || null, data.format || null, data.message || null
+  await query('INSERT INTO leads (name, email, phone, program, format, message) VALUES ($1, $2, $3, $4, $5, $6)',
+    [data.name, data.email, data.phone || null, data.program || null, data.format || null, data.message || null]
   );
   revalidatePath('/admin/leads');
   return { success: true };
 }
 
 export async function updateLeadStatus(id, status) {
-  const db = getDb();
-  db.prepare('UPDATE leads SET status = ? WHERE id = ?').run(status, id);
+  await query('UPDATE leads SET status = $1 WHERE id = $2', [status, id]);
   revalidatePath('/admin/leads');
   return { success: true };
 }
 
-export async function deleteLead(id) {
-  const db = getDb();
-  db.prepare('DELETE FROM leads WHERE id = ?').run(id);
+export async function deleteLead(formData) {
+  const data = Object.fromEntries(formData);
+  await query('DELETE FROM leads WHERE id = $1', [data.id]);
   revalidatePath('/admin/leads');
   return { success: true };
 }
 
 export async function saveProgram(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
   if (data.id) {
-    db.prepare('UPDATE programs SET title=?, description=?, category=?, format=?, level=?, duration=?, price=?, icon=?, updated_at=datetime(\'now\') WHERE id=?').run(
-      data.title, data.description, data.category, data.format, data.level, data.duration, data.price, data.icon, data.id
+    await query('UPDATE programs SET title=$1, description=$2, category=$3, format=$4, level=$5, duration=$6, price=$7, icon=$8, updated_at=NOW() WHERE id=$9',
+      [data.title, data.description, data.category, data.format, data.level, data.duration, data.price, data.icon, data.id]
     );
   } else {
-    db.prepare('INSERT INTO programs (title, description, category, format, level, duration, price, icon) VALUES (?, ?, ?, ?, ?, ?, ?, ?)').run(
-      data.title, data.description, data.category, data.format, data.level, data.duration, data.price, data.icon
+    await query('INSERT INTO programs (title, description, category, format, level, duration, price, icon) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+      [data.title, data.description, data.category, data.format, data.level, data.duration, data.price, data.icon]
     );
   }
   revalidatePath('/admin/programs');
   return { success: true };
 }
 
-export async function deleteProgram(id) {
-  const db = getDb();
-  db.prepare('DELETE FROM programs WHERE id = ?').run(id);
+export async function deleteProgram(formData) {
+  const data = Object.fromEntries(formData);
+  await query('DELETE FROM programs WHERE id = $1', [data.id]);
   revalidatePath('/admin/programs');
   return { success: true };
 }
 
 export async function saveTestimonial(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
   if (data.id) {
-    db.prepare('UPDATE testimonials SET name=?, course=?, rating=?, quote=?, initials=?, updated_at=datetime(\'now\') WHERE id=?').run(
-      data.name, data.course, data.rating, data.quote, data.initials, data.id
+    await query('UPDATE testimonials SET name=$1, course=$2, rating=$3, quote=$4, initials=$5, updated_at=NOW() WHERE id=$6',
+      [data.name, data.course, data.rating, data.quote, data.initials, data.id]
     );
   } else {
-    db.prepare('INSERT INTO testimonials (name, course, rating, quote, initials) VALUES (?, ?, ?, ?, ?)').run(
-      data.name, data.course, data.rating, data.quote, data.initials
+    await query('INSERT INTO testimonials (name, course, rating, quote, initials) VALUES ($1, $2, $3, $4, $5)',
+      [data.name, data.course, data.rating, data.quote, data.initials]
     );
   }
   revalidatePath('/admin/testimonials');
   return { success: true };
 }
 
-export async function deleteTestimonial(id) {
-  const db = getDb();
-  db.prepare('DELETE FROM testimonials WHERE id = ?').run(id);
+export async function deleteTestimonial(formData) {
+  const data = Object.fromEntries(formData);
+  await query('DELETE FROM testimonials WHERE id = $1', [data.id]);
   revalidatePath('/admin/testimonials');
   return { success: true };
 }
 
 export async function saveFaq(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
   if (data.id) {
-    db.prepare('UPDATE faqs SET question=?, answer=?, sort_order=?, updated_at=datetime(\'now\') WHERE id=?').run(
-      data.question, data.answer, data.sort_order || 0, data.id
+    await query('UPDATE faqs SET question=$1, answer=$2, sort_order=$3, updated_at=NOW() WHERE id=$4',
+      [data.question, data.answer, data.sort_order || 0, data.id]
     );
   } else {
-    const maxOrder = db.prepare('SELECT COALESCE(MAX(sort_order), 0) + 1 AS next FROM faqs').get().next;
-    db.prepare('INSERT INTO faqs (question, answer, sort_order) VALUES (?, ?, ?)').run(
-      data.question, data.answer, data.sort_order || maxOrder
+    const maxOrder = await get('SELECT COALESCE(MAX(sort_order), 0) + 1 AS next FROM faqs');
+    await query('INSERT INTO faqs (question, answer, sort_order) VALUES ($1, $2, $3)',
+      [data.question, data.answer, data.sort_order || Number(maxOrder.next)]
     );
   }
   revalidatePath('/admin/faqs');
   return { success: true };
 }
 
-export async function deleteFaq(id) {
-  const db = getDb();
-  db.prepare('DELETE FROM faqs WHERE id = ?').run(id);
+export async function deleteFaq(formData) {
+  const data = Object.fromEntries(formData);
+  await query('DELETE FROM faqs WHERE id = $1', [data.id]);
   revalidatePath('/admin/faqs');
   return { success: true };
 }
 
 export async function saveSetting(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
   for (const [key, value] of Object.entries(data)) {
-    db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)').run(key, value);
+    await query(
+      'INSERT INTO settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value',
+      [key, value]
+    );
   }
   revalidatePath('/admin/settings');
   return { success: true };
@@ -157,78 +151,70 @@ export async function saveSetting(formData) {
 // --- Student Management ---
 
 export async function createStudent(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  db.prepare('INSERT INTO students (name, email, phone, notes) VALUES (?, ?, ?, ?)').run(
-    data.name, data.email, data.phone || null, data.notes || null
+  await query('INSERT INTO students (name, email, phone, notes) VALUES ($1, $2, $3, $4)',
+    [data.name, data.email, data.phone || null, data.notes || null]
   );
   revalidatePath('/admin/students');
   return { success: true };
 }
 
 export async function updateStudent(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  db.prepare('UPDATE students SET name=?, email=?, phone=?, notes=? WHERE id=?').run(
-    data.name, data.email, data.phone || null, data.notes || null, data.id
+  await query('UPDATE students SET name=$1, email=$2, phone=$3, notes=$4 WHERE id=$5',
+    [data.name, data.email, data.phone || null, data.notes || null, data.id]
   );
   revalidatePath('/admin/students');
   return { success: true };
 }
 
-export async function deleteStudent(id) {
-  const db = getDb();
-  db.prepare('DELETE FROM students WHERE id = ?').run(id);
+export async function deleteStudent(formData) {
+  const data = Object.fromEntries(formData);
+  await query('DELETE FROM students WHERE id = $1', [data.id]);
   revalidatePath('/admin/students');
   return { success: true };
 }
 
 export async function assignPackage(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  db.prepare(`INSERT INTO student_packages (student_id, package_name, total_sessions, remaining_sessions, start_date, end_date, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?)`).run(
-    data.student_id, data.package_name, data.total_sessions, data.total_sessions,
-    data.start_date, data.end_date || null, data.status || 'active'
+  await query('INSERT INTO student_packages (student_id, package_name, total_sessions, remaining_sessions, start_date, end_date, status) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+    [data.student_id, data.package_name, data.total_sessions, data.total_sessions, data.start_date, data.end_date || null, data.status || 'active']
   );
   revalidatePath(`/admin/students/${data.student_id}`);
   return { success: true };
 }
 
 export async function updatePackageStatus(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  db.prepare('UPDATE student_packages SET status=?, remaining_sessions=? WHERE id=?').run(
-    data.status, data.remaining_sessions, data.id
+  await query('UPDATE student_packages SET status=$1, remaining_sessions=$2 WHERE id=$3',
+    [data.status, data.remaining_sessions, data.id]
   );
   revalidatePath(`/admin/students/${data.student_id}`);
   return { success: true };
 }
 
 export async function recordSession(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  const pkg = db.prepare('SELECT * FROM student_packages WHERE id = ?').get(data.student_package_id);
+  const pkg = await get('SELECT * FROM student_packages WHERE id = $1', [data.student_package_id]);
 
   if (!pkg) return { error: 'Package not found' };
   if (pkg.remaining_sessions <= 0) return { error: 'No remaining sessions' };
 
-  db.prepare('INSERT INTO session_records (student_package_id, session_date, notes) VALUES (?, ?, ?)').run(
-    data.student_package_id, data.session_date, data.notes || null
+  await query('INSERT INTO session_records (student_package_id, session_date, notes) VALUES ($1, $2, $3)',
+    [data.student_package_id, data.session_date, data.notes || null]
   );
-  db.prepare('UPDATE student_packages SET remaining_sessions = remaining_sessions - 1 WHERE id = ?').run(data.student_package_id);
+  await query('UPDATE student_packages SET remaining_sessions = remaining_sessions - 1 WHERE id = $1', [data.student_package_id]);
   revalidatePath(`/admin/students/${data.student_id}`);
   return { success: true };
 }
 
 export async function deleteSession(formData) {
-  const db = getDb();
   const data = Object.fromEntries(formData);
-  const session = db.prepare('SELECT * FROM session_records WHERE id = ?').get(data.id);
+  const session = await get('SELECT * FROM session_records WHERE id = $1', [data.id]);
   if (!session) return { error: 'Session not found' };
 
-  db.prepare('DELETE FROM session_records WHERE id = ?').run(data.id);
-  db.prepare('UPDATE student_packages SET remaining_sessions = remaining_sessions + 1 WHERE id = ?').run(session.student_package_id);
+  await query('DELETE FROM session_records WHERE id = $1', [data.id]);
+  await query('UPDATE student_packages SET remaining_sessions = remaining_sessions + 1 WHERE id = $1', [session.student_package_id]);
   revalidatePath(`/admin/students/${data.student_id}`);
   return { success: true };
 }

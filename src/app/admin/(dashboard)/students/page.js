@@ -1,4 +1,4 @@
-import { getDb } from '@/lib/db';
+import { all } from '@/lib/db';
 import Link from 'next/link';
 import DeleteForm from '../_components/DeleteForm';
 import { deleteStudent } from '@/lib/actions';
@@ -6,15 +6,10 @@ import AdminPageHeader from '../_components/AdminPageHeader';
 import AdminTable, { EmptyState } from '../_components/AdminTable';
 import styles from '../admin.module.css';
 
-function getStudents() {
-  const db = getDb();
-  return db.prepare(`SELECT s.*,
-    (SELECT COUNT(*) FROM student_packages WHERE student_id = s.id AND status = 'active') AS active_packages
-    FROM students s ORDER BY s.created_at DESC`).all();
-}
-
 export default async function AdminStudentsPage() {
-  const students = getStudents();
+  const students = await all(`SELECT s.*,
+    (SELECT COUNT(*) FROM student_packages WHERE student_id = s.id AND status = 'active') AS active_packages
+    FROM students s ORDER BY s.created_at DESC`);
 
   return (
     <div>

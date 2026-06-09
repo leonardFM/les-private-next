@@ -6,8 +6,8 @@ export default async function Home() {
   const cookieStore = await cookies();
   const locale = cookieStore.get('locale')?.value || 'id';
 
-  const programs = getPrograms(locale, true);
-  const testimonials = getTestimonials(locale, true);
+  const programs = await getPrograms(locale, true);
+  const testimonials = await getTestimonials(locale, true);
 
   return <HomeClient programs={programs} testimonials={testimonials} />;
 }

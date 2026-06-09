@@ -4,9 +4,8 @@ import AdminSidebar from './AdminSidebar';
 import HamburgerToggle from './_components/HamburgerToggle';
 import styles from './admin.module.css';
 
-initDb();
-
 export default async function AdminDashboardLayout({ children }) {
+  await initDb();
   const session = await verifySession();
 
   return (

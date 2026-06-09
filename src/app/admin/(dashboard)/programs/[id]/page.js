@@ -1,16 +1,11 @@
-import { getDb } from '@/lib/db';
+import { get } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import ProgramForm from '../ProgramForm';
 import styles from '../../admin.module.css';
 
-function getProgram(id) {
-  const db = getDb();
-  return db.prepare('SELECT * FROM programs WHERE id = ?').get(id);
-}
-
 export default async function EditProgramPage({ params }) {
   const { id } = await params;
-  const program = getProgram(id);
+  const program = await get('SELECT * FROM programs WHERE id = $1', [id]);
   if (!program) notFound();
 
   return (

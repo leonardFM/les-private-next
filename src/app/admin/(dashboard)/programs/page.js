@@ -1,4 +1,4 @@
-import { getDb } from '@/lib/db';
+import { all } from '@/lib/db';
 import Link from 'next/link';
 import DeleteForm from '../_components/DeleteForm';
 import { deleteProgram } from '@/lib/actions';
@@ -7,13 +7,8 @@ import AdminTable, { EmptyState } from '../_components/AdminTable';
 import { j } from '@/lib/utils';
 import styles from '../admin.module.css';
 
-function getPrograms() {
-  const db = getDb();
-  return db.prepare('SELECT * FROM programs ORDER BY created_at DESC').all();
-}
-
 export default async function AdminProgramsPage() {
-  const programs = getPrograms();
+  const programs = await all('SELECT * FROM programs ORDER BY created_at DESC');
 
   return (
     <div>

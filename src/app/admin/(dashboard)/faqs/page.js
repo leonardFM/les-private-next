@@ -1,4 +1,4 @@
-import { getDb } from '@/lib/db';
+import { all } from '@/lib/db';
 import Link from 'next/link';
 import DeleteForm from '../_components/DeleteForm';
 import { deleteFaq } from '@/lib/actions';
@@ -7,13 +7,8 @@ import AdminTable, { EmptyState } from '../_components/AdminTable';
 import { j } from '@/lib/utils';
 import styles from '../admin.module.css';
 
-function getFaqs() {
-  const db = getDb();
-  return db.prepare('SELECT * FROM faqs ORDER BY sort_order ASC, created_at DESC').all();
-}
-
 export default async function AdminFaqsPage() {
-  const faqs = getFaqs();
+  const faqs = await all('SELECT * FROM faqs ORDER BY sort_order ASC, created_at DESC');
 
   return (
     <div>

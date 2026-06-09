@@ -1,81 +1,70 @@
-Refactor halaman /kids-private agar mengikuti seluruh sistem website yang sudah ada.
+Analyze the current dashboard implementation and refactor it for a clean, modern, responsive admin experience.
 
-Requirements:
+Goals:
 
-1. Dark Mode Support
+* Improve layout consistency
+* Improve responsiveness
+* Improve usability
+* Reduce code duplication
+* Reuse existing components whenever possible
 
-* Gunakan theme provider yang sudah digunakan oleh halaman lain.
-* Jangan membuat implementasi dark mode baru.
-* Gunakan design token yang sudah ada.
+Tasks:
 
-Pastikan:
+1. Audit the dashboard UI
 
-* Background berubah sesuai theme.
-* Card tetap memiliki kontras yang baik.
-* CTA tetap menonjol.
-* Ilustrasi tetap terlihat baik di dark mode.
+   * Identify inconsistent spacing
+   * Identify inconsistent typography
+   * Identify duplicated components
+   * Identify responsiveness issues
 
-2. Multi Language Support
+2. Refactor layout
 
-* Gunakan sistem locale/i18n yang sudah dipakai website.
-* Jangan hardcode text.
+   * Consistent page container
+   * Consistent card components
+   * Consistent table layouts
+   * Consistent form layouts
 
-Semua text harus menggunakan translation key.
+3. Responsive Design
 
-Contoh:
+   * Mobile-first approach
+   * Sidebar collapses on mobile
+   * Tables become scrollable on small screens
+   * Cards stack correctly on tablet/mobile
+   * Forms adapt to screen size
 
-t("kids.hero.title")
-t("kids.hero.subtitle")
-t("kids.programs.title")
+4. Dashboard UX
 
-Buat translation file untuk:
+   * Better empty states
+   * Better loading states
+   * Better error states
+   * Consistent action buttons
 
-* English
-* Indonesian
+5. Design System
 
-3. Reusable Components
-   Pisahkan section menjadi component:
+   * Standardize spacing
+   * Standardize typography
+   * Standardize border radius
+   * Standardize shadows
+   * Standardize colors
 
-components/kids/
-├── HeroSection
-├── ProgramSection
-├── WhyChooseUsSection
-├── LearningJourneySection
-├── TestimonialSection
-├── FAQSection
-└── CTASection
+6. Component Structure
 
-4. Theme Tokens
-   Gunakan token global website:
+   * Extract reusable components
+   * Remove duplicated UI code
+   * Improve maintainability
 
---primary
---accent
---background
---foreground
---card
---border
+7. Performance
 
-Jangan menggunakan warna hardcoded.
+   * Remove unnecessary re-renders
+   * Remove unused components
+   * Remove dead code
 
-5. Accessibility
+Deliverables:
 
-* Dark mode harus tetap readable.
-* Semua icon dan illustration harus memiliki kontras yang cukup.
-* Support keyboard navigation.
+* UI audit report
+* Refactor plan
+* File changes summary
+* Then implement improvements
 
-6. Branding
-   Gunakan logo dari /public/logo.
-
-7. Future Scalability
-   Pastikan section baru dapat ditambahkan tanpa mengubah struktur halaman utama.
-
-8. Premium UI
-
-* Glassmorphism ringan
-* Soft shadows
-* Smooth transitions
-* Hover animations
-* Responsive design
-
-Tujuan:
-Halaman /kids-private harus terlihat sebagai bagian dari website utama, bukan halaman yang dibuat terpisah.
+Do not add new business features.
+Focus only on dashboard quality, responsiveness, maintainability, and user experience.

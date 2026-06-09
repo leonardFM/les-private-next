@@ -48,6 +48,55 @@
   --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   
   --container-max-width: 1200px;
+
+  /* Admin Layout */
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+
+  /* Admin Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Admin Typography */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 26px;
+  --text-3xl: 32px;
+
+  /* Admin Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 32px;
+
+  /* Admin Sidebar */
+  --sidebar-bg: #000000;
+  --sidebar-color: #fff;
+  --sidebar-border: rgba(255,255,255,0.1);
+  --sidebar-nav-hover: rgba(255,255,255,0.1);
+  --sidebar-nav-active: #004AAD;
+  --sidebar-nav-color: rgba(255,255,255,0.7);
+  --sidebar-nav-color-hover: #fff;
+
+  /* Admin Badges */
+  --badge-new-bg: #DBEAFE;
+  --badge-new-color: #1E40AF;
+  --badge-contacted-bg: #FEF3C7;
+  --badge-contacted-color: #92400E;
+  --badge-converted-bg: #D1FAE5;
+  --badge-converted-color: #065F46;
+  --badge-closed-bg: #F3F4F6;
+  --badge-closed-color: #6B7280;
+
+  /* Admin Danger */
+  --danger-color: #DC2626;
+  --danger-border: #FCA5A5;
+  --danger-hover-bg: #FEE2E2;
 }
 
 [data-theme='dark'] {

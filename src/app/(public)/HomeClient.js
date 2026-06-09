@@ -10,27 +10,19 @@ import CTASection from '@/components/CTASection';
 import { useTranslation } from '@/i18n';
 import styles from './page.module.css';
 
-export default function Home() {
+export default function HomeClient({ programs, testimonials }) {
   const { t } = useTranslation();
-  const previewPrograms = t('home.programs.cards');
   const coreFeatures = t('home.features.cards');
-  const featuredTestimonials = t('home.testimonials.cards');
   const stats = t('home.stats');
 
   return (
     <div>
-      {/* Hero Section */}
       <Hero />
-
-      {/* Promotional Banner - English for Kids */}
       <PromotionalBanner />
 
-      {/* Why Choose Us Features */}
       <section className={`${styles.features} section bg-yellow`}>
-        {/* Blob decoration */}
         <div className={styles.blobYellow1} />
         <div className={styles.blobYellow2} />
-        {/* Floating elements */}
         <div className={styles.floatStar1}>⭐</div>
         <div className={styles.floatBook1}>📚</div>
 
@@ -38,9 +30,7 @@ export default function Home() {
           <div className="section-header">
             <span className="section-tag">{t('home.features.tag')}</span>
             <h2 className="section-title">{t('home.features.title')}</h2>
-            <p className="section-subtitle">
-              {t('home.features.subtitle')}
-            </p>
+            <p className="section-subtitle">{t('home.features.subtitle')}</p>
           </div>
 
           <div className={styles.featuresGrid}>
@@ -55,12 +45,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Programs Preview */}
       <section className="section bg-blue">
-        {/* Blob decorations */}
         <div className={styles.blobBlue1} />
         <div className={styles.blobBlue2} />
-        {/* Floating elements */}
         <div className={styles.floatGlobe}>🌍</div>
         <div className={styles.floatGradCap}>🎓</div>
 
@@ -68,14 +55,12 @@ export default function Home() {
           <div className="section-header">
             <span className="section-tag">{t('home.programs.tag')}</span>
             <h2 className="section-title">{t('home.programs.title')}</h2>
-            <p className="section-subtitle">
-              {t('home.programs.subtitle')}
-            </p>
+            <p className="section-subtitle">{t('home.programs.subtitle')}</p>
           </div>
 
           <div className={styles.programsGrid}>
-            {previewPrograms.map((prog, index) => (
-              <ProgramCard key={index} {...prog} />
+            {programs.map((prog) => (
+              <ProgramCard key={prog.id} {...prog} />
             ))}
           </div>
 
@@ -87,7 +72,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Highlight Stats Banner */}
       <section className={`${styles.stats} bg-yellow`}>
         <div className={styles.blobYellow3} />
         <div className={styles.blobYellow4} />
@@ -106,7 +90,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Highlight Testimonials */}
       <section className="section bg-blue">
         <div className={styles.blobBlue3} />
         <div className={styles.blobBlue4} />
@@ -117,14 +100,12 @@ export default function Home() {
           <div className="section-header">
             <span className="section-tag">{t('home.testimonials.tag')}</span>
             <h2 className="section-title">{t('home.testimonials.title')}</h2>
-            <p className="section-subtitle">
-              {t('home.testimonials.subtitle')}
-            </p>
+            <p className="section-subtitle">{t('home.testimonials.subtitle')}</p>
           </div>
 
           <div className={styles.testimonialsGrid}>
-            {featuredTestimonials.map((test, index) => (
-              <TestimonialCard key={index} {...test} />
+            {testimonials.map((test) => (
+              <TestimonialCard key={test.id} {...test} />
             ))}
           </div>
 
@@ -136,9 +117,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <div className="container">
-        <CTASection 
+        <CTASection
           title={t('cta.default.title')}
           description={t('cta.default.description')}
           primaryActionText={t('cta.default.primaryText')}

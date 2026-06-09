@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from '@/i18n';
 import { getWhatsAppUrl } from '@/lib/constants';
+import { createLead } from '@/lib/actions';
 import styles from './contact.module.css';
 
-export default function ContactClient() {
+export default function ContactClient({ faqs }) {
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
@@ -20,14 +21,13 @@ export default function ContactClient() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   const contactInfos = t('contact.infos');
-  const faqs = t('contact.faqs');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.message) {
       const waMsg = `Halo, saya *${formData.name}*
@@ -38,6 +38,16 @@ Format: ${formData.format}
 
 *Pertanyaan Saya:*
 ${formData.message}`;
+
+      const leadForm = new FormData();
+      leadForm.set('name', formData.name);
+      leadForm.set('email', formData.email);
+      leadForm.set('phone', formData.phone);
+      leadForm.set('program', formData.program);
+      leadForm.set('format', formData.format);
+      leadForm.set('message', formData.message);
+      await createLead(leadForm);
+
       window.open(getWhatsAppUrl(waMsg), '_blank', 'noopener');
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', program: t('contact.programOptions')[0], format: t('contact.formatOptions')[0], message: '' });
@@ -54,7 +64,6 @@ ${formData.message}`;
 
   return (
     <div>
-      {/* Page Header */}
       <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <span className="section-tag">{t('contact.tag')}</span>
@@ -68,7 +77,6 @@ ${formData.message}`;
       <section className="section bg-blue">
         <div className="container">
           <div className={styles.grid}>
-            {/* Sidebar Details Info */}
             <div className={styles.infoPanel}>
               <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>{t('contact.infoTitle')}</h2>
               <p style={{ opacity: 0.85, fontSize: '15px', marginBottom: '20px' }}>
@@ -85,19 +93,16 @@ ${formData.message}`;
               ))}
             </div>
 
-            {/* Main Interactive Form Card */}
             <div className={styles.formCard}>
               {submitted ? (
                 <div className={styles.successBox}>
                   <h3 className={styles.successTitle}>{t('contact.successTitle')}</h3>
-                  <p className={styles.successText}>
-                    {t('contact.successText')}
-                  </p>
+                  <p className={styles.successText}>{t('contact.successText')}</p>
                   <p style={{ fontSize: '13px', marginTop: '10px', color: 'var(--foreground-muted)' }}>
                     {t('contact.successWhatsApp')}
                   </p>
-                  <button 
-                    onClick={() => setSubmitted(false)} 
+                  <button
+                    onClick={() => setSubmitted(false)}
                     className="btn btn-primary"
                     style={{ marginTop: '16px', fontSize: '14px', padding: '10px 20px' }}
                   >
@@ -112,51 +117,23 @@ ${formData.message}`;
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>{t('contact.labels.name')} *</label>
-                      <input 
-                        type="text" 
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder={t('contact.placeholder.name')} 
-                        className={styles.input} 
-                        required 
-                      />
+                      <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder={t('contact.placeholder.name')} className={styles.input} required />
                     </div>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>{t('contact.labels.phone')}</label>
-                      <input 
-                        type="tel" 
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder={t('contact.placeholder.phone')} 
-                        className={styles.input} 
-                      />
+                      <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder={t('contact.placeholder.phone')} className={styles.input} />
                     </div>
                   </div>
 
                   <div className={styles.formGroup}>
                     <label className={styles.label}>{t('contact.labels.email')} *</label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder={t('contact.placeholder.email')} 
-                      className={styles.input} 
-                      required 
-                    />
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder={t('contact.placeholder.email')} className={styles.input} required />
                   </div>
 
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>{t('contact.labels.program')} *</label>
-                      <select 
-                        name="program"
-                        value={formData.program}
-                        onChange={handleInputChange}
-                        className={styles.select}
-                      >
+                      <select name="program" value={formData.program} onChange={handleInputChange} className={styles.select}>
                         {t('contact.programOptions').map((opt) => (
                           <option key={opt}>{opt}</option>
                         ))}
@@ -164,12 +141,7 @@ ${formData.message}`;
                     </div>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>{t('contact.labels.format')} *</label>
-                      <select 
-                        name="format"
-                        value={formData.format}
-                        onChange={handleInputChange}
-                        className={styles.select}
-                      >
+                      <select name="format" value={formData.format} onChange={handleInputChange} className={styles.select}>
                         {t('contact.formatOptions').map((opt) => (
                           <option key={opt}>{opt}</option>
                         ))}
@@ -179,14 +151,7 @@ ${formData.message}`;
 
                   <div className={styles.formGroup} style={{ marginBottom: '30px' }}>
                     <label className={styles.label}>{t('contact.labels.message')} *</label>
-                    <textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder={t('contact.placeholder.message')} 
-                      className={styles.textarea} 
-                      required 
-                    />
+                    <textarea name="message" value={formData.message} onChange={handleInputChange} placeholder={t('contact.placeholder.message')} className={styles.textarea} required />
                   </div>
 
                   <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
@@ -199,34 +164,25 @@ ${formData.message}`;
         </div>
       </section>
 
-      {/* FAQ Accordion Section */}
       <section className={`${styles.faqSection} bg-yellow`}>
         <div className="container">
           <div className="section-header">
             <span className="section-tag">{t('contact.faqTag')}</span>
             <h2 className="section-title">{t('contact.faqTitle')}</h2>
-            <p className={styles.sectionSubtitle}>
-              {t('contact.faqSubtitle')}
-            </p>
+            <p className={styles.sectionSubtitle}>{t('contact.faqSubtitle')}</p>
           </div>
 
           <div className={styles.faqContainer}>
             {faqs.map((faq, index) => {
               const isOpen = openFaqIndex === index;
               return (
-                <div key={index} className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ''}`}>
-                  <button 
-                    onClick={() => toggleFaq(index)} 
-                    className={styles.faqHeader}
-                    aria-expanded={isOpen}
-                  >
-                    <span>{faq.q}</span>
+                <div key={faq.id} className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ''}`}>
+                  <button onClick={() => toggleFaq(index)} className={styles.faqHeader} aria-expanded={isOpen}>
+                    <span>{faq.question}</span>
                     <span className={`${styles.faqTrigger} ${isOpen ? styles.faqTriggerOpen : ''}`}>+</span>
                   </button>
                   {isOpen && (
-                    <div className={`${styles.faqContent} ${styles.faqContentOpen}`}>
-                      {faq.a}
-                    </div>
+                    <div className={`${styles.faqContent} ${styles.faqContentOpen}`}>{faq.answer}</div>
                   )}
                 </div>
               );

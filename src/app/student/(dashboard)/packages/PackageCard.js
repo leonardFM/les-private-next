@@ -115,25 +115,26 @@ export default function PackageCard({ pkg, userId }) {
 
   return (
     <div className={styles.card} style={{ display: 'flex', flexDirection: 'column' }}>
-      <h3 style={{ margin: '0 0 12px', fontSize: 'var(--text-xl)', fontWeight: 700 }}>{pkg.name}</h3>
+      <div style={{ fontSize: 32, marginBottom: 12 }}>📚</div>
+      <h3 style={{ margin: '0 0 8px', fontSize: '18px', fontWeight: 700 }}>{pkg.name}</h3>
       {pkg.description && (
-        <p style={{ margin: '0 0 16px', color: 'var(--foreground-muted, #6B7280)', fontSize: 'var(--text-sm)', flex: 1 }}>
+        <p style={{ margin: '0 0 16px', color: 'var(--foreground-muted, #6B7280)', fontSize: 'var(--text-sm)', flex: 1, lineHeight: 1.5 }}>
           {pkg.description}
         </p>
       )}
-      <div style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--foreground-muted, #6B7280)', marginBottom: 4 }}>
-          Total Sessions
+      <div style={{ marginBottom: 16, padding: '12px 0', borderTop: '1px solid var(--border-color, #E5E7EB)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--foreground-muted, #6B7280)', fontWeight: 500 }}>Sessions</span>
+          <span style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>{pkg.total_sessions} sessions</span>
         </div>
-        <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>{pkg.total_sessions} sessions</div>
       </div>
       <div style={{ marginBottom: 20 }}>
-        <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--primary-blue, #004AAD)' }}>
+        <span style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary-blue, #004AAD)' }}>
           Rp {Number(pkg.price).toLocaleString()}
-        </div>
+        </span>
       </div>
       {error && (
-        <div style={{ color: '#DC2626', fontSize: 'var(--text-xs)', marginBottom: 12, padding: '8px 12px', background: '#FEF2F2', borderRadius: 'var(--radius-sm)', border: '1px solid #FECACA' }}>
+        <div style={{ color: '#DC2626', fontSize: 'var(--text-xs)', marginBottom: 12, padding: '8px 12px', background: '#FEF2F2', borderRadius: 8, border: '1px solid #FECACA' }}>
           {error}
         </div>
       )}
@@ -141,7 +142,7 @@ export default function PackageCard({ pkg, userId }) {
         onClick={handlePurchase}
         disabled={loading}
         className={styles.actionBtn}
-        style={{ width: '100%', justifyContent: 'center', padding: '12px 24px' }}
+        style={{ width: '100%', justifyContent: 'center', padding: '12px 24px', borderRadius: 10 }}
       >
         {loading ? 'Processing...' : 'Purchase'}
       </button>

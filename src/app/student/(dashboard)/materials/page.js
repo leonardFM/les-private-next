@@ -67,30 +67,30 @@ export default async function StudentMaterialsPage() {
 
       {modulesWithMaterials.length === 0 ? (
         <div className={styles.emptyState}>
+          <div style={{ fontSize: 40, marginBottom: 12 }}>📖</div>
           <h3>No materials available</h3>
           <p>Learning materials will appear here once they are assigned to your packages.</p>
         </div>
       ) : (
         modulesWithMaterials.map(mod => (
-          <div key={mod.id} className={styles.card} style={{ marginBottom: 16 }}>
-            <div style={{
-              padding: '16px 20px',
-              borderBottom: '1px solid var(--border-color, #E5E7EB)',
-            }}>
-              <h3 style={{ margin: 0, fontSize: 'var(--text-base)', fontWeight: 700 }}>{mod.title}</h3>
-              <p style={{ margin: '4px 0 0', fontSize: 'var(--text-xs)', color: 'var(--foreground-muted)' }}>{mod.package_name}</p>
+          <div key={mod.id} className={styles.sectionCard}>
+            <div className={styles.sectionCardHeader}>
+              <div>
+                <h3>{mod.title}</h3>
+                <p style={{ margin: '4px 0 0', fontSize: 'var(--text-xs)', color: 'var(--foreground-muted)' }}>{mod.package_name}</p>
+              </div>
             </div>
             {mod.description && (
-              <div style={{ padding: '12px 20px', fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)', borderBottom: '1px solid var(--border-color, #E5E7EB)' }}>
+              <div style={{ padding: '12px 20px', fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)', borderBottom: '1px solid var(--border-color, #E5E7EB)', lineHeight: 1.5 }}>
                 {mod.description}
               </div>
             )}
             {mod.materials.length === 0 ? (
-              <div style={{ padding: 20, fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)' }}>
+              <div style={{ padding: 20, fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)', textAlign: 'center' }}>
                 No materials in this module yet.
               </div>
             ) : (
-              <div style={{ padding: 0, overflow: 'hidden' }}>
+              <div className={styles.sectionCardBody}>
                 <table className={styles.table}>
                   <thead>
                     <tr>

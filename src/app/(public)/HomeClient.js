@@ -5,21 +5,26 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import PromotionalBanner from '@/components/PromotionalBanner';
 import ProgramCard from '@/components/ProgramCard';
-import TestimonialCard from '@/components/TestimonialCard';
 import CTASection from '@/components/CTASection';
 import { useTranslation } from '@/i18n';
 import styles from './page.module.css';
+import aboutStyles from './about/about.module.css';
 
-export default function HomeClient({ programs, testimonials }) {
+export default function HomeClient() {
   const { t } = useTranslation();
   const coreFeatures = t('home.features.cards');
-  const stats = t('home.stats');
+  const programs = t('home.programs.cards');
+  const storyParagraphs = t('about.storyParagraphs');
+  const values = t('about.values');
+  const learningModes = t('about.campuses');
+  const teachers = t('about.teachers');
 
   return (
     <div>
       <Hero />
       <PromotionalBanner />
 
+      {/* Keunggulan Kami */}
       <section className={`${styles.features} section bg-yellow`}>
         <div className={styles.blobYellow1} />
         <div className={styles.blobYellow2} />
@@ -31,6 +36,11 @@ export default function HomeClient({ programs, testimonials }) {
             <span className="section-tag">{t('home.features.tag')}</span>
             <h2 className="section-title">{t('home.features.title')}</h2>
             <p className="section-subtitle">{t('home.features.subtitle')}</p>
+          </div>
+
+          <div className="section-header" style={{ marginBottom: '36px' }}>
+            <h3 className="section-title" style={{ fontSize: '28px' }}>{t('home.features.activeTitle')}</h3>
+            <p className="section-subtitle" style={{ maxWidth: '780px' }}>{t('home.features.activeDesc')}</p>
           </div>
 
           <div className={styles.featuresGrid}>
@@ -45,11 +55,12 @@ export default function HomeClient({ programs, testimonials }) {
         </div>
       </section>
 
-      <section className="section bg-blue">
-        <div className={styles.blobBlue1} />
-        <div className={styles.blobBlue2} />
-        <div className={styles.floatGlobe}>🌍</div>
-        <div className={styles.floatGradCap}>🎓</div>
+      {/* Programs */}
+      <section className={`${styles.programs} section bg-yellow`}>
+        <div className={styles.blobYellow3} />
+        <div className={styles.blobYellow4} />
+        <div className={styles.floatStar2}>✨</div>
+        <div className={styles.floatSpeech}>💬</div>
 
         <div className="container">
           <div className="section-header">
@@ -59,65 +70,101 @@ export default function HomeClient({ programs, testimonials }) {
           </div>
 
           <div className={styles.programsGrid}>
-            {programs.map((prog) => (
-              <ProgramCard key={prog.id} {...prog} />
+            {programs.map((prog, index) => (
+              <ProgramCard key={prog.id || prog.title || index} {...prog} />
             ))}
           </div>
 
           <div className={styles.programsAction}>
-            <Link href="/programs" className="btn btn-secondary">
+            <Link href="/programs" className="btn btn-primary">
               {t('home.programs.btnText')}
             </Link>
           </div>
         </div>
       </section>
 
-      <section className={`${styles.stats} bg-yellow`}>
-        <div className={styles.blobYellow3} />
-        <div className={styles.blobYellow4} />
-        <div className={styles.floatStar2}>✨</div>
-        <div className={styles.floatSpeech}>💬</div>
-
+      {/* About */}
+      <section className="section bg-blue">
         <div className="container">
-          <div className={styles.statsGrid}>
-            {stats.map((stat, index) => (
-              <div key={index} className={styles.statItem}>
-                <span className={styles.statVal}>{stat.value}</span>
-                <span className={styles.statLabel}>{stat.label}</span>
+          <div className="section-header">
+            <span className="section-tag">{t('about.tag')}</span>
+            <h2 className="section-title">{t('about.title')}</h2>
+            <p className="section-subtitle">{t('about.subtitle')}</p>
+          </div>
+
+          <div className={aboutStyles.storyRow}>
+            <div className={aboutStyles.storyContent}>
+              <h3 style={{ fontSize: '28px' }}>{t('about.storyTitle')}</h3>
+              {storyParagraphs.map((p, i) => (
+                <p key={i} style={{ opacity: 0.85 }}>{p}</p>
+              ))}
+            </div>
+
+            <div className={aboutStyles.visualPane}>
+              <h3 className={aboutStyles.visualPaneTitle}>{t('about.visualPaneTitle')}</h3>
+              <p className={aboutStyles.visualPaneDesc}>{t('about.visualPaneDesc')}</p>
+            </div>
+          </div>
+
+          <div className="section-header" style={{ marginBottom: '40px' }}>
+            <h2 className="section-title" style={{ fontSize: '26px' }}>{t('about.valuesTitle')}</h2>
+          </div>
+
+          <div className={aboutStyles.valuesGrid}>
+            {values.map((val, idx) => (
+              <div key={idx} className={aboutStyles.valueCard}>
+                <span className={aboutStyles.valueIcon}>{val.icon}</span>
+                <h3 className={aboutStyles.valueTitle}>{val.title}</h3>
+                <p className={aboutStyles.valueDesc}>{val.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="section-header" style={{ marginTop: '60px', marginBottom: '40px' }}>
+            <span className="section-tag">{t('about.campusTag')}</span>
+            <h2 className="section-title">{t('about.campusTitle')}</h2>
+            <p className="section-subtitle">{t('about.campusSubtitle')}</p>
+          </div>
+
+          <div className={aboutStyles.campusGrid}>
+            {learningModes.map((item, idx) => (
+              <div key={idx} className={aboutStyles.campusCard}>
+                <div className={aboutStyles.campusImagePlaceholder}>{item.icon}</div>
+                <div className={aboutStyles.campusInfo}>
+                  <h3 className={aboutStyles.campusName}>{item.name}</h3>
+                  <p className={aboutStyles.campusDesc}>{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-blue">
-        <div className={styles.blobBlue3} />
-        <div className={styles.blobBlue4} />
-        <div className={styles.floatStar3}>🌟</div>
-        <div className={styles.floatBook2}>📖</div>
-
+      {/* Teachers */}
+      <section className={`${aboutStyles.teachersSection} section bg-yellow`}>
         <div className="container">
           <div className="section-header">
-            <span className="section-tag">{t('home.testimonials.tag')}</span>
-            <h2 className="section-title">{t('home.testimonials.title')}</h2>
-            <p className="section-subtitle">{t('home.testimonials.subtitle')}</p>
+            <span className="section-tag">{t('about.teachersTag')}</span>
+            <h2 className="section-title">{t('about.teachersTitle')}</h2>
+            <p className="section-subtitle">{t('about.teachersSubtitle')}</p>
           </div>
 
-          <div className={styles.testimonialsGrid}>
-            {testimonials.map((test) => (
-              <TestimonialCard key={test.id} {...test} />
+          <div className={aboutStyles.teachersGrid}>
+            {teachers.map((teach, idx) => (
+              <div key={idx} className={aboutStyles.teacherCard}>
+                <div className={aboutStyles.teacherImagePlaceholder}>{teach.initials}</div>
+                <div className={aboutStyles.teacherInfo}>
+                  <h3 className={aboutStyles.teacherName}>{teach.name}</h3>
+                  <span className={aboutStyles.teacherRole}>{teach.role}</span>
+                  <p className={aboutStyles.teacherBio}>{teach.bio}</p>
+                </div>
+              </div>
             ))}
-          </div>
-
-          <div className={styles.programsAction}>
-            <Link href="/testimonials" className="btn btn-secondary">
-              {t('home.testimonials.btnText')}
-            </Link>
           </div>
         </div>
       </section>
 
-      <div className="container">
+      <div className="container" style={{ paddingTop: 0, paddingBottom: 0 }}>
         <CTASection
           title={t('cta.default.title')}
           description={t('cta.default.description')}

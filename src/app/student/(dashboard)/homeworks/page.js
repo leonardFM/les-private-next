@@ -29,6 +29,7 @@ export default async function StudentHomeworksPage() {
 
       {homeworks.length === 0 ? (
         <div className={styles.emptyState}>
+          <div style={{ fontSize: 40, marginBottom: 12 }}>📝</div>
           <h3>No homework yet</h3>
           <p>Your assignments will appear here once they are created.</p>
         </div>
@@ -37,10 +38,10 @@ export default async function StudentHomeworksPage() {
           const status = statusLabel(h);
           return (
             <Link key={h.id} href={`/student/homeworks/${h.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-              <div className={styles.card} style={{ marginBottom: 12, cursor: 'pointer', transition: 'box-shadow 0.2s' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div className={styles.sectionCard} style={{ cursor: 'pointer', transition: 'box-shadow 0.2s' }}>
+                <div className={styles.sectionCardHeader}>
                   <div>
-                    <h3 style={{ margin: 0, fontSize: 'var(--text-base)', fontWeight: 700 }}>{h.title}</h3>
+                    <h3>{h.title}</h3>
                     <p style={{ margin: '4px 0 0', fontSize: 'var(--text-xs)', color: 'var(--foreground-muted)' }}>
                       {h.module_title || 'General'} {h.due_date ? `• Due: ${new Date(h.due_date).toLocaleDateString()}` : ''}
                     </p>
@@ -48,12 +49,12 @@ export default async function StudentHomeworksPage() {
                   <span className={`${styles.badge} ${status.cls}`}>{status.text}</span>
                 </div>
                 {h.description && (
-                  <p style={{ margin: '8px 0 0', fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)' }}>
+                  <div style={{ padding: '12px 20px', fontSize: 'var(--text-sm)', color: 'var(--foreground-muted)', borderBottom: '1px solid var(--border-color, #E5E7EB)', lineHeight: 1.5 }}>
                     {h.description.length > 100 ? h.description.substring(0, 100) + '...' : h.description}
-                  </p>
+                  </div>
                 )}
                 {h.feedback && (
-                  <div style={{ marginTop: 8, padding: 8, background: '#F5F9FF', borderRadius: 6, fontSize: 'var(--text-xs)' }}>
+                  <div style={{ margin: '12px 20px', padding: 10, background: '#F0FDF4', borderRadius: 8, fontSize: 'var(--text-xs)' }}>
                     <strong>Feedback:</strong> {h.feedback}
                   </div>
                 )}

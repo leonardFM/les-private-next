@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { logout } from '@/lib/actions';
+import { useSidebar } from './_components/SidebarProvider';
 import styles from './admin.module.css';
 
 const navItems = [
@@ -23,9 +23,7 @@ const navItems = [
 
 export default function AdminSidebar({ user }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-
-  function close() { setOpen(false); }
+  const { open, close } = useSidebar();
 
   return (
     <>
@@ -40,7 +38,7 @@ export default function AdminSidebar({ user }) {
             <Link href="/admin" className={styles.brand} onClick={close}>El's Corner</Link>
             <span className={styles.brandSub}>Admin Panel</span>
           </div>
-          <button className={styles.menuToggle} onClick={() => setOpen(false)} aria-label="Close menu">
+          <button className={styles.menuToggle} onClick={close} aria-label="Close menu">
             ✕
           </button>
         </div>

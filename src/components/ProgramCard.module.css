@@ -1,3 +1,19 @@
+.oneOnOneBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  background: var(--accent-color);
+  color: #1F2937;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 8px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  box-shadow: 0 2px 8px rgba(255, 222, 89, 0.3);
+}
+
 .card {
   background-color: var(--card-bg);
   border: 1px solid rgba(0, 74, 173, 0.06);

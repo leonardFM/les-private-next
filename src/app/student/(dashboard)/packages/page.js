@@ -21,11 +21,12 @@ export default async function PackagesPage() {
 
       {packages.length === 0 ? (
         <div className={styles.emptyState}>
+          <div style={{ fontSize: 40, marginBottom: 12 }}>📦</div>
           <h3>No packages available</h3>
           <p>Check back later for available packages.</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 24 }}>
+        <div className={styles.cardGrid}>
           {packages.map(pkg => (
             <PackageCard key={pkg.id} pkg={pkg} userId={session.id} />
           ))}

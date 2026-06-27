@@ -1,17 +1,13 @@
 'use client';
 
+import { useSidebar } from './SidebarProvider';
 import styles from '../admin.module.css';
 
 export default function HamburgerToggle() {
-  function openMenu() {
-    const sidebar = document.querySelector('[class*="sidebar"]');
-    const overlay = document.querySelector('[class*="sidebarOverlay"]');
-    if (sidebar) sidebar.classList.add(styles.sidebarOpen);
-    if (overlay) overlay.classList.add(styles.sidebarOverlayVisible);
-  }
+  const { toggle } = useSidebar();
 
   return (
-    <button className={styles.menuToggle} onClick={openMenu} aria-label="Open menu" style={{ display: 'block', color: 'var(--foreground)' }}>
+    <button className={styles.menuToggle} onClick={toggle} aria-label="Toggle menu">
       ☰
     </button>
   );

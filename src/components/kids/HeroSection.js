@@ -38,16 +38,7 @@ export default function HeroSection({
           <span><strong>{metric3Val}</strong> {metric3}</span>
         </div>
       </div>
-      <div className={styles.heroVisual}>
-        <Image src={funImg} alt="" width={280} height={350} className={styles.heroVisualImg} />
-        <div className={styles.heroBadge}>
-          <span className={styles.heroBadgeIcon}>🎉</span>
-          <div>
-            <strong>{btnTrial}</strong>
-            <span className={styles.heroBadgeSub}>Gratis!</span>
-          </div>
-        </div>
-      </div>
+     
     </section>
   );
 }

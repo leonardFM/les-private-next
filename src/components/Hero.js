@@ -39,20 +39,14 @@ export default function Hero() {
           <div className={styles.illustrationArea}>
             <div className={styles.visualWrapper}>
               <div className={styles.visualContent}>
-                <Image
-                  src="/logo/logo-png.png"
-                  alt="El's Corner"
-                  width={100}
-                  height={100}
-                  className={styles.heroLogo}
-                />
-                <h3 className={styles.visualTitle}>EL'S CORNER</h3>
-                <p className={styles.visualSub}>English Learning Corner</p>
+                <div className={styles.oneOnOneBadge}>{t('hero.badge')}</div>
+                <h3 className={styles.visualTitle}>{t('hero.visualTitle')}</h3>
+                <p className={styles.visualSub}>{t('hero.visualSub')}</p>
               </div>
             </div>
 
             <div className={`${styles.floatingCard} ${styles.floatingCard1}`}>
-              <div className={styles.statIcon}>⭐</div>
+              <div className={styles.statIcon}>🎯</div>
               <div className={styles.statInfo}>
                 <span className={styles.statNum}>{t('hero.stat1Value')}</span>
                 <span className={styles.statText}>{t('hero.stat1Label')}</span>
@@ -60,7 +54,7 @@ export default function Hero() {
             </div>
 
             <div className={`${styles.floatingCard} ${styles.floatingCard2}`}>
-              <div className={styles.statIcon}>🎓</div>
+              <div className={styles.statIcon}>👨‍🏫</div>
               <div className={styles.statInfo}>
                 <span className={styles.statNum}>{t('hero.stat2Value')}</span>
                 <span className={styles.statText}>{t('hero.stat2Label')}</span>

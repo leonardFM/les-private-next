@@ -17,27 +17,23 @@ export default async function ProfilePage() {
         </div>
       </div>
 
-      <div className={styles.card} style={{ maxWidth: 600 }}>
-        <table className={styles.table} style={{ minWidth: 'auto' }}>
-          <tbody>
-            <tr>
-              <td style={{ fontWeight: 600, width: 140, padding: '12px 20px' }}>Name</td>
-              <td style={{ padding: '12px 20px' }}>{profile.name}</td>
-            </tr>
-            <tr>
-              <td style={{ fontWeight: 600, width: 140, padding: '12px 20px' }}>Email</td>
-              <td style={{ padding: '12px 20px' }}>{profile.email}</td>
-            </tr>
-            <tr>
-              <td style={{ fontWeight: 600, width: 140, padding: '12px 20px' }}>Phone</td>
-              <td style={{ padding: '12px 20px' }}>{profile.phone || '-'}</td>
-            </tr>
-            <tr>
-              <td style={{ fontWeight: 600, width: 140, padding: '12px 20px' }}>Member Since</td>
-              <td style={{ padding: '12px 20px' }}>{new Date(profile.created_at).toLocaleDateString()}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className={styles.infoCard}>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>Name</span>
+          <span className={styles.infoValue}>{profile.name}</span>
+        </div>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>Email</span>
+          <span className={styles.infoValue}>{profile.email}</span>
+        </div>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>Phone</span>
+          <span className={styles.infoValue}>{profile.phone || '-'}</span>
+        </div>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>Member Since</span>
+          <span className={styles.infoValue}>{new Date(profile.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
       </div>
     </div>
   );

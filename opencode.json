@@ -1,0 +1,41 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "agent": {
+    "backend": {
+      "description": "Backend specialist — database queries, schema validation, migration safety, API logic review",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free"
+    },
+    "frontend": {
+      "description": "Frontend specialist — Next.js App Router, UI consistency, component reuse, layout optimization",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free"
+    },
+    "lms-domain": {
+      "description": "LMS domain specialist — homework, modules, student progress, teacher workflows",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free"
+    },
+    "payment": {
+      "description": "Payment specialist — Midtrans flow, webhooks, invoices, transaction error handling",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free"
+    },
+    "performance": {
+      "description": "Performance monitor — query optimization, caching, bundle size, slow endpoint detection",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free",
+      "permission": { "edit": "deny" }
+    },
+    "database": {
+      "description": "Database architect — schema design, missing tables, migration generation, relation consistency",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash-free",
+      "permission": { "edit": "deny" }
+    }
+  },
+  "skills": {
+    "paths": [".opencode/skills"]
+  }
+}

@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { logout } from '@/lib/actions';
+import { useSidebar } from './SidebarProvider';
 import styles from './student.module.css';
 
 const navItems = [
   { label: 'Dashboard', path: '/student/dashboard', icon: '📊' },
-  { label: 'Packages', path: '/student/packages', icon: '📦' },
-  { label: 'My Packages', path: '/student/my-packages', icon: '🎓' },
+  { label: 'Tutoring Packages', path: '/student/packages', icon: '📦' },
+  { label: 'My Sessions', path: '/student/my-packages', icon: '🎯' },
   { label: 'Schedules', path: '/student/schedules', icon: '📅' },
   { label: 'Materials', path: '/student/materials', icon: '📖' },
   { label: 'Homework', path: '/student/homeworks', icon: '📝' },
@@ -19,9 +19,7 @@ const navItems = [
 
 export default function StudentSidebar({ user }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-
-  function close() { setOpen(false); }
+  const { open, close } = useSidebar();
 
   return (
     <>
@@ -34,9 +32,9 @@ export default function StudentSidebar({ user }) {
         <div className={styles.sidebarHeader}>
           <div>
             <Link href="/student/dashboard" className={styles.brand} onClick={close}>El&apos;s Corner</Link>
-            <span className={styles.brandSub}>Student Portal</span>
+            <span className={styles.brandSub}>Private Tutoring</span>
           </div>
-          <button className={styles.menuToggle} onClick={() => setOpen(false)} aria-label="Close menu">
+          <button className={styles.menuToggle} onClick={close} aria-label="Close menu">
             ✕
           </button>
         </div>

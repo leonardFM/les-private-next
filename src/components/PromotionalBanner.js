@@ -15,9 +15,7 @@ export default function PromotionalBanner() {
       <div className="container">
         <div className={styles.inner}>
           <div className={styles.content}>
-            <span className={styles.tag}>{banner.tag}</span>
             <h2 className={styles.title}>
-              <span className={styles.emoji}>{banner.bgEmoji}</span>
               {banner.title}
             </h2>
             <p className={styles.subtitle}>{banner.subtitle}</p>

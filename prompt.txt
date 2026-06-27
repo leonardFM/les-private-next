@@ -1,112 +1,28 @@
-You are a senior backend engineer specializing in PostgreSQL + Node.js (Next.js App Router).
+Analyze the hydration mismatch occurring in ProgramCard and the entire localization system.
 
-Task:
-Fix ALL runtime errors related to missing database relations in PostgreSQL.
+Current issue:
+The server renders Indonesian text ("Durasi") while the client renders English text ("Duration"), causing React hydration failures.
 
-Current error:
-- relation "homeworks" does not exist
-- relation "schedules" does not exist
+Tasks:
 
----
+1. Audit all localization and language detection logic.
+2. Find every occurrence of:
 
-## Step 1: Inspect database usage in codebase
-Search all SQL queries in:
-- src/lib/db.js
-- src/lib/modules/**
-- src/app/**
+   * navigator.language
+   * window.navigator
+   * localStorage language settings
+   * typeof window checks
+   * browser-only locale detection
+3. Identify all components where server and client may render different languages.
+4. Refactor localization so that language selection is determined consistently during SSR and passed to client components via props, context, or server state.
+5. Eliminate all hydration mismatches.
+6. Ensure server-rendered and client-rendered content are identical during hydration.
+7. Follow Next.js App Router best practices.
+8. Produce production-ready code without temporary workarounds.
 
-Identify all referenced tables:
-- homeworks
-- schedules
-- modules
-- students
-- any other missing relations
+Deliverables:
 
----
-
-## Step 2: Verify schema consistency
-For each table:
-- check if it exists in migrations / schema / SQL files
-- if not found, determine expected structure from usage in code
-
----
-
-## Step 3: Fix missing tables (IMPORTANT)
-
-If table DOES NOT exist in database schema:
-
-### Option A (preferred if schema is intended)
-Create PostgreSQL migration SQL for missing tables.
-
-Example format:
-
-CREATE TABLE IF NOT EXISTS homeworks (
-  id SERIAL PRIMARY KEY,
-  title TEXT NOT NULL,
-  description TEXT,
-  module_id INTEGER,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS schedules (
-  id SERIAL PRIMARY KEY,
-  title TEXT NOT NULL,
-  start_time TIMESTAMP,
-  end_time TIMESTAMP,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
-Rules:
-- Infer columns from code usage
-- Ensure foreign keys are added if relationships exist
-- Use correct PostgreSQL types
-
----
-
-### Option B (if table is legacy / unused)
-- Remove or comment out queries referencing it
-- Ensure no runtime calls still use it
-
----
-
-## Step 4: Fix schema mismatch issues
-Check for:
-- plural vs singular mismatch (homework vs homeworks)
-- schema prefix issues (public.homeworks vs homeworks)
-- case sensitivity issues
-
-Normalize all queries to match actual DB schema.
-
----
-
-## Step 5: Ensure initDb stability
-Fix initDb so it:
-- does NOT crash if tables are missing
-- logs missing tables clearly
-- does not silently skip critical tables
-
----
-
-## Step 6: Validate application
-Ensure:
-- Student pages load without DB errors
-- Admin schedules page works
-- Homework pages work
-- No "relation does not exist" errors remain
-
----
-
-## Constraints:
-- DO NOT change business logic
-- DO NOT change UI
-- ONLY fix database schema, migrations, and SQL queries
-- Prefer creating migrations over deleting features
-
----
-
-## Output:
-Provide:
-- list of missing tables found
-- SQL migrations created
-- queries fixed
-- files modified
+* Root cause analysis
+* List of affected files
+* Applied fixes
+* Hydration-safe localization implementation

@@ -95,8 +95,8 @@ export default function Navbar() {
               href={getWhatsAppUrl(t('nav.whatsappMsg'))}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-sm ctaBtn" 
-              style={{ padding: '8px 18px', fontSize: '14px' }}
+              className="btn btn-accent btn-sm ctaBtn" 
+              style={{ padding: '8px 18px', fontSize: '14px', fontWeight: 700 }}
               onClick={closeMenu}
             >
               {t('nav.cta')}

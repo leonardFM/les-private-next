@@ -30,7 +30,7 @@ export default async function StudentHomeworkDetailPage({ params }) {
       </div>
 
       <div className={styles.card} style={{ marginBottom: 16 }}>
-        <h3 style={{ margin: '0 0 12px', fontSize: 'var(--text-base)' }}>Description</h3>
+        <h3 style={{ margin: '0 0 12px', fontSize: 'var(--text-base)', fontWeight: 700 }}>Description</h3>
         <p style={{ margin: 0, fontSize: 'var(--text-sm)', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>
           {homework.description || 'No description provided.'}
         </p>
@@ -41,23 +41,23 @@ export default async function StudentHomeworkDetailPage({ params }) {
 
       {homework.submission_id ? (
         <div className={styles.card} style={{ marginBottom: 16 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <h3 style={{ margin: 0, fontSize: 'var(--text-base)' }}>Your Submission</h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+            <h3 style={{ margin: 0, fontSize: 'var(--text-base)', fontWeight: 700 }}>Your Submission</h3>
             {homework.score !== null ? (
-              <span className={`${styles.badge} ${styles.badgeActive}`} style={{ fontSize: 14 }}>
+              <span className={`${styles.badge} ${styles.badgeActive}`} style={{ fontSize: 14, padding: '6px 14px' }}>
                 Score: {homework.score}/{homework.max_score}
               </span>
             ) : (
-              <span className={`${styles.badge} ${styles.badgeNew}`}>Waiting for grade</span>
+              <span className={`${styles.badge} ${styles.badgeNew}`} style={{ padding: '6px 14px' }}>Waiting for grade</span>
             )}
           </div>
 
-          <p style={{ fontSize: 'var(--text-xs)', color: 'var(--foreground-muted)', marginBottom: 8 }}>
+          <p style={{ fontSize: 'var(--text-xs)', color: 'var(--foreground-muted)', marginBottom: 12 }}>
             Submitted: {new Date(homework.submitted_at).toLocaleString()}
           </p>
 
           {homework.submission_content && (
-            <div style={{ padding: 12, background: 'var(--bg-soft, #F5F9FF)', borderRadius: 8, marginBottom: 12, fontSize: 'var(--text-sm)', whiteSpace: 'pre-wrap' }}>
+            <div style={{ padding: 14, background: 'var(--bg-soft, #F5F9FF)', borderRadius: 8, marginBottom: 12, fontSize: 'var(--text-sm)', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>
               {homework.submission_content}
             </div>
           )}
@@ -65,50 +65,36 @@ export default async function StudentHomeworkDetailPage({ params }) {
           {homework.submission_file_url && (
             <div style={{ marginBottom: 12 }}>
               <a href={homework.submission_file_url} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'inline-block', padding: '8px 16px', background: 'var(--primary-blue, #004AAD)', color: '#fff', borderRadius: 6, fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>
+                className={`${styles.linkBtn} ${styles.linkBtnPrimary}`}>
                 Download Attachment ↗
               </a>
             </div>
           )}
 
           {homework.feedback && (
-            <div style={{ padding: 12, background: '#F0FDF4', borderRadius: 8, fontSize: 'var(--text-sm)' }}>
+            <div style={{ padding: 14, background: '#F0FDF4', borderRadius: 8, fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>
               <strong>Teacher Feedback:</strong> {homework.feedback}
             </div>
           )}
         </div>
       ) : (
-        <div className={styles.card}>
-          <h3 style={{ margin: '0 0 16px', fontSize: 'var(--text-base)' }}>Submit Your Work</h3>
+        <div className={styles.card} style={{ maxWidth: 720 }}>
+          <h3 style={{ margin: '0 0 20px', fontSize: 'var(--text-base)', fontWeight: 700 }}>Submit Your Work</h3>
           <form action={submitHomework}>
             <input type="hidden" name="homework_id" value={homework.id} />
             <input type="hidden" name="student_id" value={student.id} />
 
-            <div className="form-group" style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', marginBottom: 6, fontWeight: 600, fontSize: 'var(--text-sm)' }}>Your Answer</label>
-              <textarea name="content" rows={6}
-                style={{
-                  width: '100%', padding: 12, border: '1px solid var(--border-color, #E5E7EB)',
-                  borderRadius: 8, fontSize: 'var(--text-sm)', resize: 'vertical', boxSizing: 'border-box',
-                }}
-                placeholder="Write your answer here..." />
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Your Answer</label>
+              <textarea name="content" rows={6} className={styles.formTextarea} placeholder="Write your answer here..." />
             </div>
 
-            <div className="form-group" style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', marginBottom: 6, fontWeight: 600, fontSize: 'var(--text-sm)' }}>Attachment URL (optional)</label>
-              <input type="text" name="file_url"
-                style={{
-                  width: '100%', padding: 12, border: '1px solid var(--border-color, #E5E7EB)',
-                  borderRadius: 8, fontSize: 'var(--text-sm)', boxSizing: 'border-box',
-                }}
-                placeholder="/uploads/your-file.pdf" />
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Attachment URL (optional)</label>
+              <input type="text" name="file_url" className={styles.formInput} placeholder="/uploads/your-file.pdf" />
             </div>
 
-            <button type="submit"
-              style={{
-                padding: '12px 24px', background: 'var(--primary-blue, #004AAD)', color: '#fff',
-                border: 'none', borderRadius: 8, fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer',
-              }}>
+            <button type="submit" className={styles.submitBtn}>
               Submit Homework
             </button>
           </form>

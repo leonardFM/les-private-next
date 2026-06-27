@@ -6,15 +6,16 @@ import CTASection from '@/components/CTASection';
 import { useTranslation } from '@/i18n';
 import styles from './programs.module.css';
 
-export default function ProgramsClient({ programs }) {
+export default function ProgramsClient() {
   const { t } = useTranslation();
-  const [selectedFilter, setSelectedFilter] = useState('All');
-
   const categories = t('programsPage.filters');
+  const programs = t('programsPage.programs');
+  const [selectedFilter, setSelectedFilter] = useState(() => categories[0]);
+  const activeFilter = categories.includes(selectedFilter) ? selectedFilter : categories[0];
 
-  const filteredPrograms = selectedFilter === 'All'
+  const filteredPrograms = activeFilter === categories[0]
     ? programs
-    : programs.filter(prog => prog.category === selectedFilter);
+    : programs.filter(prog => prog.category === activeFilter);
 
   return (
     <div>
@@ -35,7 +36,7 @@ export default function ProgramsClient({ programs }) {
               <button
                 key={cat}
                 onClick={() => setSelectedFilter(cat)}
-                className={`${styles.filterBtn} ${selectedFilter === cat ? styles.filterActive : ''}`}
+                className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterActive : ''}`}
               >
                 {cat}
               </button>

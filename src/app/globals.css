@@ -377,6 +377,19 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.bg-blue .statItem {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.bg-blue .statVal {
+  color: var(--accent-color);
+}
+
+.bg-blue .statLabel {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .bg-blue .featureCard,
 .bg-blue .infoCard,
 .bg-blue .formCard,
@@ -512,4 +525,59 @@ html *::after {
 .card-playful:hover {
   transform: translateY(-6px) scale(1.01);
   box-shadow: var(--shadow-xl);
+}
+
+/* Premium glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+}
+
+[data-theme='dark'] .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Premium gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium badge */
+.badge-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, var(--accent-soft), var(--primary-soft));
+  border: 1px solid rgba(0, 74, 173, 0.08);
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Premium divider */
+.divider-gradient {
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+  border-radius: 2px;
+  width: 80px;
+  margin: 0 auto;
+}
+
+/* Premium section padding helper */
+.section-premium {
+  padding: 120px 0;
+}
+
+@media (max-width: 768px) {
+  .section-premium {
+    padding: 70px 0;
+  }
 }

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from 'next/headers';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,13 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "El's Corner | Les Bahasa Inggris Online & Offline",
-  description: "Les bahasa Inggris private online & offline untuk anak, remaja, dewasa, TOEFL, IELTS. Konsultasi gratis via WhatsApp. 15.000+ alumni sukses.",
+  title: "EL's Corner | English Learning Online & Offline",
+  description: "English learning programs for children, teens, and adults through structured, interactive online and offline classes.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get('locale')?.value || 'id';
+
   return (
-    <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -4,19 +4,23 @@ import { createContext, useState, useEffect, useCallback } from 'react';
 
 export const ThemeContext = createContext();
 
-function getInitialTheme() {
-  if (typeof window === 'undefined') return 'light';
-  const stored = localStorage.getItem('theme');
-  if (stored === 'dark' || stored === 'light') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+function setThemeCookie(theme) {
+  if (typeof window === 'undefined') return;
+  document.cookie = `theme=${theme};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
 }
 
-export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState('light');
-
-  useEffect(() => {
-    setThemeState(getInitialTheme());
-  }, []);
+export function ThemeProvider({ children, initialTheme = 'light' }) {
+  const [theme, setThemeState] = useState(() => {
+    if (typeof window === 'undefined') return initialTheme;
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        if (stored !== initialTheme) setThemeCookie(stored);
+        return stored;
+      }
+    } catch {}
+    return initialTheme;
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -25,7 +29,8 @@ export function ThemeProvider({ children }) {
   const toggleTheme = useCallback(() => {
     setThemeState((prev) => {
       const next = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', next);
+      try { localStorage.setItem('theme', next); } catch {}
+      setThemeCookie(next);
       return next;
     });
   }, []);

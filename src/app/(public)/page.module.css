@@ -86,6 +86,108 @@
   line-height: 1.7;
 }
 
+/* How It Works */
+.howItWorksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+.howItWorksGrid::before {
+  content: '';
+  position: absolute;
+  top: 48px;
+  left: calc(12.5% + 12px);
+  right: calc(12.5% + 12px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), rgba(255,255,255,0.3), var(--accent-color));
+  z-index: 1;
+}
+
+@media (max-width: 968px) {
+  .howItWorksGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .howItWorksGrid::before {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .howItWorksGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.howItWorksCard {
+  text-align: center;
+  padding: 32px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 2;
+  transition: all var(--transition-bounce);
+  backdrop-filter: blur(4px);
+}
+
+.howItWorksCard:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.howStepNum {
+  font-size: 40px;
+  font-weight: 900;
+  color: rgba(255, 222, 89, 0.3);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.howIconWrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: transform var(--transition-bounce);
+}
+
+.howItWorksCard:hover .howIconWrapper {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.howTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.howDesc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .howStepNum {
+    font-size: 32px;
+  }
+  .howTitle {
+    font-size: 16px;
+  }
+}
+
 /* Programs Preview Grid */
 .programsGrid {
   display: grid;
@@ -114,7 +216,6 @@
 .stats {
   padding: 80px 0;
   text-align: center;
-  color: hsl(214, 40%, 12%);
   position: relative;
 }
 

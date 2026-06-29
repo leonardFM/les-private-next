@@ -171,6 +171,16 @@
   font-weight: 600;
 }
 
+.priceOriginal {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
+  margin-bottom: 2px;
+}
+
 .priceVal {
   font-size: 22px;
   font-weight: 800;

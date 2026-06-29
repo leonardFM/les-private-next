@@ -22,10 +22,7 @@ export default function Hero() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.content}>
-            <div className={styles.tagline}>
-              <span className={styles.taglineDot}></span>
-              <span>{t('hero.tagline')}</span>
-            </div>
+            
             <h1 className={styles.title}>
               {t('hero.titlePrefix')}<span className={styles.highlight}>{t('hero.titleHighlight')}</span>
             </h1>

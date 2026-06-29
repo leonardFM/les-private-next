@@ -13,6 +13,7 @@ export default function ProgramCard({
   level,
   duration,
   price,
+  originalPrice,
   icon = '📖'
 }) {
   const { locale } = useTranslation();
@@ -47,6 +48,7 @@ export default function ProgramCard({
         <div className={styles.footer}>
           <div className={styles.priceWrapper}>
             <span className={styles.priceLabel}>{isIndo ? 'Mulai dari' : 'From'}</span>
+            {originalPrice ? <span className={styles.priceOriginal}>{originalPrice}</span> : null}
             <span className={styles.priceVal}>{price}</span>
           </div>
           <a href={getWhatsAppUrl(whatsappMsg)} target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-sm ${styles.enrollBtn}`} style={{ padding: '10px 16px', fontSize: '13px' }}>

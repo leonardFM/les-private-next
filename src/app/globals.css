@@ -396,7 +396,6 @@ h1, h2, h3, h4, h5, h6 {
 .bg-blue .faqItem,
 .bg-blue .faqItemOpen,
 .bg-blue .valueCard,
-.bg-blue .teacherCard,
 .bg-blue .campusCard {
   --foreground: #1F2937;
   --foreground-muted: #6B7280;

@@ -218,35 +218,9 @@ const translations = {
         },
       ],
       teachersTag: "Tim Pengajar",
-      teachersTitle: "Belajar Bersama Pengajar yang Peduli pada Perkembangan Anda",
+      teachersTitle: "Didukung oleh Pengajar Profesional dan Berpengalaman",
       teachersSubtitle:
-        "Kami percaya bahwa proses belajar yang baik tidak hanya ditentukan oleh materi, tetapi juga oleh dukungan dan bimbingan yang diberikan selama perjalanan belajar.",
-      teachers: [
-        {
-          initials: "AB",
-          name: "Arthur Pendelton",
-          role: "Tutor Bahasa Inggris",
-          bio: "Arthur berpengalaman membimbing siswa dengan pendekatan yang sabar, terarah, dan fokus pada komunikasi aktif.",
-        },
-        {
-          initials: "MJ",
-          name: "Maria Jenkins",
-          role: "Tutor Remaja dan Dewasa",
-          bio: "Maria membantu siswa membangun grammar, vocabulary, dan kepercayaan diri dalam percakapan sehari-hari.",
-        },
-        {
-          initials: "DK",
-          name: "David Kim",
-          role: "Tutor Program Intensif",
-          bio: "David berfokus pada strategi belajar yang terukur dan latihan yang relevan dengan kebutuhan masing-masing siswa.",
-        },
-        {
-          initials: "SH",
-          name: "Sophia Hernandez",
-          role: "Tutor Anak",
-          bio: "Sophia menciptakan kelas yang menyenangkan, interaktif, dan mendukung perkembangan anak secara positif.",
-        },
-      ],
+        "Proses belajar dirancang secara terstruktur dengan pendampingan yang personal, konsisten, dan berfokus pada perkembangan setiap siswa.",
     },
     contact: {
       tag: "Hubungi Kami",
@@ -990,35 +964,9 @@ const translations = {
         },
       ],
       teachersTag: "Teaching Team",
-      teachersTitle: "Learn with Teachers Who Care About Your Progress",
+      teachersTitle: "Supported by Experienced Professional Teachers",
       teachersSubtitle:
-        "We believe good learning is shaped not only by materials, but also by the support and guidance given throughout the journey.",
-      teachers: [
-        {
-          initials: "AB",
-          name: "Arthur Pendelton",
-          role: "English Tutor",
-          bio: "Arthur has experience guiding students with a patient, structured approach focused on active communication.",
-        },
-        {
-          initials: "MJ",
-          name: "Maria Jenkins",
-          role: "Teen and Adult Tutor",
-          bio: "Maria helps students build grammar, vocabulary, and confidence in everyday conversation.",
-        },
-        {
-          initials: "DK",
-          name: "David Kim",
-          role: "Intensive Program Tutor",
-          bio: "David focuses on measurable learning strategies and practice that matches each student’s needs.",
-        },
-        {
-          initials: "SH",
-          name: "Sophia Hernandez",
-          role: "Kids Tutor",
-          bio: "Sophia creates classes that are fun, interactive, and supportive of positive child development.",
-        },
-      ],
+        "Learning is delivered in a structured way with personalized, consistent guidance focused on each student's growth.",
     },
     contact: {
       tag: "Get In Touch",

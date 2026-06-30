@@ -9,7 +9,6 @@ import styles from './about.module.css';
 export default function AboutClient() {
   const { t } = useTranslation();
   const values = t('about.values');
-  const teachers = t('about.teachers');
   const campuses = t('about.campuses');
 
   return (
@@ -104,28 +103,11 @@ export default function AboutClient() {
 
     <section className={`${styles.teachersSection} section bg-blue`}>
       <div className="container">
-        <div className="section-header">
-          <span className="section-tag">{t('about.teachersTag')}</span>
+        <div className="section-header" style={{ marginBottom: 0 }}>
           <h2 className="section-title">{t('about.teachersTitle')}</h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle" style={{ maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto' }}>
             {t('about.teachersSubtitle')}
           </p>
-        </div>
-
-        <div className={styles.teachersGrid}>
-          {teachers.map((teach, idx) => (
-            <div key={idx} className={styles.teacherCard}>
-              <div className={styles.teacherImagePlaceholder}>
-                {teach.initials}
-              </div>
-
-              <div className={styles.teacherInfo}>
-                <h3 className={styles.teacherName}>{teach.name}</h3>
-                <span className={styles.teacherRole}>{teach.role}</span>
-                <p className={styles.teacherBio}>{teach.bio}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

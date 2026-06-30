@@ -17,7 +17,6 @@ export default function HomeClient() {
   const storyParagraphs = t('about.storyParagraphs');
   const values = t('about.values');
   const learningModes = t('about.campuses');
-  const teachers = t('about.teachers');
 
   return (
     <div>
@@ -143,23 +142,11 @@ export default function HomeClient() {
       {/* Teachers */}
       <section className={`${aboutStyles.teachersSection} section bg-yellow`}>
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">{t('about.teachersTag')}</span>
+          <div className="section-header" style={{ marginBottom: 0 }}>
             <h2 className="section-title">{t('about.teachersTitle')}</h2>
-            <p className="section-subtitle">{t('about.teachersSubtitle')}</p>
-          </div>
-
-          <div className={aboutStyles.teachersGrid}>
-            {teachers.map((teach, idx) => (
-              <div key={idx} className={aboutStyles.teacherCard}>
-                <div className={aboutStyles.teacherImagePlaceholder}>{teach.initials}</div>
-                <div className={aboutStyles.teacherInfo}>
-                  <h3 className={aboutStyles.teacherName}>{teach.name}</h3>
-                  <span className={aboutStyles.teacherRole}>{teach.role}</span>
-                  <p className={aboutStyles.teacherBio}>{teach.bio}</p>
-                </div>
-              </div>
-            ))}
+            <p className="section-subtitle" style={{ maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto' }}>
+              {t('about.teachersSubtitle')}
+            </p>
           </div>
         </div>
       </section>

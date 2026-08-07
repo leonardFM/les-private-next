@@ -20,29 +20,19 @@
 ### 🔐 Admin Dashboard (`/admin`)
 - Login dengan JWT session
 - Dashboard overview (statistik, guru terbaru, jadwal mendatang)
-- **CRUD** — Program, Testimonial, FAQ, Guru, Siswa, Leads
+- **CRUD** — Program, Testimonial, FAQ, Guru, Siswa
 - **Manajemen Siswa** — Assign paket, catat sesi, lihat sisa sesi
 - **Manajemen Jadwal** — Buat/edit, filter status
-- **Manajemen Pembayaran** — Lihat transaksi, filter status
 - **Manajemen PR** — Buat tugas, lihat pengumpulan, beri nilai
-- **Manajemen Leads** — Kelola inquiry dari form kontak
 - **Pengaturan** — Nomor WhatsApp, info kontak, nama situs
 
 ### 👨‍🎓 Student Portal (`/student`)
 - Registrasi & login
 - Dashboard (sesi berikutnya, statistik, PR terbaru, materi)
-- Beli paket via Midtrans
-- Riwayat pembayaran
 - Jadwal dengan link meeting
 - Materi pembelajaran per modul
 - PR dengan pengumpulan & grading
 - Manajemen profil
-
-### 💳 Pembayaran
-- Integrasi **Midtrans Snap API**
-- Webhook untuk update status pembayaran
-- Aktivasi paket otomatis setelah pembayaran sukses
-- Verifikasi signature webhook
 
 ### 🌍 Internasionalisasi (i18n)
 - Sistem i18n kustom (context-based)
@@ -62,7 +52,6 @@
 | **Database** | PostgreSQL 17 (via `pg`) |
 | **Autentikasi** | JWT (via `jose`) |
 | **Password** | `bcryptjs` |
-| **Pembayaran** | Midtrans (`midtrans-client`) |
 | **Font** | Geist (via `next/font`) |
 | **Linting** | ESLint 9 |
 
@@ -84,28 +73,20 @@ src/
 │   │   ├── login/
 │   │   ├── page.js        # Dashboard
 │   │   ├── students/
-│   │   ├── teachers/
-│   │   ├── schedules/
+│   │   ├── teachers/       # Guru
+│   │   ├── schedules/      # Jadwal
 │   │   ├── programs/
 │   │   ├── testimonials/
 │   │   ├── faqs/
-│   │   ├── leads/
-│   │   ├── payments/
-│   │   ├── homeworks/
 │   │   └── settings/
 │   ├── student/           # Student portal
 │   │   ├── login/
 │   │   ├── register/
 │   │   ├── dashboard/
 │   │   ├── schedules/
-│   │   ├── packages/
-│   │   ├── payments/
-│   │   ├── homeworks/
-│   │   ├── materials/
 │   │   ├── my-packages/
 │   │   └── profile/
 │   └── api/               # API routes
-│       ├── payments/
 │       └── meetings/
 ├── components/            # Komponen reusable
 ├── context/               # React context (Theme, i18n)
@@ -117,21 +98,18 @@ src/
     ├── student-dal.js     # Student session verification
     ├── data.js            # Data access layer
     ├── actions.js         # Server Actions
-    ├── midtrans.js        # Integrasi Midtrans
     ├── constants.js       # Konstanta
     └── modules/           # Modul fitur
         ├── teachers/
         ├── schedules/
-        ├── meetings/
-        ├── materials/
-        └── homeworks/
+        └── meetings/
 ```
 
 ---
 
 ## Database Schema
 
-**18 tabel** di PostgreSQL:
+**13 tabel** di PostgreSQL:
 
 | Tabel | Deskripsi |
 |---|---|
@@ -142,18 +120,11 @@ src/
 | `testimonials` | Testimoni (bilingual JSON) |
 | `faqs` | FAQ (bilingual JSON, sortable) |
 | `settings` | Pengaturan key-value |
-| `leads` | Inquiry form kontak |
 | `packages` | Paket yang bisa dibeli |
 | `student_packages` | Paket yang dimiliki siswa |
 | `session_records` | Catatan sesi/kehadiran |
-| `payments` | Transaksi Midtrans |
 | `schedules` | Jadwal kelas |
 | `meetings` | Link meeting online |
-| `modules` | Modul pembelajaran |
-| `materials` | Materi pembelajaran |
-| `homeworks` | Tugas/PR |
-| `homework_submissions` | Pengumpulan tugas |
-| `homework_grades` | Penilaian tugas |
 
 ---
 
@@ -163,7 +134,6 @@ src/
 
 - Node.js (>= 18)
 - PostgreSQL 17 (atau gunakan Docker)
-- Akun Midtrans (sandbox/production)
 
 ### 1. Clone & Install
 
@@ -192,7 +162,7 @@ npm run init-db
 # Seed data awal (admin, program, testimonial, FAQ)
 npm run seed
 
-# Seed data learning (guru, jadwal, modul, PR)
+# Seed data learning (guru, jadwal, meeting)
 npm run seed-learning
 ```
 
@@ -221,11 +191,6 @@ Buat file `.env` (sudah tersedia):
 |---|---|
 | `DATABASE_URL` | Connection string PostgreSQL |
 | `SESSION_SECRET` | Secret key untuk JWT (opsional) |
-| `MIDTRANS_SERVER_KEY` | Server key Midtrans |
-| `MIDTRANS_CLIENT_KEY` | Client key Midtrans |
-| `MIDTRANS_IS_PRODUCTION` | `true`/`false` |
-| `NEXT_PUBLIC_MIDTRANS_CLIENT_KEY` | Client key (public) |
-| `NEXT_PUBLIC_MIDTRANS_IS_PRODUCTION` | `true`/`false` |
 
 ---
 
@@ -279,7 +244,6 @@ Dengan helper `t()` untuk parsing di komponen.
 ### Keamanan
 - Password di-hash dengan bcryptjs
 - Session cookies httpOnly
-- Webhook signature verification (Midtrans)
 - Parameterized queries (mencegah SQL injection)
 
 ---

@@ -59,7 +59,7 @@ export default function AboutClient() {
           </div>
         </div>
 
-        <div className="section-header" style={{ marginBottom: '40px' }}>
+        <div className="section-header">
           <h2 className="section-title" style={{ fontSize: '26px' }}>
             {t('about.valuesTitle')}
           </h2>

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from '@/i18n';
 import { getWhatsAppUrl } from '@/lib/constants';
-import { createLead } from '@/lib/actions';
 import styles from './contact.module.css';
 
 export default function ContactClient({ faqs }) {
@@ -39,15 +38,6 @@ Format: ${formData.format}
 *Pertanyaan Saya:*
 ${formData.message}`;
 
-      const leadForm = new FormData();
-      leadForm.set('name', formData.name);
-      leadForm.set('email', formData.email);
-      leadForm.set('phone', formData.phone);
-      leadForm.set('program', formData.program);
-      leadForm.set('format', formData.format);
-      leadForm.set('message', formData.message);
-      await createLead(leadForm);
-
       window.open(getWhatsAppUrl(waMsg), '_blank', 'noopener');
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', program: t('contact.programOptions')[0], format: t('contact.formatOptions')[0], message: '' });
@@ -64,7 +54,7 @@ ${formData.message}`;
 
   return (
     <div>
-      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
+      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <span className="section-tag">{t('contact.tag')}</span>
           <h1 className="section-title" style={{ margin: 0 }}>{t('contact.title')}</h1>

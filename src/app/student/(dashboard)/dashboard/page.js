@@ -18,30 +18,28 @@ export default async function StudentDashboardPage() {
   let attendanceRate = 0;
   let upcomingSessions = [];
   let recentCompleted = [];
-  let recentHomework = [];
-  let unreadFeedback = 0;
-  let recentMaterials = [];
 
   if (student) {
     const rows = await all(`SELECT
-      (SELECT COUNT(*) FROM session_records WHERE student_id = $1) AS total_sessions,
-      (SELECT COUNT(*) FROM session_records WHERE student_id = $1 AND status = 'completed') AS completed_sessions,
-      (SELECT COUNT(*) FROM session_records WHERE student_id = $1 AND status = 'attended') AS attended_sessions`,
+      (SELECT COUNT(*) FROM schedules WHERE student_id = $1 AND status != 'cancelled') AS total_sessions,
+      (SELECT COUNT(*) FROM schedules WHERE student_id = $1 AND status = 'completed') AS completed_sessions,
+      (SELECT COUNT(*) FROM session_records sr
+        JOIN student_packages sp ON sp.id = sr.student_package_id
+        WHERE sp.student_id = $1) AS attended_sessions`,
       [student.id]
     );
     totalSessions = rows[0]?.total_sessions || 0;
     completedSessions = rows[0]?.completed_sessions || 0;
     const attendedSessions = rows[0]?.attended_sessions || 0;
-    attendanceRate = completedSessions > 0 ? Math.round((attendedSessions / completedSessions) * 100) : 0;
+    attendanceRate = totalSessions > 0 ? Math.round((attendedSessions / totalSessions) * 100) : 0;
 
-    activePackage = await get(`SELECT sp.*, p.name AS package_name,
-      (SELECT COUNT(*) FROM session_records sr WHERE sr.student_package_id = sp.id AND sr.status = 'completed') AS used_sessions
+    activePackage = await get(`SELECT sp.*,
+      (SELECT COUNT(*) FROM session_records sr WHERE sr.student_package_id = sp.id) AS used_sessions
       FROM student_packages sp
-      LEFT JOIN packages p ON p.id = sp.package_id
       WHERE sp.student_id = $1 AND sp.status = 'active'
       ORDER BY sp.created_at DESC LIMIT 1`, [student.id]);
 
-    nextSession = await get(`SELECT s.*, t.name AS teacher_name, t.initials AS teacher_initials,
+    nextSession = await get(`SELECT s.*, t.name AS teacher_name,
       sp.package_name FROM schedules s
       LEFT JOIN teachers t ON t.id = s.teacher_id
       LEFT JOIN student_packages sp ON sp.id = s.student_package_id
@@ -66,23 +64,8 @@ export default async function StudentDashboardPage() {
       LEFT JOIN student_packages sp ON sp.id = s.student_package_id
       WHERE s.student_id = $1 AND s.status = 'completed'
       ORDER BY s.date DESC, s.start_time DESC LIMIT 3`, [student.id]);
-
-    recentHomework = await all(`SELECT hw.*, hw.title, hw.due_date, hw.status
-      FROM homeworks hw
-      JOIN modules m ON m.id = hw.module_id
-      JOIN student_packages sp ON sp.id = m.student_package_id
-      WHERE sp.student_id = $1
-      ORDER BY hw.due_date ASC LIMIT 3`, [student.id]);
-
-    recentMaterials = await all(`SELECT m.title, m.type, m.created_at
-      FROM materials m
-      JOIN modules mod ON mod.id = m.module_id
-      JOIN student_packages sp ON sp.id = mod.student_package_id
-      WHERE sp.student_id = $1
-      ORDER BY m.created_at DESC LIMIT 3`, [student.id]);
   }
 
-  const isNewStudent = !activePackage;
   const memberSince = student?.created_at
     ? new Date(student.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
     : '';
@@ -120,9 +103,6 @@ export default async function StudentDashboardPage() {
               <Link href="/student/schedules" className="btn btn-accent btn-sm" style={{ padding: '10px 24px', fontSize: '14px' }}>
                 View Schedule
               </Link>
-              <Link href={`/student/materials`} className="btn btn-sm" style={{ padding: '10px 24px', fontSize: '14px', background: 'rgba(255,255,255,0.15)', color: '#fff', borderRadius: 'var(--border-radius-md)' }}>
-                Prepare Materials
-              </Link>
             </div>
           </div>
         </section>
@@ -134,8 +114,8 @@ export default async function StudentDashboardPage() {
             <h2 className={styles.nextSessionTitle}>Start Your Learning Journey</h2>
             <p className={styles.nextSessionDesc}>Book your first private 1-on-1 session and get matched with a dedicated tutor.</p>
             <div className={styles.nextSessionActions}>
-              <Link href="/student/packages" className="btn btn-accent btn-sm" style={{ padding: '10px 24px', fontSize: '14px' }}>
-                Browse Packages
+              <Link href="/student/my-packages" className="btn btn-accent btn-sm" style={{ padding: '10px 24px', fontSize: '14px' }}>
+                View My Sessions
               </Link>
             </div>
           </div>
@@ -286,53 +266,6 @@ export default async function StudentDashboardPage() {
                   <div className={styles.progressFill} style={{ width: `${attendanceRate}%`, background: 'var(--success, #22C55E)' }} />
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Homework */}
-          <section className={styles.sectionCard}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Homework</h2>
-              <Link href="/student/homeworks" className={styles.viewAll}>View All →</Link>
-            </div>
-            <div className={styles.sectionBody}>
-              {recentHomework.length > 0 ? recentHomework.map(hw => (
-                <div key={hw.id} className={styles.activityItem} style={{ padding: '10px 16px' }}>
-                  <div className={styles.activityInfo}>
-                    <span className={styles.activityTitle}>{hw.title}</span>
-                    <span className={styles.activityMeta}>Due: {hw.due_date ? formatDate(hw.due_date) : 'No date'}</span>
-                  </div>
-                  <span className={`${styles.badgeSm} ${hw.status === 'submitted' ? styles.statusCompleted : styles.statusScheduled}`}>
-                    {hw.status || 'pending'}
-                  </span>
-                </div>
-              )) : (
-                <div className={styles.emptySection}>
-                  <p>No homework assigned yet.</p>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Materials */}
-          <section className={styles.sectionCard}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Learning Materials</h2>
-              <Link href="/student/materials" className={styles.viewAll}>View All →</Link>
-            </div>
-            <div className={styles.sectionBody}>
-              {recentMaterials.length > 0 ? recentMaterials.map((mat, i) => (
-                <div key={i} className={styles.activityItem} style={{ padding: '10px 16px' }}>
-                  <div className={styles.activityInfo}>
-                    <span className={styles.activityTitle}>{mat.title}</span>
-                    <span className={styles.activityMeta}>{mat.type || 'Material'}</span>
-                  </div>
-                </div>
-              )) : (
-                <div className={styles.emptySection}>
-                  <p>No materials yet.</p>
-                </div>
-              )}
             </div>
           </section>
 

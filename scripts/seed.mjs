@@ -25,17 +25,6 @@ async function seed() {
       name TEXT NOT NULL,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
-    CREATE TABLE IF NOT EXISTS leads (
-      id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      phone TEXT,
-      program TEXT,
-      format TEXT,
-      message TEXT,
-      status TEXT DEFAULT 'new',
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
     CREATE TABLE IF NOT EXISTS programs (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL DEFAULT '{}',
@@ -256,7 +245,7 @@ async function seed() {
     2
   );
   await insertFaq(
-    JSON.stringify({ id: 'Apakah ada tes penempatan gratis?', en: 'Is there a free placement test?' }),
+    JSON.stringify({ id: 'Apakah ada tes penempatan sebelum pendaftaran?', en: 'Is there a placement test before enrollment?' }),
     JSON.stringify({ id: 'Ya! Kami mewajibkan semua calon siswa untuk mengikuti diagnostik komprehensif selama 15 menit.', en: 'Yes! We require all prospective students to take a comprehensive 15-minute diagnostic.' }),
     3
   );

@@ -10,15 +10,6 @@ export default function Hero() {
   const { t } = useTranslation();
   return (
     <section className={styles.hero}>
-      {/* Floating Decorative Elements — Brand Theme */}
-      <div className={styles.floatingElem + ' ' + styles.star1}>⭐</div>
-      <div className={styles.floatingElem + ' ' + styles.star2}>✨</div>
-      <div className={styles.floatingElem + ' ' + styles.star3}>🌟</div>
-      <div className={styles.floatingElem + ' ' + styles.globe}>🌍</div>
-      <div className={styles.floatingElem + ' ' + styles.gradCap}>🎓</div>
-      <div className={styles.floatingElem + ' ' + styles.book}>📚</div>
-      <div className={styles.floatingElem + ' ' + styles.sparkle}>✨</div>
-
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.content}>

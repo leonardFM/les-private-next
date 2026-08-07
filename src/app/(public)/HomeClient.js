@@ -27,8 +27,6 @@ export default function HomeClient() {
       <section className={`${styles.features} section bg-yellow`}>
         <div className={styles.blobYellow1} />
         <div className={styles.blobYellow2} />
-        <div className={styles.floatStar1}>⭐</div>
-        <div className={styles.floatBook1}>📚</div>
 
         <div className="container">
           <div className="section-header">
@@ -58,8 +56,6 @@ export default function HomeClient() {
       <section className={`${styles.programs} section bg-yellow`}>
         <div className={styles.blobYellow3} />
         <div className={styles.blobYellow4} />
-        <div className={styles.floatStar2}>✨</div>
-        <div className={styles.floatSpeech}>💬</div>
 
         <div className="container">
           <div className="section-header">
@@ -105,7 +101,7 @@ export default function HomeClient() {
             </div>
           </div>
 
-          <div className="section-header" style={{ marginBottom: '40px' }}>
+          <div className="section-header">
             <h2 className="section-title" style={{ fontSize: '26px' }}>{t('about.valuesTitle')}</h2>
           </div>
 
@@ -119,7 +115,7 @@ export default function HomeClient() {
             ))}
           </div>
 
-          <div className="section-header" style={{ marginTop: '60px', marginBottom: '40px' }}>
+          <div className="section-header" style={{ marginTop: '60px' }}>
             <span className="section-tag">{t('about.campusTag')}</span>
             <h2 className="section-title">{t('about.campusTitle')}</h2>
             <p className="section-subtitle">{t('about.campusSubtitle')}</p>

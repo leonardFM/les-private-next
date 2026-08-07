@@ -19,7 +19,7 @@ export default function ProgramsClient() {
 
   return (
     <div>
-      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
+      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <span className="section-tag">{t('programsPage.tag')}</span>
           <h1 className="section-title" style={{ margin: 0 }}>{t('programsPage.title')}</h1>
@@ -46,7 +46,7 @@ export default function ProgramsClient() {
           <div className={styles.grid}>
             {filteredPrograms.length > 0 ? (
               filteredPrograms.map((prog) => (
-                <ProgramCard key={prog.id} {...prog} />
+                <ProgramCard key={prog.title} {...prog} />
               ))
             ) : (
               <div className={styles.noResults}>

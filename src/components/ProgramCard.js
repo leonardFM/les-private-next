@@ -52,7 +52,7 @@ export default function ProgramCard({
             <span className={styles.priceVal}>{price}</span>
           </div>
           <a href={getWhatsAppUrl(whatsappMsg)} target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-sm ${styles.enrollBtn}`} style={{ padding: '10px 16px', fontSize: '13px' }}>
-            {isIndo ? 'Jadwalkan Trial' : 'Book Trial'}
+            {isIndo ? 'Hubungi Kami' : 'Contact Us'}
           </a>
         </div>
       </div>

@@ -9,17 +9,11 @@ Normalize and consolidate UI components for the LMS platform.
 
 ## Known Duplications to Fix
 
-1. **Midtrans Snap.js loading** — Duplicated in:
-   - `src/app/admin/(dashboard)/payments/_components/PaymentButton.js`
-   - `src/app/student/(dashboard)/packages/PackageCard.js`
-   
-   **Fix**: Extract shared `useMidtransSnap` hook into `src/lib/hooks/useMidtransSnap.js`
-
-2. **CSS Module patterns** — Check for duplicated styles across `.module.css` files:
+1. **CSS Module patterns** — Check for duplicated styles across `.module.css` files:
    - Look for identical `.container`, `.card`, `.grid` patterns
    - Extract to shared CSS Modules in `src/components/`
 
-3. **Admin list pages** — All follow same structure:
+2. **Admin list pages** — All follow same structure:
    ```jsx
    <AdminPageHeader />
    <AdminTable /> or <EmptyState />

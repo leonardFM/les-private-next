@@ -52,18 +52,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    `CREATE TABLE IF NOT EXISTS leads (
-      id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      phone TEXT,
-      program TEXT,
-      format TEXT,
-      message TEXT,
-      status TEXT DEFAULT 'new',
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
     `CREATE TABLE IF NOT EXISTS programs (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL DEFAULT '{}',
@@ -204,63 +192,6 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )`,
 
-    // --- Modules (depends on packages) ---
-    `CREATE TABLE IF NOT EXISTS modules (
-      id SERIAL PRIMARY KEY,
-      package_id INTEGER NOT NULL REFERENCES packages(id) ON DELETE CASCADE,
-      title TEXT NOT NULL,
-      description TEXT,
-      sort_order INTEGER DEFAULT 0,
-      created_at TIMESTAMPTZ DEFAULT NOW(),
-      updated_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
-    // --- Materials (depends on modules) ---
-    `CREATE TABLE IF NOT EXISTS materials (
-      id SERIAL PRIMARY KEY,
-      module_id INTEGER NOT NULL REFERENCES modules(id) ON DELETE CASCADE,
-      title TEXT NOT NULL,
-      type TEXT NOT NULL DEFAULT 'text',
-      content TEXT,
-      file_url TEXT,
-      sort_order INTEGER DEFAULT 0,
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
-    // --- Homeworks (depends on modules, teachers, student_packages) ---
-    `CREATE TABLE IF NOT EXISTS homeworks (
-      id SERIAL PRIMARY KEY,
-      module_id INTEGER REFERENCES modules(id) ON DELETE SET NULL,
-      teacher_id INTEGER REFERENCES teachers(id) ON DELETE SET NULL,
-      student_package_id INTEGER NOT NULL REFERENCES student_packages(id) ON DELETE CASCADE,
-      title TEXT NOT NULL,
-      description TEXT,
-      due_date DATE,
-      max_score INTEGER DEFAULT 100,
-      created_at TIMESTAMPTZ DEFAULT NOW(),
-      updated_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
-    // --- Homework submissions (depends on homeworks, students) ---
-    `CREATE TABLE IF NOT EXISTS homework_submissions (
-      id SERIAL PRIMARY KEY,
-      homework_id INTEGER NOT NULL REFERENCES homeworks(id) ON DELETE CASCADE,
-      student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
-      content TEXT,
-      file_url TEXT,
-      submitted_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
-    // --- Homework grades (depends on homework_submissions) ---
-    `CREATE TABLE IF NOT EXISTS homework_grades (
-      id SERIAL PRIMARY KEY,
-      homework_submission_id INTEGER NOT NULL REFERENCES homework_submissions(id) ON DELETE CASCADE,
-      teacher_id INTEGER REFERENCES teachers(id) ON DELETE SET NULL,
-      score INTEGER NOT NULL,
-      feedback TEXT,
-      graded_at TIMESTAMPTZ DEFAULT NOW()
-    )`,
-
     // --- Indexes ---
     `CREATE INDEX IF NOT EXISTS idx_session_records_package_id ON session_records(student_package_id)`,
     `CREATE INDEX IF NOT EXISTS idx_student_packages_student_id ON student_packages(student_id)`,
@@ -276,12 +207,6 @@ export async function initDb() {
     `CREATE INDEX IF NOT EXISTS idx_schedules_teacher_id ON schedules(teacher_id)`,
     `CREATE INDEX IF NOT EXISTS idx_schedules_date ON schedules(date)`,
     `CREATE UNIQUE INDEX IF NOT EXISTS idx_meetings_schedule_id ON meetings(schedule_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_modules_package_id ON modules(package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_materials_module_id ON materials(module_id)`,
-    `CREATE UNIQUE INDEX IF NOT EXISTS idx_homework_grades_submission_id ON homework_grades(homework_submission_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homeworks_student_package_id ON homeworks(student_package_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homework_submissions_homework_id ON homework_submissions(homework_id)`,
-    `CREATE INDEX IF NOT EXISTS idx_homework_submissions_student_id ON homework_submissions(student_id)`,
 
     // --- ALTER TABLE migrations ---
     `ALTER TABLE users ADD COLUMN IF NOT EXISTS role TEXT DEFAULT 'admin'`,

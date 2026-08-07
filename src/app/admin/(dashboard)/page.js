@@ -7,9 +7,7 @@ async function getStats() {
     counts,
     expiring,
     recentTeachers,
-    revenue,
     upcomingSchedules,
-    pendingHomework,
   ] = await Promise.all([
     get(`
       SELECT
@@ -25,11 +23,6 @@ async function getStats() {
       WHERE sp.status = 'active' AND sp.remaining_sessions <= 3
       ORDER BY sp.remaining_sessions ASC LIMIT 5`),
     all('SELECT * FROM teachers ORDER BY created_at DESC LIMIT 5'),
-    get(`SELECT
-      COALESCE(SUM(amount), 0)::int AS total_revenue,
-      COUNT(*)::int AS total_transactions,
-      COUNT(*) FILTER (WHERE payment_status = 'settlement')::int AS successful_payments
-    FROM payments`),
     all(`SELECT s.id, s.date, s.start_time, s.end_time, s.status, s.notes,
       st.name AS student_name, t.name AS teacher_name
       FROM schedules s
@@ -37,8 +30,6 @@ async function getStats() {
       LEFT JOIN teachers t ON t.id = s.teacher_id
       WHERE s.date >= CURRENT_DATE AND s.date <= CURRENT_DATE + 6
       ORDER BY s.date, s.start_time LIMIT 6`),
-    get(`SELECT COUNT(*)::int AS count FROM homeworks h
-      WHERE h.due_date >= CURRENT_DATE`),
   ]);
 
   return {
@@ -50,9 +41,7 @@ async function getStats() {
     activePackages: counts.active_packages,
     recentTeachers,
     expiringPackages: expiring,
-    revenue: revenue || { total_revenue: 0, total_transactions: 0, successful_payments: 0 },
     upcomingSchedules,
-    pendingHomework: pendingHomework?.count || 0,
   };
 }
 
@@ -222,13 +211,6 @@ export default async function AdminDashboardPage() {
                   <span className={styles.quickActionDesc}>Schedule a session</span>
                 </div>
               </Link>
-              <Link href="/admin/modules/new" className={styles.quickActionItem}>
-                <span className={styles.quickActionIcon}>📖</span>
-                <div>
-                  <span className={styles.quickActionLabel}>Add Module</span>
-                  <span className={styles.quickActionDesc}>Create learning module</span>
-                </div>
-              </Link>
             </div>
           </div>
 
@@ -287,12 +269,8 @@ export default async function AdminDashboardPage() {
                 <span className={styles.glanceLabel}>Total Teachers</span>
               </div>
               <div className={styles.glanceItem}>
-                <span className={styles.glanceValue}>{stats.revenue.total_transactions}</span>
-                <span className={styles.glanceLabel}>Transactions</span>
-              </div>
-              <div className={styles.glanceItem}>
-                <span className={styles.glanceValue}>{stats.revenue.successful_payments}</span>
-                <span className={styles.glanceLabel}>Settled</span>
+                <span className={styles.glanceValue}>{stats.activePackages}</span>
+                <span className={styles.glanceLabel}>Active Packages</span>
               </div>
             </div>
           </div>

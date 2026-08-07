@@ -51,28 +51,6 @@ export async function logout() {
   redirect('/admin/login');
 }
 
-export async function createLead(formData) {
-  const data = Object.fromEntries(formData);
-  await query('INSERT INTO leads (name, email, phone, program, format, message) VALUES ($1, $2, $3, $4, $5, $6)',
-    [data.name, data.email, data.phone || null, data.program || null, data.format || null, data.message || null]
-  );
-  revalidatePath('/admin/leads');
-  return { success: true };
-}
-
-export async function updateLeadStatus(id, status) {
-  await query('UPDATE leads SET status = $1 WHERE id = $2', [status, id]);
-  revalidatePath('/admin/leads');
-  return { success: true };
-}
-
-export async function deleteLead(formData) {
-  const data = Object.fromEntries(formData);
-  await query('DELETE FROM leads WHERE id = $1', [data.id]);
-  revalidatePath('/admin/leads');
-  return { success: true };
-}
-
 export async function saveProgram(formData) {
   const data = Object.fromEntries(formData);
   if (data.id) {

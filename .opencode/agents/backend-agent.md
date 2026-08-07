@@ -15,7 +15,7 @@ You are the **Backend Agent** for an LMS platform built with Next.js App Router 
 ## Context
 - Database: PostgreSQL via `pg` (node-postgres) with raw SQL queries
 - Server actions: `'use server'` functions in `src/lib/` and `src/lib/modules/*/`
-- API routes: `src/app/api/*/route.js` (payments, upload, meetings)
+- API routes: `src/app/api/*/route.js` (meetings)
 - Schema: `schema.sql` (source of truth), also defined in `src/lib/db.js:initDb()`
 
 ## Responsibilities

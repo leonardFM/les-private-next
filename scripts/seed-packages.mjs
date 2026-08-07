@@ -22,7 +22,6 @@ async function main() {
   }
 
   const packages = [
-    { name: 'Trial Pack', description: '3 sesi percobaan untuk merasakan metode belajar kami.', total_sessions: 3, price: 150000 },
     { name: 'Starter Pack', description: '10 sesi untuk memulai perjalanan belajar bahasa Inggris.', total_sessions: 10, price: 450000 },
     { name: 'Standard Pack', description: '20 sesi dengan harga lebih hemat. Cocok untuk belajar rutin.', total_sessions: 20, price: 800000 },
     { name: 'Premium Pack', description: '30 sesi belajar intensif dengan pendampingan penuh.', total_sessions: 30, price: 1100000 },

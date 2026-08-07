@@ -1,0 +1,555 @@
+openapi: 3.0.3
+info:
+  title: Student API — Les Private
+  description: >
+    Dokumentasi API untuk role **student** pada platform Les Private.
+    Auth menggunakan **session cookie** (JWT HS256, httpOnly, `session`,
+    expire 7 hari) yang diset oleh server action `studentLogin` /
+    `studentRegister` dan diverifikasi oleh `verifyStudentSession()`.
+
+    Catatan arsitektur:
+    - Sebagian besar operasi dijalankan melalui **Next.js Server Actions**
+      (bukan REST route handler). Operasi tersebut didokumentasikan di sini
+      sebagai kontrak setara REST agar mudah diintegrasikan/diuji.
+    - Satu-satunya REST route handler murni yang ada: `POST /api/meetings/create`.
+  version: 1.0.0
+  contact:
+    name: Les Private Team
+
+servers:
+  - url: http://localhost:3000
+    description: Local development
+  - url: https://les-private.example.com
+    description: Production
+
+tags:
+  - name: Auth
+    description: Login & registrasi siswa
+  - name: Dashboard
+    description: Ringkasan data siswa
+  - name: Profile
+    description: Profil siswa
+  - name: Packages
+    description: Paket belajar siswa
+  - name: Schedules
+    description: Jadwal kelas siswa
+  - name: Meetings
+    description: Pembuatan link meeting (REST route handler murni)
+
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session
+      description: >
+        Session cookie berisi JWT yang di-set oleh server action login/register
+        siswa. Diperlukan untuk semua endpoint student.
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Pesan kesalahan.
+      required:
+        - error
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+      required:
+        - success
+
+    SessionCookieSet:
+      type: object
+      description: >
+        Berhasil login/register. Server menetapkan cookie `session`
+        (httpOnly, secure di production, sameSite=lax, expire 7 hari)
+        lalu me-redirect browser ke `/student/dashboard`.
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: Budi Santoso
+        email:
+          type: string
+          example: budi@example.com
+        role:
+          type: string
+          enum: [student]
+        phone:
+          type: string
+          nullable: true
+          example: "08123456789"
+
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        name:
+          type: string
+          example: Budi Santoso
+        email:
+          type: string
+          example: budi@example.com
+        phone:
+          type: string
+          nullable: true
+          example: "08123456789"
+        created_at:
+          type: string
+          format: date-time
+
+    DashboardSummary:
+      type: object
+      description: Ringkasan yang ditampilkan di `/student/dashboard`.
+      properties:
+        student:
+          $ref: '#/components/schemas/Student'
+        stats:
+          type: object
+          properties:
+            total_sessions:
+              type: integer
+              description: Jumlah schedule (selain status cancelled).
+            completed_sessions:
+              type: integer
+              description: Jumlah schedule dengan status completed.
+            attended_sessions:
+              type: integer
+              description: Jumlah session_records milik siswa.
+            attendance_rate:
+              type: integer
+              description: Persentase (attended / total) dibulatkan.
+        active_package:
+          type: object
+          nullable: true
+          description: Paket aktif terbaru.
+          properties:
+            id:
+              type: integer
+            package_name:
+              type: string
+            total_sessions:
+              type: integer
+            remaining_sessions:
+              type: integer
+            used_sessions:
+              type: integer
+            start_date:
+              type: string
+              format: date
+            end_date:
+              type: string
+              format: date
+              nullable: true
+            status:
+              type: string
+              enum: [active, completed, cancelled]
+        next_session:
+          $ref: '#/components/schemas/Schedule'
+        tutor:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            specialization:
+              type: string
+              nullable: true
+            bio:
+              type: string
+              nullable: true
+        upcoming_sessions:
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/Schedule'
+        recent_completed:
+          type: array
+          maxItems: 3
+          items:
+            $ref: '#/components/schemas/Schedule'
+
+    Package:
+      type: object
+      properties:
+        id:
+          type: integer
+        student_id:
+          type: integer
+        package_name:
+          type: string
+          example: Starter Pack
+        total_sessions:
+          type: integer
+        remaining_sessions:
+          type: integer
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        status:
+          type: string
+          enum: [active, completed, cancelled]
+        created_at:
+          type: string
+          format: date-time
+
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: integer
+        student_id:
+          type: integer
+        student_package_id:
+          type: integer
+        teacher_id:
+          type: integer
+          nullable: true
+        date:
+          type: string
+          format: date
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        notes:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [scheduled, confirmed, completed, cancelled]
+        teacher_name:
+          type: string
+          nullable: true
+        package_name:
+          type: string
+          nullable: true
+        meeting:
+          $ref: '#/components/schemas/Meeting'
+        created_at:
+          type: string
+          format: date-time
+
+    Meeting:
+      type: object
+      properties:
+        id:
+          type: integer
+        schedule_id:
+          type: integer
+        provider:
+          type: string
+          enum: [zoom, google_meet]
+        meeting_id:
+          type: string
+          nullable: true
+        join_url:
+          type: string
+          format: uri
+          nullable: true
+        host_url:
+          type: string
+          format: uri
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum: [student]
+        created_at:
+          type: string
+          format: date-time
+        student_id:
+          type: integer
+          nullable: true
+
+    MeetingCreateRequest:
+      type: object
+      required:
+        - schedule_id
+        - provider
+      properties:
+        schedule_id:
+          type: integer
+          description: ID jadwal yang ingin dibuatkan meeting.
+        provider:
+          type: string
+          enum: [zoom, google_meet]
+          description: Penyedia video conference.
+
+    MeetingCreateResponse:
+      oneOf:
+        - $ref: '#/components/schemas/MeetingCreateOk'
+        - $ref: '#/components/schemas/ErrorResponse'
+
+    MeetingCreateOk:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        meeting_id:
+          type: string
+          nullable: true
+        join_url:
+          type: string
+          nullable: true
+        host_url:
+          type: string
+          nullable: true
+
+paths:
+  /api/meetings/create:
+    post:
+      tags:
+        - Meetings
+      summary: Buat link meeting untuk satu jadwal
+      description: >
+        **REST route handler murni** (`src/app/api/meetings/create/route.js`).
+        Membuat meeting (zoom/google_meet) untuk schedule. Gagal dengan 409
+        jika meeting sudah ada untuk schedule tersebut, dan 400 jika provider
+        tidak valid atau field wajib kosong. Catatan: tidak memverifikasi
+        session siswa.
+      operationId: createMeeting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingCreateRequest'
+      responses:
+        '200':
+          description: Meeting berhasil dibuat.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingCreateOk'
+        '400':
+          description: schedule_id/provider wajib atau provider tidak valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Meeting sudah ada untuk schedule ini.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /student/login:
+    post:
+      tags:
+        - Auth
+      summary: Login siswa
+      description: >
+        **Server action** `studentLogin` (`src/lib/actions.js`). Set cookie
+        session lalu redirect ke `/student/dashboard`. Error dikembalikan
+        sebagai objek `{ error }` (bukan status HTTP).
+      operationId: studentLogin
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '302':
+          description: Redirect ke `/student/dashboard` setelah session cookie di-set.
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: session=eyJ...; HttpOnly; Path=/; Max-Age=604800
+        '200':
+          description: Kredensial salah — kembali ke halaman login dengan error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /student/register:
+    post:
+      tags:
+        - Auth
+      summary: Registrasi siswa
+      description: >
+        **Server action** `studentRegister` (`src/lib/actions.js`). Membuat
+        baris `users` (role student) + `students`, set session cookie, lalu
+        redirect ke `/student/dashboard`. Password di-hash bcrypt (cost 12).
+      operationId: studentRegister
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: Budi Santoso
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                  nullable: true
+                password:
+                  type: string
+                  format: password
+      responses:
+        '302':
+          description: Redirect ke `/student/dashboard`.
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: session=eyJ...; HttpOnly; Path=/; Max-Age=604800
+        '200':
+          description: Validasi gagal atau email sudah terdaftar.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /student/dashboard:
+    get:
+      tags:
+        - Dashboard
+      summary: Ringkasan dashboard siswa
+      description: >
+        Server component `src/app/student/(dashboard)/dashboard/page.js`.
+        Data dirender server-side setelah verifikasi session cookie.
+        Berisi statistik, paket aktif, sesi berikutnya, tutor, upcoming, dan
+        sesi terakhir selesai.
+      operationId: getStudentDashboard
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Halaman dashboard ter-render.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+        '302':
+          description: Redirect ke `/student/login` jika session tidak valid/role bukan student.
+
+  /student/profile:
+    get:
+      tags:
+        - Profile
+      summary: Ambil profil siswa
+      description: >
+        Server component `src/app/student/(dashboard)/profile/page.js`.
+        Mengembalikan profil user siswa (join `students`).
+      operationId: getStudentProfile
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Profil siswa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '302':
+          description: Redirect ke `/student/login` jika belum login.
+
+  /student/my-packages:
+    get:
+      tags:
+        - Packages
+      summary: Daftar paket belajar siswa
+      description: >
+        Server component `src/app/student/(dashboard)/my-packages/page.js`.
+        Paket milik siswa (via `users.id` → `students.user_id`).
+      operationId: getStudentPackages
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Daftar paket.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Package'
+        '302':
+          description: Redirect ke `/student/login` jika belum login.
+
+  /student/schedules:
+    get:
+      tags:
+        - Schedules
+      summary: Daftar jadwal siswa
+      description: >
+        Server component `src/app/student/(dashboard)/schedules/page.js`.
+        Jadwal milik siswa beserta meeting terkait (jika ada). Query via
+        `getSchedules({ studentId })`.
+      operationId: getStudentSchedules
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Daftar jadwal (dengan meeting).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+        '302':
+          description: Redirect ke `/student/login` jika belum login.

@@ -7,7 +7,7 @@ import styles from './HeroSection.module.css';
 
 export default function HeroSection({
   tag, title, titleHighlight, desc,
-  btnWA, btnTrial, msgWA, msgTrial,
+  btnWA, msgWA,
   metric1, metric1Val, metric2, metric2Val, metric2Icon,
   metric3, metric3Val,
   heroBg, funImg
@@ -27,9 +27,6 @@ export default function HeroSection({
         <div className={styles.heroActions}>
           <a href={getWhatsAppUrl(msgWA)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
             {btnWA}
-          </a>
-          <a href={getWhatsAppUrl(msgTrial)} target="_blank" rel="noopener noreferrer" className={styles.heroBtnOutline}>
-            {btnTrial}
           </a>
         </div>
         <div className={styles.heroMetrics}>

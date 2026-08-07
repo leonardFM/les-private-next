@@ -19,7 +19,7 @@ export default function TestimonialsClient({ testimonials }) {
 
   return (
     <div>
-      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)', marginBottom: '40px' }}>
+      <section className="section bg-yellow" style={{ padding: '60px 0', borderBottom: '1px solid var(--border-color)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <span className="section-tag">{t('testimonialsPage.tag')}</span>
           <h1 className="section-title" style={{ margin: 0 }}>{t('testimonialsPage.title')}</h1>

@@ -40,9 +40,7 @@ export default function KidsPrivateClient() {
         titleHighlight={kids.hero.titleHighlight}
         desc={kids.hero.desc}
         btnWA={kids.hero.btnWA}
-        btnTrial={kids.hero.btnTrial}
         msgWA={kids.hero.msgWA}
-        msgTrial={kids.hero.msgTrial}
         metric1={kids.hero.metric1}
         metric1Val={kids.hero.metric1Val}
         metric2={kids.hero.metric2}

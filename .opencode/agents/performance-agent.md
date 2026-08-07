@@ -14,7 +14,6 @@ You are the **Performance Agent** for an LMS platform. You do NOT edit code dire
 
 ## Context
 - Caching: `unstable_cache` from Next.js is used in `src/lib/data.js` for public pages but NOT in most admin/student data functions
-- N+1 queries: Present in `src/app/student/(dashboard)/materials/page.js`
 - Bundle: No code splitting analysis, no lazy loading for heavy components
 - `initDb()`: Called on every layout render, running ~30 SQL statements per page load
 
@@ -35,7 +34,6 @@ You are the **Performance Agent** for an LMS platform. You do NOT edit code dire
 ## Key files
 - `src/lib/data.js` — Read operations (some cached, most not)
 - `src/lib/modules/*/data.js` — Domain data functions (uncached)
-- `src/app/student/(dashboard)/materials/page.js` — Known N+1
 - `src/app/admin/(dashboard)/page.js` — Dashboard stats (uncached)
 - `src/app/student/(dashboard)/dashboard/page.js` — Student stats (uncached)
 - All admin list pages — Check for pagination

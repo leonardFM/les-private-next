@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { decrypt } from '@/lib/session';
 
-const protectedRoutes = ['/admin', '/student', '/student/dashboard', '/student/packages', '/student/my-packages', '/student/payments', '/student/profile', '/student/schedules', '/student/materials', '/student/homeworks'];
-const protectedPrefixes = ['/admin/leads', '/admin/programs', '/admin/testimonials', '/admin/faqs', '/admin/settings', '/admin/payments', '/admin/students', '/admin/teachers', '/admin/schedules', '/admin/modules', '/admin/homeworks'];
+const protectedRoutes = ['/admin', '/student', '/student/dashboard', '/student/my-packages', '/student/profile', '/student/schedules'];
+const protectedPrefixes = ['/admin/programs', '/admin/testimonials', '/admin/faqs', '/admin/settings', '/admin/students', '/admin/teachers', '/admin/schedules'];
 const authRoutes = ['/admin/login', '/student/login', '/student/register'];
 
 export default async function proxy(req) {

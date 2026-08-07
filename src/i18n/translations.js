@@ -4,7 +4,7 @@ const translations = {
       brand: "El's Corner",
       links: ["Beranda", "Tentang Kami", "Program", "Testimoni", "Kontak"],
       paths: ["/", "/about", "/programs", "/testimonials", "/contact"],
-      cta: "Coba Trial Gratis",
+      cta: "Konsultasi Kami",
       langToggle: "EN",
       whatsappMsg: "Halo! Saya ingin konsultasi tentang les privat 1-on-1 di El's Corner.",
     },
@@ -226,7 +226,7 @@ const translations = {
       tag: "Hubungi Kami",
       title: "Mulai Les Privat 1-on-1",
       subtitle:
-        "Siap memulai perjalanan belajar privat Anda? Hubungi konsultan kami untuk sesi trial gratis dan konsultasi program.",
+        "Siap memulai perjalanan belajar privat Anda? Hubungi konsultan kami untuk konsultasi program.",
       infoTitle: "Detail Kontak",
       infoIntro:
         "Kunjungi kantor pusat kami, hubungi agen dukungan, atau kirim email. Konsultan akademik kami selalu siap membantu.",
@@ -254,7 +254,7 @@ const translations = {
       ],
       formTitle: "Konsultasi Kursus",
       formSub:
-        "Isi detail Anda untuk menghitung biaya atau minta sesi uji coba gratis.",
+        "Isi detail Anda untuk menghitung biaya atau konsultasi program.",
       labels: {
         name: "Nama Lengkap",
         phone: "Nomor Telepon",
@@ -303,7 +303,7 @@ const translations = {
           a: "Ya, 100% pengajar akademik kami memiliki sertifikasi mengajar (CELTA, DELTA, atau TEFL) dengan gelar universitas di bidang Linguistik Terapan, Sastra, atau Pendidikan.",
         },
         {
-          q: "Apakah ada tes penempatan gratis sebelum pendaftaran?",
+          q: "Apakah ada tes penempatan sebelum pendaftaran?",
           a: "Ya! Kami mewajibkan semua calon siswa (kecuali level pemula) untuk mengikuti diagnostik bahasa komprehensif selama 15 menit, yang mengevaluasi tata bahasa, tulisan, dan kemampuan berbicara.",
         },
         {
@@ -537,7 +537,7 @@ const translations = {
           },
           {
             icon: "\u{1F4DE}",
-            title: "Konsultasi Gratis",
+            title: "Konsultasi Program",
             desc: "Konsultasi via WhatsApp untuk membantu memilih program yang tepat untuk anak Anda.",
           },
         ],
@@ -589,7 +589,7 @@ const translations = {
           },
           {
             q: "Bagaimana sistem pembayaramnya?",
-            a: "Biaya program dapat dibayarkan secara penuh di awal atau dicicil bulanan. Kami juga menyediakan paket trial selama 4 sesi.",
+            a: "Biaya program dapat dibayarkan secara penuh di awal atau dicicil bulanan.",
           },
           {
             q: "Apakah anak saya akan mendapatkan sertifikat?",
@@ -599,8 +599,8 @@ const translations = {
       },
       cta: {
         title: "Daftarkan Anak Anda Sekarang!",
-        description: "Konsultasi gratis via WhatsApp untuk mengetahui program English for Kids yang paling sesuai untuk buah hati Anda. Gratis sesi trial!",
-        btnText: "Konsultasi Gratis via WA",
+        description: "Konsultasi via WhatsApp untuk mengetahui program English for Kids yang paling sesuai untuk buah hati Anda.",
+        btnText: "Konsultasi via WA",
       },
     },
     testimonialsPage: {
@@ -678,9 +678,7 @@ const translations = {
         titleHighlight: "Anak-Anak Suka",
         desc: "Les privat interaktif yang membuat anak jatuh cinta dengan belajar. Metode menyenangkan, tutor sabar, hasil nyata.",
         btnWA: "Chat Via WhatsApp",
-        btnTrial: "Coba Trial Gratis",
         msgWA: "Halo! Saya tertarik dengan program les privat untuk anak usia 4-8 tahun. Mohon informasinya.",
-        msgTrial: "Halo! Saya ingin coba Trial Class gratis untuk anak saya.",
         metric1: "Orang Tua Percaya",
         metric1Val: "15.000+",
         metric2: "Rating",
@@ -733,13 +731,12 @@ const translations = {
         items: [
           { q: "Berapa usia minimal untuk mengikuti program?", a: "Program kami dirancang untuk anak usia 4-8 tahun." },
           { q: "Bagaimana sistem pembelajarannya?", a: "Kami menggunakan metode 1-on-1 dengan tutor berpengalaman yang disesuaikan dengan gaya belajar anak." },
-          { q: "Apakah ada trial class?", a: "Ya! Kami menyediakan trial class gratis untuk memastikan anak Anda cocok dengan metode kami." },
         ],
       },
       cta: {
         tag: "Mulai Sekarang",
         title: "Berikan yang Terbaik untuk Si Kecil",
-        desc: "Daftar sekarang & dapatkan sesi trial gratis. Temukan bagaimana metode kami bisa membuat anak Anda jatuh cinta dengan belajar.",
+        desc: "Daftar sekarang & temukan bagaimana metode kami bisa membuat anak Anda jatuh cinta dengan belajar.",
         btn: "Chat Via WhatsApp",
       },
     },
@@ -750,7 +747,7 @@ const translations = {
       brand: "El's Corner",
       links: ["Home", "About Us", "Programs", "Testimonials", "Contact"],
       paths: ["/", "/about", "/programs", "/testimonials", "/contact"],
-      cta: "Free Trial",
+      cta: "Contact Us",
       langToggle: "ID",
       whatsappMsg: "Hello! I'd like to learn about private 1-on-1 tutoring at El's Corner.",
     },
@@ -972,7 +969,7 @@ const translations = {
       tag: "Get In Touch",
       title: "Start Private 1-on-1 Tutoring",
       subtitle:
-        "Ready to start your private learning journey? Contact our consultants for a free trial session and program consultation.",
+        "Ready to start your private learning journey? Contact our consultants for program consultation.",
       infoTitle: "Contact Details",
       infoIntro:
         "Visit our physical downtown headquarters, call our support agents, or email us. Our academic advisors are always happy to help.",
@@ -1000,7 +997,7 @@ const translations = {
       ],
       formTitle: "Request Course Consultation",
       formSub:
-        "Submit your details to calculate your fees or request a free diagnostic trial session.",
+        "Submit your details to calculate your fees or request program consultation.",
       labels: {
         name: "Full Name",
         phone: "Phone Number",
@@ -1049,7 +1046,7 @@ const translations = {
           a: "Yes, 100% of our academic educators hold certified teaching credentials (CELTA, DELTA, or TEFL) with university degrees in Applied Linguistics, Literature, or Education.",
         },
         {
-          q: "Is there a free level diagnostic before enrollment?",
+          q: "Is there a level diagnostic before enrollment?",
           a: "Yes! We require all prospective students (except beginner levels) to complete our comprehensive 15-minute language diagnostic, which evaluates grammar, written output, and speaking skills.",
         },
         {
@@ -1280,7 +1277,7 @@ const translations = {
           },
           {
             icon: "\u{1F4DE}",
-            title: "Free Consultation",
+            title: "Program Consultation",
             desc: "WhatsApp consultation to help choose the right program for your child.",
           },
         ],
@@ -1332,7 +1329,7 @@ const translations = {
           },
           {
             q: "How does payment work?",
-            a: "Program fees can be paid in full upfront or in monthly installments. We also offer a trial package of 4 sessions.",
+            a: "Program fees can be paid in full upfront or in monthly installments.",
           },
           {
             q: "Will my child receive a certificate?",
@@ -1342,8 +1339,8 @@ const translations = {
       },
       cta: {
         title: "Register Your Child Now!",
-        description: "Free consultation via WhatsApp to find out the most suitable English for Kids program for your child. Free trial session!",
-        btnText: "Free WA Consultation",
+        description: "WhatsApp consultation to find out the most suitable English for Kids program for your child.",
+        btnText: "WA Consultation",
       },
     },
     testimonialsPage: {
@@ -1415,9 +1412,7 @@ const translations = {
         titleHighlight: "Kids Love",
         desc: "Interactive private lessons that make children fall in love with learning. Fun methods, patient tutors, real results.",
         btnWA: "Chat via WhatsApp",
-        btnTrial: "Try Free Trial",
         msgWA: "Hello! I'm interested in the private tutoring program for children aged 4-8. Please provide information.",
-        msgTrial: "Hello! I'd like to try a free Trial Class for my child.",
         metric1: "Parents Trust",
         metric1Val: "15,000+",
         metric2: "Rating",
@@ -1470,13 +1465,12 @@ const translations = {
         items: [
           { q: "What is the minimum age to join?", a: "Our program is designed for children aged 4-8 years." },
           { q: "How does the learning system work?", a: "We use a 1-on-1 method with experienced tutors tailored to your child's learning style." },
-          { q: "Is there a trial class?", a: "Yes! We provide a free trial class to ensure your child is a good fit for our method." },
         ],
       },
       cta: {
         tag: "Start Now",
         title: "Give the Best for Your Little One",
-        desc: "Register now and get a free trial session. Discover how our method can make your child fall in love with learning.",
+        desc: "Register now and discover how our method can make your child fall in love with learning.",
         btn: "Chat via WhatsApp",
       },
     },

@@ -25,12 +25,6 @@ export default function PromotionalBanner() {
           </div>
           <div className={styles.visual}>
             <div className={styles.iconCircle}>🧒</div>
-            <div className={styles.floatingIcons}>
-              <span className={styles.floatIcon} style={{ top: '10%', left: '10%' }}>⭐</span>
-              <span className={styles.floatIcon} style={{ top: '5%', right: '15%' }}>📚</span>
-              <span className={styles.floatIcon} style={{ bottom: '15%', left: '5%' }}>🎓</span>
-              <span className={styles.floatIcon} style={{ bottom: '10%', right: '10%' }}>✨</span>
-            </div>
           </div>
         </div>
       </div>

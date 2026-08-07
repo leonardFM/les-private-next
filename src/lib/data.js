@@ -136,57 +136,7 @@ export async function getExpiringPackages(days = 30) {
     ORDER BY sp.remaining_sessions ASC`, [days]);
 }
 
-export async function getPayments({ status, search, limit = 50, offset = 0 } = {}) {
-  let sql = `SELECT p.id, p.order_id, p.student_id, p.user_id, p.student_package_id,
-    COALESCE(sp.package_name, p.package_name) AS package_name,
-    p.total_sessions, p.amount, p.payment_status, p.transaction_status,
-    p.payment_type, p.transaction_id, p.snap_token, p.created_at, p.updated_at,
-    COALESCE(s.name, u.name) AS student_name
-    FROM payments p
-    LEFT JOIN students s ON s.id = p.student_id
-    LEFT JOIN users u ON u.id = p.user_id
-    LEFT JOIN student_packages sp ON sp.id = p.student_package_id
-    WHERE 1=1`;
-  const params = [];
-  if (status) {
-    sql += ' AND p.payment_status = $' + (params.length + 1);
-    params.push(status);
-  }
-  if (search) {
-    sql += ` AND (COALESCE(s.name, u.name) ILIKE $${params.length + 1} OR p.order_id ILIKE $${params.length + 1})`;
-    params.push(`%${search}%`);
-  }
-  sql += ' ORDER BY p.created_at DESC';
-  sql += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
-  params.push(limit, offset);
-  return all(sql, params);
-}
-
-export async function getPaymentById(id) {
-  return get(`SELECT p.id, p.order_id, p.student_id, p.user_id, p.student_package_id,
-    COALESCE(sp.package_name, p.package_name) AS package_name,
-    COALESCE(sp.total_sessions, p.total_sessions) AS total_sessions,
-    p.amount, p.payment_status, p.transaction_status,
-    p.payment_type, p.transaction_id, p.snap_token, p.created_at, p.updated_at,
-    COALESCE(s.name, u.name) AS student_name,
-    COALESCE(s.email, u.email) AS student_email,
-    COALESCE(s.phone, u.phone) AS student_phone
-    FROM payments p
-    LEFT JOIN students s ON s.id = p.student_id
-    LEFT JOIN users u ON u.id = p.user_id
-    LEFT JOIN student_packages sp ON sp.id = p.student_package_id
-    WHERE p.id = $1`, [id]);
-}
-
-export async function getPaymentByOrderId(orderId) {
-  return get('SELECT * FROM payments WHERE order_id = $1', [orderId]);
-}
-
 // --- Packages ---
-
-export async function getPackages() {
-  return all('SELECT * FROM packages WHERE active = 1 ORDER BY price ASC');
-}
 
 export async function getAllPackages() {
   return all('SELECT * FROM packages ORDER BY id ASC');
@@ -197,15 +147,6 @@ export async function getPackageById(id) {
 }
 
 // --- Student Portal ---
-
-export async function getStudentPayments(userId) {
-  return all(`SELECT p.*, COALESCE(sp.package_name, p.package_name) AS package_name,
-    sp.total_sessions, sp.remaining_sessions, sp.status AS package_status
-    FROM payments p
-    LEFT JOIN student_packages sp ON sp.id = p.student_package_id
-    WHERE p.user_id = $1
-    ORDER BY p.created_at DESC`, [userId]);
-}
 
 export async function getStudentPackages(userId) {
   return all(`SELECT sp.*, s.name AS student_name FROM student_packages sp
@@ -225,8 +166,6 @@ export async function getStudentProfile(userId) {
 export async function getStats() {
   const row = await get(`
     SELECT
-      (SELECT COUNT(*) FROM leads) AS total_leads,
-      (SELECT COUNT(*) FROM leads WHERE status = 'new') AS new_leads,
       (SELECT COUNT(*) FROM programs) AS total_programs,
       (SELECT COUNT(*) FROM testimonials) AS total_testimonials,
       (SELECT COUNT(*) FROM students) AS total_students,
@@ -234,8 +173,6 @@ export async function getStats() {
       (SELECT COUNT(*) FROM student_packages WHERE status = 'active' AND remaining_sessions <= 3) AS expiring_packages
   `);
   return {
-    totalLeads: Number(row.total_leads),
-    newLeads: Number(row.new_leads),
     totalPrograms: Number(row.total_programs),
     totalTestimonials: Number(row.total_testimonials),
     totalStudents: Number(row.total_students),

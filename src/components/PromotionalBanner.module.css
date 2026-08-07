@@ -127,30 +127,6 @@
   50% { transform: translateY(-12px); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
 }
 
-.floatingIcons {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.floatIcon {
-  position: absolute;
-  font-size: 24px;
-  animation: floatIcon 5s ease-in-out infinite;
-  opacity: 0.8;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-14px); }
-}
-
-@keyframes floatIcon {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(10deg); }
-  66% { transform: translateY(-4px) rotate(-5deg); }
-}
-
 @media (max-width: 768px) {
   .banner { padding: 40px 0; }
   .inner { flex-direction: column; text-align: center; }

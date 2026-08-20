@@ -11,12 +11,7 @@
   transition: background-color var(--transition-normal);
 }
 
-:global([data-theme='dark']) .header {
-  background-color: rgba(10, 15, 30, 0.85);
-}
-
-.navContainer {
-  display: flex;
+.navContainer {  display: flex;
   align-items: center;
   justify-content: space-between;
   height: 80px;
@@ -96,28 +91,6 @@
 .ctaBtn {
   font-size: 14px;
   padding: 10px 20px;
-}
-
-.themeToggle {
-  background: var(--primary-soft) !important;
-  border: 1px solid var(--border-color) !important;
-  padding: 8px !important;
-  font-size: 18px !important;
-  min-width: 40px !important;
-  border-radius: var(--border-radius-sm) !important;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  line-height: 1;
-}
-
-.themeToggle:hover {
-  transform: scale(1.15) rotate(-15deg);
-  box-shadow: var(--shadow-md);
-}
-
-:global([data-theme='dark']) .themeToggle {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
 }
 
 /* Mobile Toggle Hamburger button */

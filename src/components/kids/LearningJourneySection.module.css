@@ -3,10 +3,6 @@
   background: linear-gradient(180deg, var(--accent-soft) 0%, var(--background) 100%);
 }
 
-[data-theme='dark'] .sec {
-  background: linear-gradient(180deg, var(--primary-soft) 0%, var(--background) 100%);
-}
-
 .head {
   text-align: center;
   margin-bottom: 44px;

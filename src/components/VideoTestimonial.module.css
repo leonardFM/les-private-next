@@ -1,0 +1,150 @@
+.section {
+  width: 100%;
+  background: #faf5ff;
+  padding: 64px 16px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 64px 32px;
+  }
+}
+
+.container {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #1e293b;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 30px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 48px;
+  }
+}
+
+.videoPane {
+  width: 100%;
+}
+
+.videoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.videoFrame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.testimonial {
+  position: relative;
+  padding: 16px 8px;
+}
+
+.watermark {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 96px;
+  height: 96px;
+  color: #8b5cf6;
+  opacity: 0.15;
+}
+
+.quote {
+  margin: 0;
+}
+
+.quoteText {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.625;
+  color: #334155;
+}
+
+.quoteText strong {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+@media (min-width: 768px) {
+  .quoteText {
+    font-size: 20px;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.profileMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profileName {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.profileRole {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.schoolIcon {
+  width: 16px;
+  height: 16px;
+  color: #4f46e5;
+  flex-shrink: 0;
+}

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/i18n';
-import { useTheme } from '@/context';
 import { getWhatsAppUrl } from '@/lib/constants';
 import styles from './Navbar.module.css';
 
@@ -13,7 +12,6 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { t, locale, toggleLocale } = useTranslation();
-  const { theme, toggleTheme } = useTheme();
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -72,15 +70,6 @@ export default function Navbar() {
               </li>
             );
           })}
-          <li>
-            <button
-              onClick={toggleTheme}
-              className={`${styles.themeToggle} btn`}
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
-          </li>
           <li>
             <button
               onClick={toggleLocale}

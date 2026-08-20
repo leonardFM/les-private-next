@@ -3,10 +3,6 @@
   background: var(--bg-soft);
 }
 
-[data-theme='dark'] .sec {
-  background: var(--background);
-}
-
 .head {
   text-align: center;
 }

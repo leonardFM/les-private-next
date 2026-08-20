@@ -5,10 +5,6 @@
   background: linear-gradient(180deg, var(--background) 0%, var(--accent-soft) 100%);
 }
 
-[data-theme='dark'] .sec {
-  background: linear-gradient(180deg, var(--background) 0%, var(--primary-soft) 100%);
-}
-
 .deco {
   position: absolute;
   width: 350px;

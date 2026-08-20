@@ -219,10 +219,6 @@
   position: relative;
 }
 
-:global([data-theme='dark']) .stats {
-  color: var(--foreground);
-}
-
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -251,10 +247,6 @@
   border-radius: var(--border-radius-lg);
   backdrop-filter: blur(8px);
   transition: transform var(--transition-bounce);
-}
-
-:global([data-theme='dark']) .statItem {
-  background: rgba(0, 0, 0, 0.25);
 }
 
 .statItem:hover {

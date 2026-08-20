@@ -1,0 +1,291 @@
+.sec {
+  padding: 80px 0;
+  background: linear-gradient(180deg, transparent 0%, var(--primary-soft) 100%);
+}
+
+.head {
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--accent-soft);
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.startBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin-top: 36px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chip {
+  padding: 10px 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--foreground-muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chipActive {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.statusBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 36px;
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--foreground-muted);
+}
+
+.errorText {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 36px;
+  margin-bottom: 10px;
+}
+
+.counter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--foreground-muted);
+}
+
+.score {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.progressTrack {
+  height: 8px;
+  border-radius: 50px;
+  background: var(--border-color);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.4s ease;
+}
+
+.prompt {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 28px;
+}
+
+.prompt em {
+  font-style: normal;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--card-bg);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  aspect-ratio: 4/3;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.imgWrap {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .imgWrap img {
+  transform: scale(1.05);
+}
+
+.cardCorrect {
+  outline: 4px solid var(--success);
+  cursor: default;
+}
+
+.cardWrong {
+  outline: 4px solid var(--danger-color);
+  cursor: default;
+  opacity: 0.75;
+}
+
+.cardDim {
+  opacity: 0.55;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.badgeWrong {
+  background: var(--danger-color);
+}
+
+.feedback {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 24px;
+  color: var(--foreground);
+}
+
+.doneBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 36px;
+  padding: 48px 24px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+  font-size: 40px;
+}
+
+.starOn {
+  color: var(--accent);
+}
+
+.starOff {
+  color: var(--border-color);
+}
+
+.resultTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.doneActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .sec { padding: 50px 0; }
+  .title { font-size: 26px; }
+  .prompt { font-size: 20px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}

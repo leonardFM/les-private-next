@@ -1,0 +1,141 @@
+.storyRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .storyRow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.storyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.visualPane {
+  background: linear-gradient(135deg, var(--primary-soft) 0%, hsl(var(--primary-hue), 80%, 88%) 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 60px 40px;
+  height: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.visualPaneTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+}
+
+.visualPaneDesc {
+  font-size: 15px;
+  color: var(--foreground-muted);
+  max-width: 320px;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.valueCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 32px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.valueCard:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.valueIcon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.valueTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--foreground);
+}
+
+.valueDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.6;
+}
+
+.campusGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .campusGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.campusCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.campusImagePlaceholder {
+  height: 200px;
+  background-color: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  font-size: 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.campusInfo {
+  padding: 24px;
+}
+
+.campusName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.campusDesc {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.5;
+}

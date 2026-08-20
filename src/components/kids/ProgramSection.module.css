@@ -5,10 +5,6 @@
   background: var(--bg-soft);
 }
 
-[data-theme='dark'] .sec {
-  background: var(--background);
-}
-
 .deco {
   position: absolute;
   width: 500px;

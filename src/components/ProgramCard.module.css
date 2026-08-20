@@ -79,11 +79,6 @@
   50% { transform: translateY(-6px); }
 }
 
-:global([data-theme='dark']) .badge {
-  background-color: rgba(10, 15, 30, 0.9);
-  color: white;
-}
-
 .body {
   padding: 28px 24px;
   display: flex;

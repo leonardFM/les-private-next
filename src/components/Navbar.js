@@ -11,7 +11,7 @@ import styles from './Navbar.module.css';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { t, locale, toggleLocale } = useTranslation();
+  const { t } = useTranslation();
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -70,15 +70,6 @@ export default function Navbar() {
               </li>
             );
           })}
-          <li>
-            <button
-              onClick={toggleLocale}
-              className={`${styles.langToggle} btn`}
-              style={{ padding: '8px 14px', fontSize: '13px', fontWeight: 700, minWidth: '44px' }}
-            >
-              {t('nav.langToggle')}
-            </button>
-          </li>
           <li>
             <a 
               href={getWhatsAppUrl(t('nav.whatsappMsg'))}

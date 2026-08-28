@@ -16,11 +16,8 @@ export default function ProgramCard({
   originalPrice,
   icon = '📖'
 }) {
-  const { locale } = useTranslation();
-  const isIndo = locale !== 'en';
-  const whatsappMsg = isIndo
-    ? `Halo! Saya tertarik dengan program privat *${title}* (${format}). Mohon informasinya lebih lanjut.`
-    : `Hello! I'm interested in the private tutoring program *${title}* (${format}). Please provide more information.`;
+  const { t } = useTranslation();
+  const whatsappMsg = `Halo! Saya tertarik dengan program privat *${title}* (${format}). Mohon informasinya lebih lanjut.`;
   return (
     <div className={styles.card}>
       <div className={styles.oneOnOneBadge}>1:1</div>
@@ -36,23 +33,23 @@ export default function ProgramCard({
 
         <div className={styles.metaGrid}>
           <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>{isIndo ? 'Tingkat' : 'Level'}</span>
+            <span className={styles.metaLabel}>Tingkat</span>
             <span className={styles.metaVal}>{level}</span>
           </div>
           <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>{isIndo ? 'Durasi' : 'Duration'}</span>
+            <span className={styles.metaLabel}>Durasi</span>
             <span className={styles.metaVal}>{duration}</span>
           </div>
         </div>
 
         <div className={styles.footer}>
           <div className={styles.priceWrapper}>
-            <span className={styles.priceLabel}>{isIndo ? 'Mulai dari' : 'From'}</span>
+            <span className={styles.priceLabel}>Mulai dari</span>
             {originalPrice ? <span className={styles.priceOriginal}>{originalPrice}</span> : null}
             <span className={styles.priceVal}>{price}</span>
           </div>
           <a href={getWhatsAppUrl(whatsappMsg)} target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-sm ${styles.enrollBtn}`} style={{ padding: '10px 16px', fontSize: '13px' }}>
-            {isIndo ? 'Hubungi Kami' : 'Contact Us'}
+            Hubungi Kami
           </a>
         </div>
       </div>

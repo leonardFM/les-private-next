@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--primary-blue);
+  border-radius: 3px;
+  transition: width 1s linear;
+}
+
+.time {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.low .progressBar {
+  background: #EF4444;
+}
+
+.low .time {
+  color: #EF4444;
+  animation: pulse 1s infinite;
+}
+
+.finished .progressBar {
+  background: #22C55E;
+}
+
+.finished .time {
+  color: #22C55E;
+}
+
+.stopped {
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

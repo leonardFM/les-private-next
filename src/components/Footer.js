@@ -45,10 +45,10 @@ export default function Footer() {
               {t('footer.description')}
             </p>
             <div className={styles.socials}>
-              <a href="#" className={styles.socialIcon} aria-label={t('footer.socialAria.fb')}>Fb</a>
-              <a href="#" className={styles.socialIcon} aria-label={t('footer.socialAria.ig')}>Ig</a>
-              <a href="#" className={styles.socialIcon} aria-label={t('footer.socialAria.tw')}>Tw</a>
-              <a href="#" className={styles.socialIcon} aria-label={t('footer.socialAria.ln')}>Ln</a>
+              <a href="https://www.facebook.com/elscorner" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label={t('footer.socialAria.fb')}>Fb</a>
+              <a href="https://www.instagram.com/elscorner" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label={t('footer.socialAria.ig')}>Ig</a>
+              <a href="https://www.tiktok.com/@elscorner" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label={t('footer.socialAria.tw')}>Tw</a>
+              <a href="https://www.linkedin.com/company/elscorner" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label={t('footer.socialAria.ln')}>Ln</a>
             </div>
           </div>
 

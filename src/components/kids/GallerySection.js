@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FadeIn } from './FadeIn';
 import styles from './GallerySection.module.css';
 
-export default function GallerySection({ tag, title, sub, images }) {
+export default function GallerySection({ tag, title, sub, images, alts }) {
   return (
     <FadeIn>
       <section className={styles.sec}>
@@ -18,7 +18,12 @@ export default function GallerySection({ tag, title, sub, images }) {
           <div className={styles.grid}>
             {images.map((src, i) => (
               <div key={i} className={styles.item}>
-                <Image src={src} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" />
+                <Image
+                  src={src}
+                  alt={alts?.[i] || `Galeri EL's Corner - ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
               </div>
             ))}
           </div>

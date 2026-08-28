@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) var(--space-3xl);
+  border-radius: var(--radius-lg);
+  background: white;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 320px;
+}
+
+.card.cardVisible {
+  transform: scale(1);
+}
+
+.card.correct {
+  border-top: 4px solid #22C55E;
+}
+
+.card.incorrect {
+  border-top: 4px solid #EF4444;
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.correct .iconWrapper {
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+}
+
+.incorrect .iconWrapper {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+}
+
+.icon {
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+}
+
+.correct .title {
+  color: #16A34A;
+}
+
+.incorrect .title {
+  color: #DC2626;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--foreground-muted);
+}
+
+.closeBtn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-soft);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--foreground-muted);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  background: var(--border-color);
+  color: var(--foreground);
+}

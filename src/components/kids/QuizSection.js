@@ -124,7 +124,7 @@ export default function QuizSection({
           {phase === 'loading' && (
             <div className={styles.statusBox}>
               <div className={styles.spinner} />
-              <p>Loading soal...</p>
+              <p>Memuat soal...</p>
             </div>
           )}
 

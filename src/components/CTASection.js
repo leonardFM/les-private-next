@@ -6,11 +6,11 @@ import { getWhatsAppUrl } from '@/lib/constants';
 import styles from './CTASection.module.css';
 
 export default function CTASection({
-  title = 'Ready to Start Your Learning Journey?',
-  description = 'Find the program that fits your needs and start building your English skills with more confidence.',
-  primaryActionText = 'View Programs',
+  title = 'Siap Memulai Perjalanan Belajar Anda?',
+  description = 'Temukan program yang sesuai dengan kebutuhan Anda dan mulai tingkatkan kemampuan bahasa Inggris dengan lebih percaya diri.',
+  primaryActionText = 'Lihat Program',
   primaryMessage = '',
-  secondaryActionText = 'Contact Us',
+  secondaryActionText = 'Hubungi Kami',
   secondaryActionUrl = '/programs'
 }) {
   return (

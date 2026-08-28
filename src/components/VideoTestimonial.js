@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import styles from './VideoTestimonial.module.css';
 
 const VIDEO_URL = 'https://www.youtube-nocookie.com/embed/ScMzIvxBSi4';
@@ -12,7 +13,7 @@ export default function VideoTestimonial() {
         {/* Section Header */}
         <div className={styles.header}>
           <h2 className={styles.title}>
-            Lihat keseruan belajar bahasa Inggris di English Academy
+            Lihat keseruan belajar bahasa Inggris di EL&apos;s Corner
           </h2>
         </div>
 
@@ -22,9 +23,10 @@ export default function VideoTestimonial() {
             <div className={styles.videoFrame}>
               <iframe
                 src={VIDEO_URL}
-                title="Video testimoni siswa English Academy"
+                title="Video testimoni siswa EL's Corner"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
+                loading="lazy"
               />
             </div>
           </div>
@@ -37,7 +39,7 @@ export default function VideoTestimonial() {
 
             <blockquote className={styles.quote}>
               <p className={styles.quoteText}>
-                &ldquo;Seru banget belajar di English Academy,{' '}
+                &ldquo;Seru banget belajar di EL&apos;s Corner,{' '}
                 <strong>
                   bisa interaksi sama temen-temen dari berbagai kota. Materinya gak ngebosenin
                 </strong>
@@ -46,9 +48,11 @@ export default function VideoTestimonial() {
             </blockquote>
 
             <div className={styles.profile}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=112&h=112&q=80"
                 alt="Maharani"
+                width={56}
+                height={56}
                 className={styles.avatar}
               />
               <div className={styles.profileMeta}>

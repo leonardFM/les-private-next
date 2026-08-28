@@ -16,7 +16,7 @@ export default function HeroSection({
     <section className={styles.hero}>
       <div className={styles.heroDeco1} />
       <div className={styles.heroDeco2} />
-      <Image src={heroBg} alt="" className={styles.heroBg} fill sizes="100vw" />
+      <Image src={heroBg} alt="Latar belakang program kids EL's Corner" className={styles.heroBg} fill sizes="100vw" />
       <div className={styles.heroOverlay} />
       <div className={styles.heroContent}>
         <div className={styles.heroTag}>{tag}</div>

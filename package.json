@@ -12,9 +12,13 @@
     "init-db": "node scripts/init-db.mjs"
   },
   "dependencies": {
+    "@livekit/components-react": "^2.9.24",
+    "@livekit/components-styles": "^1.2.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "jose": "^6.2.3",
+    "livekit-client": "^2.22.0",
+    "livekit-server-sdk": "^2.18.0",
     "next": "16.2.6",
     "pg": "^8.21.0",
     "react": "19.2.4",

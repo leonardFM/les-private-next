@@ -47,7 +47,7 @@ function Accordion({ items }) {
 }
 
 export default function KidsClient() {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const kids = t('kidsPage');
 
   return (

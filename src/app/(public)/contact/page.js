@@ -1,16 +1,75 @@
 import { getFaqs } from '@/lib/data';
-import { cookies } from 'next/headers';
 import ContactClient from './ContactClient';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata = {
-  title: "Contact Us | El's Corner",
-  description: "Get in touch with the admissions team at El's Corner.",
+  title: "Hubungi Kami | El's Corner",
+  description: "Hubungi tim admissions El's Corner untuk informasi program belajar bahasa Inggris.",
+  openGraph: {
+    title: "Hubungi Kami | El's Corner",
+    description: "Hubungi tim admissions El's Corner untuk informasi program belajar bahasa Inggris.",
+    url: 'https://elscorner.com/contact',
+    images: ['/og-default.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Hubungi Kami | El's Corner",
+    description: "Hubungi tim admissions El's Corner untuk informasi program belajar bahasa Inggris.",
+    images: ['/og-default.png'],
+  },
+  alternates: {
+    canonical: 'https://elscorner.com/contact',
+  },
+};
+
+const contactPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: "Hubungi Kami | El's Corner",
+  description: "Hubungi tim admissions El's Corner untuk informasi program belajar bahasa Inggris.",
+  url: 'https://elscorner.com/contact',
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: "EL's Corner",
+  url: 'https://elscorner.com',
+  logo: 'https://elscorner.com/logo/logo-png.png',
+  description: "Program belajar bahasa Inggris untuk anak, remaja, dan dewasa.",
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'ID',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'admissions',
+    availableLanguage: ['Indonesian'],
+  },
 };
 
 export default async function Contact() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('locale')?.value || 'id';
-  const faqs = await getFaqs(locale);
+  const faqs = await getFaqs('id');
 
-  return <ContactClient faqs={faqs} />;
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: (faqs || []).map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
+  return (
+    <>
+      <JsonLd data={contactPageSchema} />
+      <JsonLd data={localBusinessSchema} />
+      {faqs && faqs.length > 0 && <JsonLd data={faqSchema} />}
+      <ContactClient faqs={faqs} />
+    </>
+  );
 }

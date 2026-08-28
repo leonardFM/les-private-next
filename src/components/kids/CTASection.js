@@ -10,7 +10,7 @@ export default function KidsCTASection({ tag, title, desc, btn, msgWA, bgImg, fu
   return (
     <FadeIn>
       <section className={styles.sec}>
-        <Image src={bgImg} alt="" className={styles.bg} fill sizes="100vw" />
+        <Image src={bgImg} alt="Latar belakang program kids EL's Corner" className={styles.bg} fill sizes="100vw" />
         <div className={styles.overlay} />
         <div className="container">
           <div className={styles.inner}>
@@ -23,7 +23,7 @@ export default function KidsCTASection({ tag, title, desc, btn, msgWA, bgImg, fu
               </a>
             </div>
             <div className={styles.visual}>
-              <Image src={funImg} alt="" width={240} height={290} className={styles.img} />
+              <Image src={funImg} alt="Ilustrasi program kids EL's Corner" width={240} height={290} className={styles.img} />
             </div>
           </div>
         </div>

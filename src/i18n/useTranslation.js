@@ -5,7 +5,7 @@ import { LanguageContext } from './LanguageProvider';
 import translations from './translations';
 
 export function useTranslation() {
-  const { locale, toggleLocale } = useContext(LanguageContext);
+  const { locale } = useContext(LanguageContext);
 
   function t(key) {
     const keys = key.split('.');
@@ -17,5 +17,5 @@ export function useTranslation() {
     return value ?? key;
   }
 
-  return { t, locale, toggleLocale };
+  return { t, locale };
 }

@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from 'next/headers';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,16 +12,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "EL's Corner | English Learning Online & Offline",
-  description: "English learning programs for children, teens, and adults through structured, interactive online and offline classes.",
+  metadataBase: new URL('https://elscorner.com'),
+  title: {
+    default: "EL's Corner | Kursus Bahasa Inggris Online & Offline",
+    template: "%s | EL's Corner",
+  },
+  description: "Kursus bahasa Inggris untuk anak, remaja, dan dewasa melalui program pembelajaran yang terstruktur, interaktif, dan personal.",
+  openGraph: {
+    title: "EL's Corner | Kursus Bahasa Inggris Online & Offline",
+    description: "Kursus bahasa Inggris untuk anak, remaja, dan dewasa melalui program pembelajaran yang terstruktur, interaktif, dan personal.",
+    url: 'https://elscorner.com',
+    siteName: "EL's Corner",
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: "EL's Corner - Kursus Bahasa Inggris",
+      },
+    ],
+    locale: 'id_ID',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "EL's Corner | Kursus Bahasa Inggris Online & Offline",
+    description: "Kursus bahasa Inggris untuk anak, remaja, dan dewasa melalui program pembelajaran yang terstruktur, interaktif, dan personal.",
+    images: ['/og-default.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
-export default async function RootLayout({ children }) {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('locale')?.value || 'id';
-
+export default function RootLayout({ children }) {
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>{children}</body>
     </html>
   );

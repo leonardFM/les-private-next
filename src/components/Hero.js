@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './Hero.module.css';
 
 const features = [
@@ -65,11 +66,11 @@ export default function HeroSection() {
 
             {/* Tombol CTA */}
             <div className={styles.ctaRow}>
-              <a href="#konsultasi-cabang" className={styles.ctaPrimary}>
-                Konsultasi di Cabang
+              <a href="https://wa.me/6281234567890?text=Halo!%20Saya%20ingin%20konsultasi%20tentang%20program%20bahasa%20Inggris%20di%20EL%27s%20Corner." className={styles.ctaPrimary} target="_blank" rel="noopener noreferrer">
+                Konsultasi via WhatsApp
               </a>
-              <a href="#konsultasi-online" className={styles.ctaSecondary}>
-                Konsultasi Program Online
+              <a href="/contact" className={styles.ctaSecondary}>
+                Hubungi Kami
               </a>
             </div>
           </div>
@@ -77,37 +78,48 @@ export default function HeroSection() {
           {/* Kolom Kanan: Bento Grid Foto */}
           <div className={styles.gallery}>
             <div className={`${styles.galleryItem} ${styles.galleryFirst}`}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80"
-                alt="Siswa belajar"
+                alt="Siswa sedang belajar bahasa Inggris di kelas yang interaktif"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className={styles.galleryImg}
+                priority
               />
             </div>
             <div className={styles.galleryItem}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80"
-                alt="Diskusi kelas"
+                alt="Diskusi kelompok di kelas bahasa Inggris"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
                 className={styles.galleryImg}
               />
             </div>
             <div className={styles.galleryItem}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80"
-                alt="Pengajar Native"
+                alt="Pengajar native bahasa Inggris mengajar"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
                 className={styles.galleryImg}
               />
             </div>
             <div className={`${styles.galleryItem} ${styles.galleryWide}`}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
-                alt="Fasilitas Tablet & Kelas Interaktif"
+                alt="Fasilitas tablet dan kelas interaktif"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className={styles.galleryImg}
               />
             </div>
             <div className={`${styles.galleryItem} ${styles.galleryLast}`}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80"
-                alt="Anak belajar interaktif"
+                alt="Anak-anak belajar bahasa Inggris dengan menyenangkan"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className={styles.galleryImg}
               />
             </div>

@@ -1,8 +1,8 @@
 import TestClassroomClient from './TestClassroomClient';
 
 export const metadata = {
-  title: 'Ujian Session',
-  description: 'Interactive exam session with live video',
+  title: 'Kelas Seru',
+  description: 'Kelas belajar warna-warni yang seru untuk anak-anak',
 };
 
 export default function TestClassroomPage() {

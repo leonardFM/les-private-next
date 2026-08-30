@@ -65,6 +65,7 @@ export default function TestClassroomClient() {
         body: JSON.stringify({
           roomName,
           participantName: participantName || role,
+          role,
         }),
       });
 
@@ -105,8 +106,8 @@ export default function TestClassroomClient() {
           audio={true}
         >
           <div className={styles.classroomHeader}>
-            <h1>Ujian Session</h1>
-            <p>Room: {roomName} | Role: {role}</p>
+            <h1>🎨 Kelas Seru</h1>
+            <p>{role === 'teacher' ? '👨‍🏫 Guru' : '👩‍🎓 Siswa'} | Room: {roomName}</p>
           </div>
           <div className={styles.classroomContent}>
             {role === 'teacher' ? <TeacherView /> : (
@@ -123,8 +124,8 @@ export default function TestClassroomClient() {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <h1>Ujian Session</h1>
-          <p>{role === 'teacher' ? 'Teacher Mode' : 'Student Mode'}</p>
+          <h1>🎨 Kelas Seru</h1>
+          <p>{role === 'teacher' ? '👨‍🏫 Mode Guru' : '👩‍🎓 Mode Siswa'}</p>
         </div>
 
         <form onSubmit={handleJoin} className={styles.form}>
@@ -167,7 +168,7 @@ export default function TestClassroomClient() {
               className={styles.button}
               disabled={isLoading || !roomName || !participantName}
             >
-              {isLoading ? 'Bergabung...' : 'Masuk ke Kelas'}
+              {isLoading ? 'Masuk... 🚀' : 'Masuk ke Kelas 🚀'}
             </button>
           </div>
         </form>

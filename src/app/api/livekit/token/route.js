@@ -1,9 +1,9 @@
-import { AccessToken } from 'livekit-server-sdk';
+import { AccessToken, TrackSource } from 'livekit-server-sdk';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   try {
-    const { roomName, participantName } = await request.json();
+    const { roomName, participantName, role } = await request.json();
 
     if (!roomName || !participantName) {
       return NextResponse.json(
@@ -27,12 +27,18 @@ export async function POST(request) {
       identity: participantName,
     });
 
+    const isStudent = role === 'student';
+
     at.addGrant({
       roomJoin: true,
       room: roomName,
       canPublish: true,
       canSubscribe: true,
       canPublishData: true,
+      // Siswa hanya bisa publish kamera & mikrofon, tidak bisa share screen
+      ...(isStudent
+        ? { canPublishSources: [TrackSource.CAMERA, TrackSource.MICROPHONE] }
+        : {}),
     });
 
     const token = await at.toJwt();
